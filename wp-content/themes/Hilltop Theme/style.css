@@ -1,0 +1,257 @@
+/*
+Theme Name: Hilltop Institute Divi Theme
+Description: A child theme to house custom coding which modifies the Divi parent theme by Elegant Themes. Includes default line numbers where the code was taken from in the parent theme.
+Author:   Mia Jordan
+Template: Divi
+*/
+
+@import url("../Divi/style.css");
+
+@font-face {
+	font-family: 'Calibri-Light';
+	  src: url('assets/typography/Calibri-Light.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Calibri-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Calibri-Light.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Calibri-Light.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Calibri-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Calibri-Light.svg#svgCalibri-Light') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibri';
+	  src: url('assets/typography/Calibri.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Calibri.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Calibri.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Calibri.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Calibri.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Calibri.svg#svgCalibri') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibri-Italic';
+	  src: url('assets/typography/Calibri-Italic.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Calibri-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Calibri-Italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Calibri-Italic.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Calibri-Italic.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Calibri-Italic.svg#Calibri-Italic') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Calibri-Bold';
+	  src: url('assets/typography/Calibri-Bold.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Calibri-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Calibri-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Calibri-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Calibri-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Calibri-Bold.svg#Calibri-Bold') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Candara';
+	  src: url('assets/typography/Candara.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Candara.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Candara.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Candara.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Candara.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Candara.svg#Candara') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Candara-Italic';
+	  src: url('assets/typography/Candara-Italic.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Candara-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Candara-Italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Candara-Italic.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Candara-Italic.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Candara-Italic.svg#Candara-Italic') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Candara-Bold';
+	  src: url('assets/typography/Candara-Bold.eot'); /* IE9 Compat Modes */
+  src: url('assets/typography/Candara-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/typography/Candara-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/typography/Candara-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/typography/Candara-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/typography/Candara-Bold.svg#Candara-Bold') format('svg'); /* Legacy iOS */
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+ #top-menu-nav>ul>li>a:hover, #top-menu-nav>ul>li>a:focus {
+    opacity: 1;
+	 background:none;
+	 	color:#cc0000;
+
+  
+}
+
+.et-fixed-header #et-top-navigation nav>ul>li>a:hover {
+    opacity: 1;
+	 background:none;
+	 	color:#cc0000;}
+
+.nav li ul {
+    position: absolute;
+    padding: 0px 0;
+}
+
+#top-menu li li {
+    margin: 0;
+    padding: 0 0px;
+}
+
+#top-menu li li a {
+    width: 240px;
+    padding: 6px 20px;
+}
+
+#main-header .nav li ul a {
+    color: rgba(0,0,0,1);
+}
+
+.et_mobile_menu li a:hover, .nav ul li a:hover {
+     opacity: 1; 
+    background-color: rgba(0,0,0,.1);
+}
+@media only screen and (min-width: 768px) {
+
+#et-secondary-nav .menu-item-has-children>a:first-child:after, #top-menu .menu-item-has-children>a:first-child:after {
+    position: absolute;
+    top: 9px;
+   
+}
+}
+
+@media only screen and (min-width: 981px) {
+.et_header_style_left #et-top-navigation nav>ul>li>a {
+    padding-bottom: 25px !important;
+}
+}
+
+#main-header .nav li ul {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    /* opacity: 0.5; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family:'Candara','Orienta',sans-serif;
+}
+
+/*p {
+	font-family:'Calibri-Light','Open Sans',sans-serif;
+}*/
+
+#top-menu a {
+	
+	font-family:'Candara','Orienta',sans-serif;
+
+}
+
+.headerhilltop .et_pb_fullwidth_header_container {
+	width:90% !important;
+}
+
+img.hilltoplarge {
+	width:50%;
+	height:auto;
+}
+.headerphoto  .et_pb_fullwidth_header_overlay {
+/* Webkit */
+	
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+30,0+87,0.5+100 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 87%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
+	
+}
+
+.home-icons img {
+	max-width:190px;
+}
+
+.staffheaderphoto  .et_pb_fullwidth_header_overlay {
+/* Webkit */
+	
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+30,0+87,0.5+100 */
+background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 87%, rgba(0,0,0,0.5) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 87%,rgba(0,0,0,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
+	
+}
+
+.staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom {
+	margin-bottom:0 !important;
+}
+
+.et_pb_fullscreen.staffheaderphoto .et_pb_fullwidth_header_container.left .header-content-container.bottom, .et_pb_fullscreen .et_pb_fullwidth_header_container.right .header-content-container.bottom {
+    margin-bottom: 0px;
+}
+
+
+/* Style Footer Credits - Lines 948 & 949 */
+
+/* #footer-info { 
+text-align: left; 
+color: green; 
+padding-bottom: 10px; 
+float: left; 
+}
+
+#footer-info a { 
+font-weight: 700; 
+color: yellow; 
+}
+
+#footer-info a:hover { 
+color: pink; 
+}
+
+*/
+/* Style Footer Social Icons - Lines 1185 to 1198 */
+
+/*#footer-bottom .et-social-facebook a {
+	color: blue;
+}
+#footer-bottom .et-social-twitter a {
+	color: powderblue;
+}
+#footer-bottom .et-social-google-plus a {
+	color: red;
+}
+#footer-bottom .et-social-rss a {
+	color: orange;
+}
+*/
+
+/* Hover Colors*/
+/* #footer-bottom .et-social-facebook a:hover {
+	color: pink;
+}
+#footer-bottom .et-social-twitter a:hover {
+	color: pink;
+}
+#footer-bottom .et-social-google-plus a:hover {
+	color: pink;
+}
+#footer-bottom .et-social-rss a:hover {
+	color: pink;
+}
+*/
