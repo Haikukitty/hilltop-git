@@ -138,39 +138,10 @@ Template: Divi
 }
 }
 
-@media only screen and (min-width: 980px) {
+@media only screen and (min-width: 981px) {
 .et_header_style_left #et-top-navigation nav>ul>li>a {
     padding-bottom: 25px !important;
 }
-	
-	#logo {
-opacity:1;
-display:inherit;
-margin: 0 0 0 0;
--webkit-transition: all .4s ease-in-out;
--moz-transition: all .4s ease-in-out;
-transition: all .4s ease-in-out;
-}
-#logo.second-logo {
-opacity:0;
--webkit-transition: all .4s ease-in-out;
--moz-transition: all .4s ease-in-out;
-transition: all .4s ease-in-out;
-}
-.et-fixed-header #logo {
-opacity: 0;
--webkit-transition: all .4s ease-in-out;
--moz-transition: all .4s ease-in-out;
-transition: all .4s ease-in-out;
- 
-}
-.et-fixed-header #logo.second-logo {
-opacity:1;
--webkit-transition: all .4s ease-in-out;
--moz-transition: all .4s ease-in-out;
-transition: all .4s ease-in-out;
-}
-
 }
 
 #main-header .nav li ul {
