@@ -15,6 +15,20 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 			while ( have_posts() ): the_post(); ?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<?php
+add_filter("gform_field_value_staffname", "populate_staffname");
+function populate_staffname($value){
+return get_post_meta($post->ID, 'staff-name', true);
+}
+
+add_filter("gform_field_value_staffemail", "populate_staffemail");
+function populate_staffemail($value){
+return get_post_meta($post->ID, 'staff-email', true);
+
+}
+
+?>
+
 					<div class="entry-content">
 					<?php
 						the_content();
