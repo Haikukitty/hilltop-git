@@ -53,17 +53,8 @@ function divi_portfolio_items( $query ) {
 	if( $query->is_main_query() && !is_admin() && is_post_type_archive( 'portfolio' ) ) {
 		$query->set( 'posts_per_page', '12' );
 	}
-	
-	if( $query->is_main_query() && is_post_type_archive( 'news-bulletins' ) ) {
-		$query->set( 'posts_per_page', '20' );
-	}
-	
-	if( $query->is_main_query() && is_post_type_archive( 'publication' ) ) {
-		$query->set( 'posts_per_page', '20' );
-	}
 
 }
-
 
 //add_filter("gform_pre_render", "populate_email");
 
@@ -146,21 +137,9 @@ function acc_enqueue_stuff() {
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
 
     /** Call landing-page-template-one enqueue */
-  } else if ( is_page_template( 'archive-news-bulletins.php' ) ) {
+  } else {
     /** Call regular enqueue */
-	  
-	   wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.lilo.accordion.min.js', array('jquery'),'1.0', true);
-       
-        wp_enqueue_script('accordion_script');
-	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
   }
-	else {
-		
-		wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.lilo.accordion.min.js', array('jquery'),'1.0', true);
-       
-        wp_enqueue_script('accordion_script');
-	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
-	}
 }
 add_action( 'wp_enqueue_scripts', 'acc_enqueue_stuff' );
 
@@ -177,35 +156,19 @@ add_filter('acf/upload_prefilter', function($errors) {
 add_image_size( 'team-size', 300, 300, array( 'center', 'top' ) ); // 300 pixels wide by 300 pixels tall, crop from the top
 
 
-//function wp_pubs_pre_get_posts( $query ) {
+function wp_pubs_pre_get_posts( $query ) {
 
 
-//if ( is_admin() || ! $query->is_main_query() ) return;
+if ( is_admin() || ! $query->is_main_query() ) return;
 
-//if ( in_array ( $query->get('post_type'), array('publication') ) ) {
-   //     $query->set( 'posts_per_page', 5 ); 
+if ( in_array ( $query->get('post_type'), array('publication') ) ) {
+        $query->set( 'posts_per_page', 5 ); 
 
- //   return;
-//} }
+    return;
+} }
 	
-//	add_action( 'pre_get_posts', 'wp_pubs_pre_get_posts' );
+	add_action( 'pre_get_posts', 'wp_pubs_pre_get_posts' );
 
-function news_query( $query ){
-    if( ! is_admin()
-        && $query->is_post_type_archive( 'news-bulletins' )
-        && $query->is_main_query() ){
-            $query->set( 'posts_per_page', 20 );
-    }
-}
-add_action( 'pre_get_posts', 'news_query' );
 
-function pubs_query( $query ){
-    if( ! is_admin()
-        && $query->is_post_type_archive( 'publication' )
-        && $query->is_main_query() ){
-            $query->set( 'posts_per_page', 10 );
-    }
-}
-add_action( 'pre_get_posts', 'pubs_query' );
 
 

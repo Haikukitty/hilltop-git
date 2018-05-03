@@ -32,6 +32,32 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
+<<<<<<< HEAD
+=======
+					<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
+			
+				
+					<section class="et_pb_fullwidth_header et_pb_module et_pb_bg_layout_dark et_pb_text_align_left staffheaderphoto et_pb_fullwidth_header_0 pubs" style="background-image:url(<?php if( !empty($pubheader) ): ?><?php echo $pubheader['url']; ?><?php endif; ?>);">			
+				
+				<div class="et_pb_fullwidth_header_container left">
+					<div class="header-content-container bottom">
+					<div class="header-content">
+						
+						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/publication/" class="headerpiclink">Publications</a></h1>
+						
+						<div class="et_pb_header_content_wrapper"></div>
+						
+					</div>
+				</div>
+					
+				</div>
+				<div class="et_pb_fullwidth_header_overlay" style="background-color: rgba(40,40,40,0.45);"></div>
+				<div class="et_pb_fullwidth_header_scroll"></div>
+			</section>
+				
+				
+			</div>
+>>>>>>> news feed templates, functions etc
 					<?php if ( ( 'off' !== $show_default_title && $is_page_builder_used ) || ! $is_page_builder_used ) { ?>
 
 					<?php
