@@ -64,7 +64,6 @@ function divi_portfolio_items( $query ) {
 
 }
 
-
 //add_filter("gform_pre_render", "populate_email");
 
 //function populate_email($form){
@@ -141,8 +140,6 @@ function acc_enqueue_stuff() {
   if ( is_page_template( 'page-our-team.php' ) ) {
 	  
 	  wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.lilo.accordion.min.js', array('jquery'),'1.0', true);
-	  
-	    wp_register_script('jquery-ui', get_stylesheet_directory_uri() . '/assets/js/jqueryacc.js', array('jquery'),'1.0', true);
        
         wp_enqueue_script('accordion_script');
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
@@ -153,16 +150,12 @@ function acc_enqueue_stuff() {
 	  
 	   wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.lilo.accordion.min.js', array('jquery'),'1.0', true);
        
-	    wp_register_script('jquery-ui', get_stylesheet_directory_uri() . '/assets/js/jqueryacc.js', array('jquery'),'1.0', true);
-	  
         wp_enqueue_script('accordion_script');
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
   }
 	else {
 		
 		wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.lilo.accordion.min.js', array('jquery'),'1.0', true);
-		
-	    wp_register_script('jquery-ui', get_stylesheet_directory_uri() . '/assets/js/jqueryacc.js', array('jquery'),'1.0', true);
        
         wp_enqueue_script('accordion_script');
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 

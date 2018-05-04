@@ -111,6 +111,8 @@ Template: Divi
     padding: 0px 0;
 }
 
+
+
 #top-menu li li {
     margin: 0;
     padding: 0 0px;
@@ -493,13 +495,30 @@ padding-bottom: 67px;
 
 }
 
-.introtext, .introtext p {
+.introtext, .introtext p, p.introtext {
 	font-family:'Raleway','Arial',sans-serif;
 	font-weight:200;
 	font-size:24px;
 	color:#555555;
 }
 
-.introtext {
+div.introtext {
 	padding-bottom:53px;
 }
+
+h3 a.menu_head {
+	
+	font-size:30px;
+	color: #00a0af;
+	    font-family: 'Candara','Orienta',sans-serif;
+
+}
+
+h3 a.menu_head:hover {
+	
+text-decoration:none;
+	color: #00a0af;
+	    font-family: 'Candara','Orienta',sans-serif;
+
+}
+

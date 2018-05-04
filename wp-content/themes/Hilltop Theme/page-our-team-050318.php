@@ -42,8 +42,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
 			
 			
- <div class="the-teams" id="accordion">
-			<?php $i = 0; ?>
+ <div class="the-teams">
 
 			<?php
 //$_terms = get_terms( array('teams') );
@@ -75,12 +74,13 @@ foreach ($_terms as $term) :
   <?php  if( $_posts->have_posts() ) : ?>
 	
 	
-	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>" data-tab-index="<?php echo $i; ?>">
-		<a name="tab<?php echo $i; ?>" class="menu_head"><?php echo $term->name; ?></a>
+	<div class="lilo-accordion-control">
+<h2 class="menu_head">      
+          <?php echo $term->name; ?></h2>
        
     
    
-			</h3>
+			</div>
 
 
     
@@ -109,7 +109,7 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
 
 	
 	 <?php
-$i++;
+$c++;
     endif;
     wp_reset_postdata();  ?>
 	
@@ -131,73 +131,16 @@ $i++;
 </div> <!-- #main-content -->
 
  <script>
-	 
-jQuery(document).ready( function() {
-    jQuery('#accordion').accordion({
-        collapsible:true,
-		navigation:true,
-				heightStyle: "content",
-        beforeActivate: function(event, ui) {
-             // The accordion believes a panel is being opened
-            if (ui.newHeader[0]) {
-                var currHeader  = ui.newHeader;
-                var currContent = currHeader.next('.ui-accordion-content');
-             // The accordion believes a panel is being closed
-            } else {
-                var currHeader  = ui.oldHeader;
-                var currContent = currHeader.next('.ui-accordion-content');
-            }
-             // Since we've changed the default behavior, this detects the actual status
-            var isPanelSelected = currHeader.attr('aria-selected') == 'true';
-            
-             // Toggle the panel's header
-            currHeader.toggleClass('ui-corner-all',isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top',!isPanelSelected).attr('aria-selected',((!isPanelSelected).toString()));
-            
-            // Toggle the panel's icon
-            currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e',isPanelSelected).toggleClass('ui-icon-triangle-1-s',!isPanelSelected);
-            
-             // Toggle the panel's content
-            currContent.toggleClass('accordion-content-active',!isPanelSelected)    
-            if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
+jQuery( document ).ready(function( $ ) {
+    jQuery('.the-teams').liloAccordion({
+  onlyOneActive: false,
+  initFirstActive: true,
+  hideControl: false,
+  openNextOnClose: false
 
-            return false; // Cancels the default action
-        }
-		
-
-  	  });
-	
+})
 });
-	 
-	 	jQuery(document).ready(function () {
-
-jQuery(".lilo-accordion-content").click(function () {
-	
-	    var parentId = jQuery(this).prop('id');
-
-    jQuery(parentId).css("display", "block");
-	
-	            sessionStorage.setItem('parentId', parentId).css('display')
-
-	
-  //  sessionStorage.setItem("shop-vehicle", jQuery(parentId).css("display"));
-});
-	 
-    if (sessionStorage.getItem("parentId"))
-    {
-		
-		sessionStorage.getItem("parentId");
-        jQuery('parentId').css("display", "block");
-    }
-});
-	
-	
-
-
-	 
-	  
   </script>
-
-
 
 <?php
 
