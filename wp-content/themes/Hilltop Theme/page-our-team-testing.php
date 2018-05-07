@@ -143,7 +143,7 @@ jQuery( document ).ready(function( $ ) {
 	
 	 var parent = sessionStorage.getItem('parentId');
 		 
-		 var accord = parentId + "1";
+		 var accord = parent + "1";
 	
 	jQuery('body, html, #'+accord).scrollTop(0);
 
