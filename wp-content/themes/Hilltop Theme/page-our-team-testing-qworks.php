@@ -75,7 +75,7 @@ foreach ($_terms as $term) :
   <?php  if( $_posts->have_posts() ) : ?>
 	
 	
-	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>1" data-tab-index="<?php echo $i; ?>">
+	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>" data-tab-index="<?php echo $i; ?>">
 		<a name="tab<?php echo $i; ?>"><?php echo $term->name; ?></a>
        
     
@@ -85,7 +85,7 @@ foreach ($_terms as $term) :
 
     
 		 
-		  <div class="lilo-accordion-content" id="tab<?php echo $i; ?>">
+		  <div class="lilo-accordion-content" id="divtab<?php echo $i; ?>">
 			  <div class="row">
 		   <?php   while ( $_posts->have_posts() ) : $_posts->the_post();
         ?>
@@ -140,15 +140,8 @@ jQuery( document ).ready(function( $ ) {
   openNextOnClose: false
 
 })
-	
-	 var parent = sessionStorage.getItem('parentId');
-		 
-		 var accord = parentId + "1";
-	
-	jQuery('body, html, #'+accord).scrollTop(0);
 
-
-});	 
+	 
 
 jQuery(".lilo-accordion-content").click(function () {
 	
@@ -161,28 +154,19 @@ jQuery(".lilo-accordion-content").click(function () {
   //  sessionStorage.setItem("shop-vehicle", jQuery(parentId).css("display"));
 });
 	
-
+	});
 			
 	 
 	 window.onload = function() {
 
 			    var parentId = sessionStorage.getItem('parentId');
-		 
-		 var parentacc = parentId + "1";
 
 	 
   
 		sessionStorage.getItem('parentId');
 		//sessionStorage.getItem("parentId");
         document.getElementById(parentId).style.display = "block";
-		       var acc= document.getElementById(parentacc);
-		 acc.className += " active remembered";
-		 
-//acc.innerHTML = variableLongText;
-//acc.scrollTop = -200;
-
-
-	 };
+	 }
 
 	
 

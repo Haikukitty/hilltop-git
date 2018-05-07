@@ -59,7 +59,6 @@ Template: Divi
 	font-family: 'Candara';
 	  src: url('assets/typography/Candara.eot'); /* IE9 Compat Modes */
   src: url('assets/typography/Candara.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('assets/typography/Candara.woff2') format('woff2'), /* Super Modern Browsers */
        url('assets/typography/Candara.woff') format('woff'), /* Pretty Modern Browsers */
        url('assets/typography/Candara.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('assets/typography/Candara.svg#Candara') format('svg'); /* Legacy iOS */
@@ -506,7 +505,7 @@ div.introtext {
 	padding-bottom:53px;
 }
 
-h3 a.menu_head {
+h3.lilo-accordion-control a {
 	
 	font-size:30px;
 	color: #00a0af;
@@ -514,7 +513,7 @@ h3 a.menu_head {
 
 }
 
-h3 a.menu_head:hover {
+h3.lilo-accordion-control a:hover {
 	
 text-decoration:none;
 	color: #00a0af;

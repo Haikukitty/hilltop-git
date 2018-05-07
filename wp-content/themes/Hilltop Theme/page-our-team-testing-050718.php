@@ -140,15 +140,8 @@ jQuery( document ).ready(function( $ ) {
   openNextOnClose: false
 
 })
-	
-	 var parent = sessionStorage.getItem('parentId');
-		 
-		 var accord = parentId + "1";
-	
-	jQuery('body, html, #'+accord).scrollTop(0);
 
-
-});	 
+	 
 
 jQuery(".lilo-accordion-content").click(function () {
 	
@@ -161,7 +154,12 @@ jQuery(".lilo-accordion-content").click(function () {
   //  sessionStorage.setItem("shop-vehicle", jQuery(parentId).css("display"));
 });
 	
-
+	
+	jQuery(function() { 
+    jQuery(document).scrollTop( jQuery(".remembered").offset(-100).top );
+}); 
+	
+	});
 			
 	 
 	 window.onload = function() {
@@ -177,12 +175,9 @@ jQuery(".lilo-accordion-content").click(function () {
         document.getElementById(parentId).style.display = "block";
 		       var acc= document.getElementById(parentacc);
 		 acc.className += " active remembered";
-		 
-//acc.innerHTML = variableLongText;
-//acc.scrollTop = -200;
 
 
-	 };
+	 }
 
 	
 

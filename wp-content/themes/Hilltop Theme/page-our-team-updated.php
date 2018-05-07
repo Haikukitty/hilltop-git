@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Our Team testing Template
+Template Name: Our Team Updated Main Page
 */
 
 get_header();
@@ -42,7 +42,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
 			
 			
- <div class="the-teams">
+ <div class="the-teams" id="accordion">
 			<?php $i = 0; ?>
 
 			<?php
@@ -75,7 +75,7 @@ foreach ($_terms as $term) :
   <?php  if( $_posts->have_posts() ) : ?>
 	
 	
-	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>1" data-tab-index="<?php echo $i; ?>">
+	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>" data-tab-index="<?php echo $i; ?>">
 		<a name="tab<?php echo $i; ?>"><?php echo $term->name; ?></a>
        
     
@@ -85,7 +85,7 @@ foreach ($_terms as $term) :
 
     
 		 
-		  <div class="lilo-accordion-content" id="tab<?php echo $i; ?>">
+		  <div class="lilo-accordion-content">
 			  <div class="row">
 		   <?php   while ( $_posts->have_posts() ) : $_posts->the_post();
         ?>
@@ -132,58 +132,64 @@ $i++;
 
  <script>
 	 
-jQuery( document ).ready(function( $ ) {
-    jQuery('.the-teams').liloAccordion({
-  onlyOneActive: false,
-  initFirstActive: true,
-  hideControl: false,
-  openNextOnClose: false
+jQuery(document).ready( function() {
+    jQuery('#accordion').accordion({
+        collapsible:true,
+		navigation:true,
+				heightStyle: "content",
+        beforeActivate: function(event, ui) {
+             // The accordion believes a panel is being opened
+            if (ui.newHeader[0]) {
+                var currHeader  = ui.newHeader;
+                var currContent = currHeader.next('.ui-accordion-content');
+             // The accordion believes a panel is being closed
+            } else {
+                var currHeader  = ui.oldHeader;
+                var currContent = currHeader.next('.ui-accordion-content');
+            }
+             // Since we've changed the default behavior, this detects the actual status
+            var isPanelSelected = currHeader.attr('aria-selected') == 'true';
+            
+             // Toggle the panel's header
+            currHeader.toggleClass('ui-corner-all',isPanelSelected).toggleClass('accordion-header-active ui-state-active ui-corner-top',!isPanelSelected).attr('aria-selected',((!isPanelSelected).toString()));
+            
+            // Toggle the panel's icon
+            currHeader.children('.ui-icon').toggleClass('ui-icon-triangle-1-e',isPanelSelected).toggleClass('ui-icon-triangle-1-s',!isPanelSelected);
+            
+             // Toggle the panel's content
+            currContent.toggleClass('accordion-content-active',!isPanelSelected)    
+            if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
 
-})
+            return false; // Cancels the default action
+        }
+		
+
+  	  });
 	
-	 var parent = sessionStorage.getItem('parentId');
-		 
-		 var accord = parentId + "1";
-	
-	jQuery('body, html, #'+accord).scrollTop(0);
-
-
-});	 
+});
+	 
+	 	jQuery(document).ready(function () {
 
 jQuery(".lilo-accordion-content").click(function () {
 	
 	    var parentId = jQuery(this).prop('id');
 
+    jQuery(parentId).css("display", "block");
 	
-	            sessionStorage.setItem('parentId', parentId);
+	            sessionStorage.setItem('parentId', parentId).css('display')
 
 	
   //  sessionStorage.setItem("shop-vehicle", jQuery(parentId).css("display"));
 });
+	 
+    if (sessionStorage.getItem("parentId"))
+    {
+		
+		sessionStorage.getItem("parentId");
+        jQuery('parentId').css("display", "block");
+    }
+});
 	
-
-			
-	 
-	 window.onload = function() {
-
-			    var parentId = sessionStorage.getItem('parentId');
-		 
-		 var parentacc = parentId + "1";
-
-	 
-  
-		sessionStorage.getItem('parentId');
-		//sessionStorage.getItem("parentId");
-        document.getElementById(parentId).style.display = "block";
-		       var acc= document.getElementById(parentacc);
-		 acc.className += " active remembered";
-		 
-//acc.innerHTML = variableLongText;
-//acc.scrollTop = -200;
-
-
-	 };
-
 	
 
 
