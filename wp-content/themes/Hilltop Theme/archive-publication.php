@@ -1,12 +1,15 @@
 <?php
 /*
-Template Name: Publications Archive Page
+Template Name: Publications Search Page
 */
 
 
 
 	
+	
 get_header();
+global $wp_query;
+
 
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
@@ -24,7 +27,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Publications</h1>
+						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/publications/" class="headerpiclink">Publications</a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -42,83 +45,60 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 	<div class="container">
 		<div id="content-area" class="clearfix">
 			
-			<?php the_field('publications_archive_intro_text','cpt_publication'); ?>
-			
 			<?php echo do_shortcode( '[searchandfilter slug="publications"]' ); ?>
 			
-			<div id="results">
+	<div id="results" class="pubsarchive">
+		
+		 <h4 class="search-title"> <?php echo $wp_query->found_posts; ?>
+        <?php _e( 'Search Results Found', 'locale' ); ?></h4>
 
-			<?php $i = 0; ?>
+        <?php if ( have_posts() ) { ?>
 
-						<?php 
-			
-			$paged = ( get_query_var(‘page’) ) ? get_query_var(‘page’) : 1;
-		if($paged == 1 ) {
-			 $abstract = get_field('publication_abstract');  // in first page number of post (a=4)
-		} else  { // in other page number of post (b=6),{equation: a+($paged -2)*b]
-			
-		}
-			
-			
-			if (have_posts()) : while ( have_posts() ) : the_post(); ?>
- 
 
-				<article id="post-<?php the_ID(); ?> publist-<?php echo $i; ?>" <?php post_class(); ?>>
+            <?php while ( have_posts() ) { the_post(); ?>
+
+              <article id="post-<?php the_ID(); ?> publist-<?php echo $i; ?>" <?php post_class(); ?>>
 
 				<?php if ( ! $is_page_builder_used ) : ?>
+				  <div class="pubsholder">
+					  <div class="pubsdate">
+						  <?php the_time('m/d/Y', '<h4 class="pubdate">', '</h4>'); ?>
+
+					  </div>
+								  <div class="pubslist">
 
 					<h2 class="main_title feeds"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
-				<?php
-					$thumb = '';
+									  
+					  </div>
+				  </div>
+				  				<?php endif; ?>
 
-					$width = (int) apply_filters( 'et_pb_index_blog_image_width', 1080 );
-
-					$height = (int) apply_filters( 'et_pb_index_blog_image_height', 675 );
-					$classtext = 'et_featured_image';
-					$titletext = get_the_title();
-					$thumbnail = get_thumbnail( $width, $height, $classtext, $titletext, $titletext, false, 'Blogimage' );
-					$thumb = $thumbnail["thumb"];
-
-					if ( 'on' === et_get_option( 'divi_page_thumbnails', 'false' ) && '' !== $thumb )
-						print_thumbnail( $thumb, $thumbnail["use_timthumb"], $titletext, $width, $height );
-				?>
-
-				<?php endif; ?>
-
-					<div class="entry-content">
-						
-						
-
-						 <?php $paged = ( get_query_var(‘page’) ) ? get_query_var(‘page’) : 1;
-		if(($paged == 1 ) && ($i = 0)) {
-			 $abstract = get_field('publication_abstract');  // in first page number of post (a=4)
-			
- ?>
-					<?php
-						 echo $abstract;
-
-						
-					?>
-						  <?php }  else { }
-						
- ?> 
+				  				</article> <!-- .et_pb_post -->
 		
-					
-					</div> <!-- .entry-content -->
+		
 
-			
-
-				</article> <!-- .et_pb_post -->
-			
-			
-			<?php 
-
-			$i++;
-endwhile;
-					
-?>
 				
-	<?php endif; ?>
+
+						
+						
+
+						
+
+
+           <?php echo paginate_links(); ?>
+
+        <?php }  } ?>
+
+
+			
+					
+
+			
+
+			
+			
+
+				
 
 			
 <?php wp_reset_postdata(); 
@@ -128,21 +108,19 @@ endwhile;
 	'prev_text' => __( '< Back', 'textdomain' ),
 	'next_text' => __( 'Next >', 'textdomain' ),
 ) );
+								   
+								  
 
 ?>
 			
-<?php if ( ! $is_page_builder_used ) :
-	
-							
-					?>
+
 			</div>
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 
-<?php endif; ?>
 
 </div> <!-- #main-content -->
 
 <?php
 
-get_footer();
+get_footer(); 

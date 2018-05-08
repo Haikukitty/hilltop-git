@@ -461,8 +461,8 @@ margin-bottom: 21px;
 margin-top: 7px;
 }
 form.searchandfilter {
-	padding-top: 11px;
-padding-bottom: 67px;
+	padding-top: 5px;
+padding-bottom: 47px;
 }
 
 
@@ -484,6 +484,8 @@ padding-bottom: 67px;
 
 .main_title.feeds {
 	font-size:24px;
+	margin-bottom:0;
+	margin-top:5px;
 	
 }
 
@@ -519,5 +521,47 @@ text-decoration:none;
 	color: #00a0af;
 	    font-family: 'Candara','Orienta',sans-serif;
 
+}
+
+.pubsdate {
+	white-space: nowrap;
+	padding-right:10px;
+	float:left;
+	width:11%;
+	color: #333333;
+}
+
+.pubslist {
+	
+	float:left;
+	width:87%;
+}
+
+.pubsholder {overflow:hidden;}
+
+.pubs-archive-link {
+	margin-top:33px;
+	margin-bottom:57px;
+	text-align:center;
+}
+
+.pubsarchive {
+	margin-bottom: 73px;
+}
+
+h4.search-title {
+	display:none;
+}
+
+.searchandfilter select.sf-input-select {
+    min-width: 120px;
+}
+
+.single-people .staff-info {
+	margin-bottom: 73px;
+}
+
+.pubslist p:last-of-type {
+    padding-bottom: 1.5em;
 }
 

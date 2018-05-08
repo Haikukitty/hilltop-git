@@ -1,19 +1,19 @@
 <?php
 /*
-Template Name: Publications Search Page
+Template Name: Publications Main Page Template
 */
 
 
 
 	
-	
 get_header();
-global $wp_query;
-
 
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
 <div id="main-content">
+	
+	<?php while( have_posts() ): the_post(); /* start main loop */ ?>
+
 
 <?php if ( ! $is_page_builder_used ) : ?>
 	<?php $pubheader = get_field('pubs_header_image','cpt_publication'); ?>
@@ -44,79 +44,79 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 <?php endif; ?>
 	<div class="container">
 		<div id="content-area" class="clearfix">
+			<div class="news-intro introtext">
+			<?php the_field('publications_archive_intro_text','cpt_publication'); ?>
+			</div>
 			
-			<?php echo do_shortcode( '[searchandfilter slug="publications"]' ); ?>
+			<div class="pubsearchfilter">
+				<h4 style="color:#333333;">
+					Search all publications:</h4>
 			
-	<div id="results">
+						<?php echo do_shortcode( '[searchandfilter slug="publications"]' ); ?>
+				
+			</div>
+
+			<div id="results" class="featuredpubs">
+				
+
+					 
+					   <?php
+					 
+					 	$numberpubsposts = get_field('number_of_featured_publications', 'cpt_publication');
+
+
+
+  $my_loop = new WP_Query(array(
+        'post_type' => 'publication',
+        'showposts' => $numberpubsposts,
 		
-		 <h4 class="search-title"> <?php echo $wp_query->found_posts; ?>
-        <?php _e( 'Search Results Found', 'locale' ); ?></h4>
+   )  );  
 
-        <?php if ( have_posts() ) { ?>
-
-
-            <?php while ( have_posts() ) { the_post(); ?>
-
-              <article id="post-<?php the_ID(); ?> publist-<?php echo $i; ?>" <?php post_class(); ?>>
-
-				<?php if ( ! $is_page_builder_used ) : ?>
-				  <div class="row">
+if( $my_loop->have_posts() ):
+    while( $my_loop->have_posts() ): $my_loop->the_post();		?>		
+ <div class="pubsholder" style="overflow:hidden">
 					  <div class="pubsdate">
-						  <?php the_date('m/d/Y', '<h4 class="pubdate">', '</h4>'); ?>
+						  <?php the_time('m/d/Y', '<h4 class="pubdate">', '</h4>'); ?>
 
 					  </div>
 								  <div class="pubslist">
 
 					<h2 class="main_title feeds"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
 									  
-					  </div>
-				  </div>
-				
-				<?php endif; ?>
-
-						
-						
-
-						
-
-
-           <?php echo paginate_links(); ?>
-
-        <?php }  } ?>
-
-
-			
+					 
+									  
+					<?php
+						the_field('publication_abstract'); ?>
+						  
+										  </div>
 					
-
+					 
+				</div>
+					 
+	<?php	 endwhile;
+endif;
+wp_reset_postdata(); ?>
 			
-
-				</article> <!-- .et_pb_post -->
 			
-			
-
 				
-
+				<p class="clear:both;">&nbsp;</p>
 			
-<?php wp_reset_postdata(); 
-			
-			the_posts_pagination( array(
-	'mid_size'  => 2,
-	'prev_text' => __( '< Back', 'textdomain' ),
-	'next_text' => __( 'Next >', 'textdomain' ),
-) );
-								   
-								  
-
-?>
-			
-
 			</div>
+					 			
+<div class="pubs-archive-link" style="clear:both;min-height:100px;margin-top:40px;">
+	<p><a href="<?php echo site_url(); ?>/publication/" class="et_pb_button button pdfbutton">Publications Archive</a></p>
+				</div>		
+					
+					 
+			
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 
+</div>
 
+<?php	 endwhile; ?>
 </div> <!-- #main-content -->
 
 <?php
 
-get_footer(); 
+get_footer();

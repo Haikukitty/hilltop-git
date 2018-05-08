@@ -8,7 +8,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
 
-
 <style>
 	
 	.formdiv {
@@ -79,24 +78,6 @@ background-color: transparent;
 }
 </style>
 
-<style type="text/css">
-#text{
-display:none;
-}
-.btn-container{
- margin: auto;
- height:44px;
- width:166.23px;
- 
-}
-a:active{
- color:#ffd323;
-}
-
-
-</style>
-
-
 <script>
 jQuery(document).ready(function() {
 
@@ -126,7 +107,6 @@ jQuery('.form_open').removeClass("formshow");
 
 
 <div id="main-content">
-
 	
 	<?php if ( ! $is_page_builder_used ) : ?>
 
@@ -157,34 +137,40 @@ jQuery('.form_open').removeClass("formshow");
 			</div>
 <?php endif; ?>
 	
+	<?php
+//add_filter("gform_field_value_staffname", "populate_staffname");
+// function populate_staffname($value){
+// return get_post_meta($post->ID, 'staff-name', true);
+// }
+global $post;
+add_filter("gform_field_value_staffemail", "populate_staffemail");
+function populate_staffemail($value){
+return get_post_meta($post->ID, 'wpcf-staff-email', true);
+}
+	
+// }
+					
+//					add_filter( 'gform_pre_render', 'staff_email' );
+//function staff_email( $value ) {
+//    global $post;
+ 
+ //   $staffemail = get_post_meta($post_id, 'wpcf_staff-email', true);
+ 
+ //   return $staffemail;
+//}
+	
+	
 
+
+
+?>
 	<?php
 		if ( et_builder_is_product_tour_enabled() ):
 			// load fullwidth page in Product Tour mode
-			while ( have_posts() ): the_post(); 
-	
-	
-	add_filter( 'gform_field_value_staffemail', 'my_custom_population_function' );
-function my_custom_population_function( $value ) {
-    global $post;
-    return function_exists( 'get_field' ) ? get_field( 'staff_email', $post->ID ) : false;
-}
-	?>
+			while ( have_posts() ): the_post(); ?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<?php
-add_filter("gform_field_value_staffname", "populate_staffname");
-function populate_staffname($value){
-return get_post_meta($post->ID, 'staff-name', true);
-}
-
-add_filter("gform_field_value_staffemail", "populate_staffemail");
-function populate_staffemail($value){
-return get_post_meta($post->ID, 'staff-email', true);
-
-}
-
-?>
+					
 
 					<div class="entry-content">
 					<?php
@@ -200,11 +186,55 @@ return get_post_meta($post->ID, 'staff-email', true);
 	
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); ?>
+	
+	<?php
+//add_filter("gform_pre_render", "populate_staffname");
+//function populate_staffname($value){
+//return get_post_meta($post->ID, 'wpcf-staff-name', true);
+// }
+
+//add_filter("gform_pre_render", "populate_staffemail");
+// function populate_staffemail($value){
+// return get_post_meta($post->ID, 'wpcf-staff-email', true);
+	
+// }
+					
 
 	
-
 	
-		
+
+
+
+?>
+	
+		<?php
+//add_filter("gform_field_value_staffname", "populate_staffname");
+// function populate_staffname($value){
+// return get_post_meta($post->ID, 'staff-name', true);
+// }
+//global $post;
+//add_filter("gform_field_value_staffemail", "populate_staffemail");
+//function populate_staffemail($value){
+//return get_post_meta($post->ID, 'wpcf-staff-email', true);
+//}
+	
+// }
+					
+//					add_filter( 'gform_pre_render', 'staff_email' );
+//function staff_email( $value ) {
+//    global $post;
+ 
+ //   $staffemail = get_post_meta($post_id, 'wpcf_staff-email', true);
+ 
+ //   return $staffemail;
+//}
+	
+	
+
+
+
+?>
+	
 	<div class="container">
 		<div id="content-area" class="clearfix">
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
@@ -218,7 +248,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 } ?>
 					
-
 					<div class="row">
 						<div class="col-md-4 staff-pic">
 						<?php	if ( has_post_thumbnail() ) { 
@@ -226,11 +255,11 @@ return get_post_meta($post->ID, 'staff-email', true);
 } ?>
 						</div>
 						
-						<div class="col-md-8 staff-info">
+						<div class="col-md-8">
 					
-							<h2 class="staffname"><?php the_title(); ?></h2>
-							<h5 class="stafftitle"><?php the_field('staff_title'); ?></h5>
-							<h5 class="staffphone" style="display:none;"><?php the_field('staff_phone'); ?></h5>
+							<h2 class="staffname"><?php echo(types_render_field("staff-name", array('raw' => true))); ?></h2>
+							<h5 class="stafftitle"><?php echo(types_render_field("staff-title", array('raw' => true))); ?></h5>
+							<h5 class="staffphone" style="display:none;"><?php echo(types_render_field("staff-phone", array('raw' => true))); ?></h5>
 							
 							<div class="email" style="clear:both;display:block;width:100%;"><a class="button_popup" href="#"><img class="size-full wp-image-594 alignleft" src="http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/04/email-icon.png" style="emailicon" alt="" width="40" height="32"></a></div>
 							
@@ -238,20 +267,12 @@ return get_post_meta($post->ID, 'staff-email', true);
 													
 							
 							<div class="staffbio" style="clear:both;padding-top:25px;">
-								<div id="expand" class="textfade">
-								<?php the_field('staff_bio'); ?>
-								</div>
-								<div id="text">
-									<?php the_field('staff_bio_hidden'); ?>
-								</div>
-								
-								<div class="btn-container"><button id="toggle">Read More</button></div>
+								<?php echo(types_render_field("staff-bio", array('output' => 'html'))); ?>
 							</div>
 							
 						</div>
 					
 				</article> <!-- .et_pb_post -->
-
 					
 										<div class="form_open">
 
@@ -260,7 +281,7 @@ return get_post_meta($post->ID, 'staff-email', true);
 						
 						<div class=" et-waypoint et_pb_animation_fade_in" >
 						
-						<h4 style="margin-top: 5px; padding-top: 4px; padding-bottom: 5px; margin-bottom: 2px;">Contact <?php the_title(); ?></h4>
+						<h4 style="margin-top: 5px; padding-top: 4px; padding-bottom: 5px; margin-bottom: 2px;">Contact <?php echo(types_render_field("staff-name", array('raw' => true))); ?></h4>
 						
 						<?php $staff_form = get_field('contact_form_for_staff_pages','cpt_people');
 							
@@ -291,29 +312,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 
 	<?php endif; ?>
 </div> <!-- #main-content -->
-
-
-
-<script type="text/javascript">
-//jQuery.noConflict();
-
-jQuery(document).ready(function() {
-jQuery("#toggle").click(function() {
- var elem = jQuery("#toggle").text();
- if (elem == "Read More") {
- //Stuff to do when btn is in the read more state
- jQuery("#toggle").text("Read Less");
- jQuery("#text").slideDown();
- jQuery("#expand").removeClass('textfade');
- } else {
- //Stuff to do when btn is in the read less state
-jQuery("#toggle").text("Read More");
- jQuery("#text").slideUp();
- jQuery("#expand").addClass('textfade');
- }
- });
-});
-</script>
 
 <?php
 

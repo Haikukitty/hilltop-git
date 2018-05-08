@@ -143,9 +143,23 @@ jQuery( document ).ready(function( $ ) {
 	
 	 var parent = sessionStorage.getItem('parentId');
 		 
-		 var accord = parent + "1";
+		 var accord = "#" + parent + "1";
 	
-	jQuery('body, html, #'+accord).scrollTop(0);
+	// jQuery(accord).delay(2000).animate({ scrollTop: 0 }, "fast");
+
+	
+	//jQuery(accord).scrollTop(0);
+	
+//	setTimeout((function() {
+//   jQuery(accord).animate({top: 0} ,{duration:500});
+//}), 1000);
+	
+	jQuery(document).scroll(function () {    
+if (jQuery(window).scrollTop() === 0) {    
+ jQuery(accord).delay(2000).slideUp(500);    
+   }
+})
+
 
 
 });	 
@@ -172,13 +186,13 @@ jQuery(".lilo-accordion-content").click(function () {
 
 	 
   
-		sessionStorage.getItem('parentId');
+	//	sessionStorage.getItem('parentId');
 		//sessionStorage.getItem("parentId");
         document.getElementById(parentId).style.display = "block";
 		       var acc= document.getElementById(parentacc);
 		 acc.className += " active remembered";
-		 
-//acc.innerHTML = variableLongText;
+ 
+//document.acc.scrollTop = 100 // where x is some integer
 //acc.scrollTop = -200;
 
 

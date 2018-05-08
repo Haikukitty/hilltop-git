@@ -97,7 +97,7 @@ foreach( $newsposts as $post ) :  //setup_postdata($ppost);
 	
 			<?php the_content(); ?>
 							  	<p class="published-dates newspage"><em><?php
-						the_date();
+						the_time('m/d/Y');
 								?></em></p>
 					 
 
@@ -125,7 +125,7 @@ endwhile;
 					 
 				</div>
 <div class="news-archive-link">
-	<a href="/news-bulletins/" class="et_pb_button button pdfbutton">News &amp; Bulletins Archive</a>
+	<a href="<?php echo site_url(); ?>/news-bulletins/" class="et_pb_button button pdfbutton">News &amp; Bulletins Archive</a>
 				</div>
 			
 

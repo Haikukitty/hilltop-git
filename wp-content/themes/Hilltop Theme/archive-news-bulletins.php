@@ -74,7 +74,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 	
 			<?php the_content(); ?>
 							  	<p class="published-dates" style="text-align:right;"><em><?php
-						the_date();
+						the_time('m/d/Y');
 								?></em></p>
 
 				</div> 
@@ -117,7 +117,7 @@ endwhile;
 jQuery( document ).ready(function( $ ) {
     jQuery('.the-news').liloAccordion({
   onlyOneActive: false,
-  initFirstActive: true,
+  initFirstActive: false,
   hideControl: false,
   openNextOnClose: false
 

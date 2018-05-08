@@ -32,8 +32,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
-<<<<<<< HEAD
-=======
+
 					<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
 			
 				
@@ -43,7 +42,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/publication/" class="headerpiclink">Publications</a></h1>
+						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/publications/" class="headerpiclink">Publications</a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -57,7 +56,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 				
 				
 			</div>
->>>>>>> news feed templates, functions etc
 					<?php if ( ( 'off' !== $show_default_title && $is_page_builder_used ) || ! $is_page_builder_used ) { ?>
 
 					<?php
@@ -67,6 +65,38 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 } ?>
+
+					<div class="et_pb_row et_pb_row_0">
+					<div class="entry-content">
+						
+						
+						
+						<h1 class="entry-title" style="font-size: 26px;"><?php the_title(); ?></h1>
+						
+						  <h4 class="pubdate"><?php the_date('m/d/Y'); ?></h4>
+
+						
+						 <?php the_field('publication_abstract'); ?> 
+						
+					
+						
+						<?php
+
+						if(get_field('upload_pdf')) { ?>
+						
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field('upload_pdf'); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="blank">View <?php the_field('publication_type'); ?> PDF </a></p>
+						
+
+						
+						<?php } else { ?>
+						
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field("external_pdf_link"); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="blank">View <?php the_field('publication_type'); ?> PDF </a></p>
+						
+						<?php } ?>
+						
+						</div>
+						
+					</div>
 					
 				</article> <!-- .et_pb_post -->
 
