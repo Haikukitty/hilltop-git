@@ -90,6 +90,10 @@ Template: Divi
 	font-style: normal;
 }
 
+h5 {
+	color:#8b730f !important;
+}
+
 
 
  #top-menu-nav>ul>li>a:hover, #top-menu-nav>ul>li>a:focus {
@@ -345,7 +349,7 @@ color: pink;
     color: #d97310;
     font-family: 'Raleway', Arial, sans-serif;
     font-size: 16px;
-    padding: 16px 32px 16px 16px;
+    padding: 16px 32px 16px 0px;
     font-weight: 900;
     border-bottom: 0px solid #d97310;
     border-top: 0px solid #ffffff;
@@ -424,7 +428,7 @@ margin-top: 9px;
     color: #d97310;
     font-family: 'Raleway', Arial, sans-serif;
     font-size: 16px;
-    padding: 16px 32px 10px 16px;
+    padding: 16px 32px 10px 0px;
     font-weight: 900;
     border-bottom: 0px solid #d97310;
     border-top: 0px solid #ffffff;
@@ -563,5 +567,91 @@ h4.search-title {
 
 .pubslist p:last-of-type {
     padding-bottom: 1.5em;
+}
+
+.formshow .formholder {
+position: absolute;
+top: 50%;
+max-width: 500px;
+z-index: 999999999999;
+background: #ffffff;
+left: 30%;
+padding: 23px 0px 3px 15px;
+}
+
+.gfield_label {
+display:none;
+}
+
+.form_open.formshow {
+   position: fixed;
+width:100%;
+min-width: 600px;
+z-index: 99999;
+    top: 5%;
+
+}
+
+.gform_wrapper .top_label .gfield_label {
+    display: -moz-inline-stack;
+    display: none;
+    line-height: 1.3;
+    clear: both;
+
+}
+
+.formcloser {
+position: absolute;
+    z-index: 999999999;
+    top: -50px;
+    color: #ffffff;
+    right: -30px;
+    font-size: 33px;
+    padding: 10px 15px;
+    background: #d97310;
+    border-radius: 50%;
+cursor:pointer;
+
+}
+
+.formshow .formholder_2 {
+position: absolute;
+top: 50%;
+max-width: 500px;
+z-index: 999999999999;
+background: #ffffff;
+left: 30%;
+padding: 23px 0px 3px 15px;
+}
+
+
+.form_open_2.formshow {
+   position: fixed;
+width:100%;
+min-width: 600px;
+z-index: 99999;
+    top: 5%;
+
+}
+
+
+
+.formcloser_2 {
+position: absolute;
+    z-index: 999999999;
+    top: -50px;
+    color: #ffffff;
+    right: -30px;
+    font-size: 33px;
+    padding: 10px 15px;
+    background: #d97310;
+    border-radius: 50%;
+cursor:pointer;
+
+}
+
+h1.jobs {
+	text-align:center;
+}
 }
 

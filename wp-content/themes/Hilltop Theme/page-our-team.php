@@ -40,6 +40,15 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 			</div>
 <?php endif; ?><div class="container">
 		<div id="content-area" class="clearfix">
+			
+		<?php	$teamintrotext = get_field('our_team_main_page_intro_content_or_photo','cpt_people');
+if($teamintrotext) { ?>
+	
+	<div class="introtext teamintrotext">
+		
+		<?php echo $teamintrotext; ?>
+			</div>
+<?php } ?>
 
 			
 			
@@ -136,7 +145,7 @@ $i++;
 jQuery( document ).ready(function( $ ) {
     jQuery('.the-teams').liloAccordion({
   onlyOneActive: false,
-  initFirstActive: true,
+  initFirstActive: false,
   hideControl: false,
   openNextOnClose: false
 

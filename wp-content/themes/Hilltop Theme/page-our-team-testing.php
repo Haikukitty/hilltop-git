@@ -135,7 +135,7 @@ $i++;
 jQuery( document ).ready(function( $ ) {
     jQuery('.the-teams').liloAccordion({
   onlyOneActive: false,
-  initFirstActive: true,
+  initFirstActive: false,
   hideControl: false,
   openNextOnClose: false
 
