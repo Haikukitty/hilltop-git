@@ -10,24 +10,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 
 <style>
-	
-	.formdiv {
-		    z-index: 9999999;
-}
-	.formcloser {
-    position: absolute;
-    z-index: 999999999;
-    top: -25px;
-    color: #ffffff;
-    right: -25px;
-    font-size: 33px;
-    padding: 10px 15px;
-    background: #d97310;
-    border-radius: 50%;
-    cursor: pointer;
-}
-	
- .form_open:before {
+ form_open:before {
  content: "";
 background: rgba(0,0,0, 0.7);
 position: fixed;
@@ -52,31 +35,38 @@ z-index: 100;
  display:block;
 background-color: transparent;
  }
-	
+
+.noscroll { overflow: hidden; }
+
+.overlay { 
+   position: fixed; 
+   overflow-y: scroll;
+   top: 0; right: 0; bottom: 0; left: 0; }
+
+[aria-hidden="true"] { display: none; }
+[aria-hidden="false"] { display: block; }
+
+.overlay .formholder {
+ margin: 15vh auto;
+width: 80%;
+max-width: 500px;
+padding: 15px 10px 20px 25px;
+background: #ffffff;
+
+
+background: #ffffff;
+
+}
+.overlay {
+    background:  rgba(40,40,40, .75);
+z-index:99999;
+}
 	
 
-.form_open.formshow {
-    position: fixed;
-    width: 100%;
-    min-width: 600px;
-    z-index: 99999;
-    top: 19%;
-}
-.form_open {
-    opacity: 0;
-    visibility: hidden;
-    display: none;
-    background-color: transparent;
-}
- .formshow .formholder {
-    position: absolute;
-    top: 50%;
-    max-width: 500px;
-    z-index: 999999999999;
-    background: #ffffff;
-    left: 20%;
-    padding: 23px 0px 3px 15px;
-}
+
+
+
+ 
 </style>
 
 <style type="text/css">
@@ -97,29 +87,80 @@ a:active{
 </style>
 
 
+
+<script type="text/javascript">
+jQuery.noConflict();
+
+jQuery(document).ready(function() {
+jQuery("#toggle").click(function() {
+ var elem = jQuery("#toggle").text();
+ if (elem == "Read More") {
+ //Stuff to do when btn is in the read more state
+ jQuery("#toggle").text("Read Less");
+ jQuery("#text").slideDown();
+ jQuery("#expand").removeClass('textfade');
+ } else {
+ //Stuff to do when btn is in the read less state
+jQuery("#toggle").text("Read More");
+ jQuery("#text").slideUp();
+ jQuery("#expand").addClass('textfade');
+ }
+ });
+});
+</script>
+
 <script>
+	jQuery.noConflict();
+
 jQuery(document).ready(function() {
 
 jQuery('.button_popup').click(function() {
 jQuery('.form_open').addClass("formshow");
+jQuery('.overlay').attr("aria-hidden", "false");
 });
 
 
 
 jQuery('.formcloser').click(function() {
 jQuery('.form_open').removeClass("formshow");
+jQuery('.overlay').attr("aria-hidden", "true");
 });
 
- // jQuery(document).click(function (e) {
- // if (jQuery(".form_open").hasClass("formshow")) {
- // if (!$('.form_open').is(e.target) && !$('input').is(e.target) && !$('button_popup').is(e.target)) {
- // $(".form_open").removeClass("formshow");
+
+jQuery('.overlay').attr("aria-hidden", "true");
  // }
  // }
  // });
 
 });
+
+var body = document.body,
+        overlay = document.querySelector('.overlay'),
+        overlayBtts = document.querySelectorAll('button[class$="overlay"]');
+        
+    [].forEach.call(overlayBtts, function(btt) {
+
+      btt.addEventListener('click', function() { 
+         
+         /* Detect the button class name */
+         var overlayOpen = this.className === 'button_popup';
+         
+         /* Toggle the aria-hidden state on the overlay and the 
+            no-scroll class on the body */
+         overlay.setAttribute('aria-hidden', !overlayOpen);
+         body.classList.toggle('noscroll', overlayOpen);
+         
+         /* On some mobile browser when the overlay was previously
+            opened and scrolled, if you open it again it doesn't 
+            reset its scrollTop property */
+         overlay.scrollTop = 0;
+
+      }, false);
+
+    });
+
 </script>
+
 
 
 
@@ -141,7 +182,7 @@ jQuery('.form_open').removeClass("formshow");
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Our Team</h1>
+						<h1 class="et_pb_module_header">Our Teams</h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -230,7 +271,7 @@ return get_post_meta($post->ID, 'staff-email', true);
 					
 							<h2 class="staffname"><?php the_title(); ?></h2>
 							<h5 class="stafftitle"><?php the_field('staff_title'); ?></h5>
-							<h5 class="staffphone" style="display:none;"><?php the_field('staff_phone'); ?></h5>
+							<h5 class="staffphone"><?php the_field('staff_phone'); ?></h5>
 							
 							<div class="email" style="clear:both;display:block;width:100%;"><a class="button_popup" href="#"><img class="size-full wp-image-594 alignleft" src="http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/04/email-icon.png" style="emailicon" alt="" width="40" height="32"></a></div>
 							
@@ -252,10 +293,13 @@ return get_post_meta($post->ID, 'staff-email', true);
 					
 				</article> <!-- .et_pb_post -->
 
+					<section class="overlay">
 					
-										<div class="form_open">
 
 					<div class="formholder">
+						
+						<div class="et_pb_column et_pb_column_4_4  et_pb_column_5 et_pb_css_mix_blend_mode_passthrough et-last-child">
+
 					
 						
 						<div class=" et-waypoint et_pb_animation_fade_in" >
@@ -270,7 +314,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 						
 						<?php  echo $staff_form; ?>
 						
-					</div>
 						
 						
 						
@@ -279,14 +322,19 @@ return get_post_meta($post->ID, 'staff-email', true);
 				
 				<div class="et_pb_code_inner">
 					<div class="form_close">X</div>
-				</div> <!-- .et_pb_code_inner -->
-			</div>
+							</div></div> <!-- .et_pb_code_inner -->
+			
+													
 						
 						</div>
+							
+
 					</div>
-			</article>
+																				<div class="style:clear:both;">&nbsp;</div>
+
+			</div>
 		</div>
-		</div>
+		</section>
 			<?php endwhile; ?>
 
 	<?php endif; ?>
@@ -294,26 +342,7 @@ return get_post_meta($post->ID, 'staff-email', true);
 
 
 
-<script type="text/javascript">
-//jQuery.noConflict();
 
-jQuery(document).ready(function() {
-jQuery("#toggle").click(function() {
- var elem = jQuery("#toggle").text();
- if (elem == "Read More") {
- //Stuff to do when btn is in the read more state
- jQuery("#toggle").text("Read Less");
- jQuery("#text").slideDown();
- jQuery("#expand").removeClass('textfade');
- } else {
- //Stuff to do when btn is in the read less state
-jQuery("#toggle").text("Read More");
- jQuery("#text").slideUp();
- jQuery("#expand").addClass('textfade');
- }
- });
-});
-</script>
 
 <?php
 

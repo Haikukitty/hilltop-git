@@ -64,7 +64,17 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<div class="lilo-accordion-control">
 
 
-					<h2 class="main_title feeds"><?php echo $post->post_title; ?></h2>
+					<div class="pubsholder">
+					  <div class="pubsdate">
+						  <?php the_time('m/d/Y', '<h4 class="pubdate">', '</h4>'); ?>
+
+					  </div>
+								  <div class="pubslist">
+
+					<h2 class="main_title feeds"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
+									  
+					  </div>
+				  </div>
 		
 				</div>
 				
@@ -73,9 +83,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 						  <div class="lilo-accordion-content">
 	
 			<?php the_content(); ?>
-							  	<p class="published-dates" style="text-align:right;"><em><?php
+							  <!--	<p class="published-dates" style="text-align:right;"><em><?php
 						the_time('m/d/Y');
-								?></em></p>
+								?></em></p> -->
 
 				</div> 
 			<?php endif; ?>

@@ -27,7 +27,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/publications/" class="headerpiclink">Publications</a></h1>
+						<h1 class="et_pb_module_header"><a href="<?php echo site_url(); ?>/hilltop-publications/" class="headerpiclink">Publications</a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -70,7 +70,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<h2 class="main_title feeds"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
 									  
 					  </div>
-				  </div>
+				
+				  
+
 				  				<?php endif; ?>
 
 				  				</article> <!-- .et_pb_post -->
@@ -80,14 +82,13 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				
 
 						
-						
+				        <?php } } ?>
+		
 
 						
 
 
-           <?php echo paginate_links(); ?>
 
-        <?php }  } ?>
 
 
 			

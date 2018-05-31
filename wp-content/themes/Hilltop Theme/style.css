@@ -91,7 +91,7 @@ Template: Divi
 }
 
 h5 {
-	color:#8b730f !important;
+	color:#7f6707 !important;
 }
 
 
@@ -113,6 +113,13 @@ h5 {
     position: absolute;
     padding: 0px 0;
 }
+
+
+.nav li li.last-in-section {
+	    border-bottom: 1px solid #5cc0c5;
+
+}
+
 
 
 
@@ -232,10 +239,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 }
 
 .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom {
+
+    margin-bottom: 0 !important;
+    bottom: -5px;
+    position: relative;
+
+}
+
+.et_pb_fullwidth_header { 
+padding-bottom:10px;
+}
+
+.et_pb_fullwidth_header_container.left .header-content {
+    padding-left: 0px !important;
+}
+
+.staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom {
 	margin-bottom:0 !important;
 }
 
 .et_pb_fullscreen.staffheaderphoto .et_pb_fullwidth_header_container.left .header-content-container.bottom, .et_pb_fullscreen .et_pb_fullwidth_header_container.right .header-content-container.bottom {
+    margin-bottom: 0px;
+}
+
+.hcbpheaderphoto  .et_pb_fullwidth_header_overlay {
+/* Webkit */
+	
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+30,0+87,0.5+100 */
+background: none; /* FF3.6-15 */
+/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: none; /* IE6-9 */
+	
+}
+
+.hcbpheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom {
+	margin-bottom:0 !important;
+}
+
+
+
+.et_pb_fullscreen.hcbpheaderphoto .et_pb_fullwidth_header_container.left .header-content-container.bottom, .et_pb_fullscreen .et_pb_fullwidth_header_container.right .header-content-container.bottom {
     margin-bottom: 0px;
 }
 
@@ -344,6 +387,7 @@ color: pink;
 .the-teams {
   max-width: 100%;
   margin: 0px auto;
+	padding-bottom: 77px;
 }
 .lilo-accordion-control {
     color: #d97310;
@@ -422,6 +466,18 @@ color: pink;
 .the-teams .main_title {
 text-align: center;
 margin-top: 9px;
+	margin-bottom:0;
+	padding-bottom:0;
+}
+
+.the-teams h5.stafftitle {
+text-align: center;
+margin-top: 0px;
+	padding-top:0;
+	margin-bottom:20px;
+	min-height:50px;
+	font-size:16px;
+	color:#7f6707;
 }
 
 .the-news .lilo-accordion-control {
@@ -502,9 +558,10 @@ padding-bottom: 47px;
 
 .introtext, .introtext p, p.introtext {
 	font-family:'Raleway','Arial',sans-serif;
-	font-weight:200;
+	font-weight:300;
 	font-size:24px;
-	color:#555555;
+	line-height:140%;
+	color:#343434;
 }
 
 div.introtext {
@@ -526,13 +583,23 @@ text-decoration:none;
 	    font-family: 'Candara','Orienta',sans-serif;
 
 }
+.et_pb_member_position {
+    padding-bottom: 7px;
+    color: #444;
+}.et_pb_team_member_description {
+   text-align:center;
+}
 
 .pubsdate {
-	white-space: nowrap;
-	padding-right:10px;
-	float:left;
-	width:11%;
-	color: #333333;
+
+    white-space: nowrap;
+    padding-right: 10px;
+    float: left;
+    width: 11%;
+    color: #333333;
+    font-weight: normal;
+    font-size: 18px;
+    padding-top: 2px;
 }
 
 .pubslist {
@@ -547,6 +614,10 @@ text-decoration:none;
 	margin-top:33px;
 	margin-bottom:57px;
 	text-align:center;
+}
+
+.pubsarchive article {
+	   margin-bottom:13px;
 }
 
 .pubsarchive {
@@ -603,7 +674,7 @@ z-index: 99999;
 .formcloser {
 position: absolute;
     z-index: 999999999;
-    top: -50px;
+    top: -30px;
     color: #ffffff;
     right: -30px;
     font-size: 33px;
@@ -653,5 +724,174 @@ cursor:pointer;
 h1.jobs {
 	text-align:center;
 }
+.hcbpheaderphoto.pubs {
+	padding-top:134px;
 }
 
+.hcbpheaderphoto.pubs .et_pb_fullwidth_header_container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 2200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 1%;
+}
+
+.sf-input-text, .sf-input-select {
+	height:43px;
+	    border-radius: 0 !important;
+}
+
+.sf-input-text, .sf-input-select {
+	color: #7f6707;
+    background: rgba(139,115,15,0.08);
+    border: 1px solid rgba(140,115,42,0.4);
+}
+
+.sf-field-search input[type="text"]:focus, .sf-field-search input[type="text"] {
+ 	color: #7f6707;
+    background: rgba(139,115,15,0.08);
+    border: 1px solid rgba(140,115,42,0.4);
+}
+
+.sf-field-submit input[type="submit"] {
+	height:43px;
+}
+	p.formtext {
+		
+	color: #7f6707;
+}
+
+input[type="file"], .ginput_preview {
+    color: #7f6707;
+}
+		
+	
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+ 	color: #7f6707;
+	opacity:1;
+	font-weight:normal;
+}
+::-moz-placeholder { /* Firefox 19+ */
+ 	color: #7f6707;
+		opacity:1;
+	font-weight:normal;
+
+}
+:-ms-input-placeholder { /* IE 10+ */
+ 	color: #7f6707;
+		opacity:1;
+	font-weight:normal;
+
+}
+:-moz-placeholder { /* Firefox 18- */
+ 	color: #7f6707;
+		opacity:1;
+	font-weight:normal;
+
+}
+.gform_wrapper .gfield_label {
+	display:none !important;
+}
+
+.ginput_container_fileupload input {
+	width:100% !important;
+}
+
+
+
+#footer-widgets .footer-widget li::before {
+    display: none;
+}
+
+#footer-widgets .footer-widget li {
+    padding-left: 0px;
+}
+
+#footer-widgets .footer-widget li a {
+    color: #007181 !important;
+}
+
+.et_pb_widget {
+	width:80%;
+}
+
+.widget_custom_html {
+	width:80%;
+}
+#custom_html-3 {
+	text-align:center;
+	padding-top:23px;
+}
+
+
+
+.footerbutton {
+    color: #ffffff !important;
+    border-width: 0px !important;
+    border-radius: 0px;
+    background-color: #007181 !important;
+    padding: 13px 13px !important;
+}
+
+.footerbutton:hover {
+    color: #ffffff !important;
+    border-width: 0px !important;
+    border-radius: 0px;
+    background-color: #00a0af !important;
+    padding: 13px 13px !important;
+}
+
+
+.footerbutton::after, .pdfbutton::before {
+    position: absolute;
+    margin-left: -1em;
+    opacity: 0;
+    text-shadow: none;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: none;
+    line-height: 1em;
+    text-transform: none;
+    content: "";
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+@media screen and (min-width:1200px) {
+	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
+		padding-top:373px !important;
+	}
+	
+	
+}
+@media screen and (min-width:981px) and (max-width:1100px) {
+
+#top-menu li {
+    padding-right: 15px;
+}
+}
+
+@media screen and (max-width:980px) {
+	
+	#main-header .second-logo {
+    display: block !important;
+    position: absolute;
+    top: 17px;
+}
+	
+		#main-header .logolink {
+    display: none !important;
+    
+}
+	
+	#logo {
+    max-height: 55%;
+}
+	
+	
+}

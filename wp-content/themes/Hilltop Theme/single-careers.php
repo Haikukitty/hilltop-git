@@ -92,7 +92,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Careers</h1>
+						<h1 class="et_pb_module_header">Jobs</h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						

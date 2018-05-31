@@ -24,7 +24,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Our Team</h1>
+						<h1 class="et_pb_module_header">Our Teams</h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -107,7 +107,9 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
   the_post_thumbnail('team-size');
 }
 							  ?></a></div>
-<h4 class="main_title"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h4>   
+<h4 class="main_title"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h4>  
+					  							<h5 class="stafftitle"><?php the_field('staff_title'); ?></h5>
+
 			   </div>
 			   <?php
         endwhile; ?>
