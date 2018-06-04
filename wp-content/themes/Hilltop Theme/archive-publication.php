@@ -45,6 +45,27 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 	<div class="container">
 		<div id="content-area" class="clearfix">
 			
+				<?php if( have_rows('focus_areas','cpt_publication') ): ?>
+				<div class="row">
+					<?php  while ( have_rows('focus_areas','cpt_publication') ) : the_row(); 
+					
+							$iconimage = get_sub_field('icon_image','cpt_publication');
+							$icontitle = get_sub_field('icon_title','cpt_publication');
+							$iconlink = get_sub_field('icon_link','cpt_publication');
+
+					
+					?>
+					<div class="col-md-2 col-sm-2 col-xs-3 focus">
+						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="<?php echo $iconimage['alt'] ?>" /></a><br>
+							<a href="<?php echo $iconlink; ?>" class="focuslink"><?php echo $icontitle; ?></a>
+						</p>
+						
+					</div>
+							<?php endwhile; ?>
+				</div>
+				
+				<?php endif; ?>
+			
 			<?php echo do_shortcode( '[searchandfilter slug="publications"]' ); ?>
 			
 	<div id="results" class="pubsarchive">
@@ -119,6 +140,25 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 
+<script>
+	 
+jQuery( document ).ready(function( $ ) {
+	
+	
+
+
+jQuery.noConflict();
+jQuery(document).ready(function(){
+jQuery('.focus').matchHeight();
+                    });
+
+	
+
+	 
+ });	
+
+	  
+  </script>
 
 </div> <!-- #main-content -->
 

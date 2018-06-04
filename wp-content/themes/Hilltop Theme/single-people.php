@@ -182,7 +182,7 @@ var body = document.body,
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Our Teams</h1>
+						<h1 class="et_pb_module_header"><a href="/our-team/">Our Teams</a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -261,19 +261,23 @@ return get_post_meta($post->ID, 'staff-email', true);
 					
 
 					<div class="row">
-						<div class="col-md-4 staff-pic">
+						<div class="col-md-4 col-sm-4 staff-pic">
 						<?php	if ( has_post_thumbnail() ) { 
     the_post_thumbnail( 'size-full' ); 
+	
+	$emails = get_field('staff_email');
 } ?>
 						</div>
 						
-						<div class="col-md-8 staff-info">
+						<div class="col-md-8 col-sm-8 staff-info">
 					
 							<h2 class="staffname"><?php the_title(); ?></h2>
+							
 							<h5 class="stafftitle"><?php the_field('staff_title'); ?></h5>
 							<h5 class="staffphone"><?php the_field('staff_phone'); ?></h5>
-							
+							<?php if ($emails): ?>
 							<div class="email" style="clear:both;display:block;width:100%;"><a class="button_popup" href="#"><img class="size-full wp-image-594 alignleft" src="http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/04/email-icon.png" style="emailicon" alt="" width="40" height="32"></a></div>
+							<?php endif; ?>
 							
 							
 													
@@ -293,7 +297,7 @@ return get_post_meta($post->ID, 'staff-email', true);
 					
 				</article> <!-- .et_pb_post -->
 
-					<section class="overlay">
+					<section class="overlay" aria-hidden="true">
 					
 
 					<div class="formholder">

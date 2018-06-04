@@ -64,16 +64,6 @@ function divi_portfolio_items( $query ) {
 
 }
 
-
-register_sidebar( array(
-		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
-		'id'            => 'bottomfooter',
-		'description'   => __( 'Add widgets here to appear in the very bottom area of the footer below the columns.', 'hilltop' ),
-		'before_widget' => '', 
-	'after_widget' => '', 
-	'before_title' => '<h2 class="widget-title">', 
-	'after_title' => '</h2>' ) );
-
 //add_filter("gform_pre_render", "populate_email");
 
 //function populate_email($form){
@@ -155,8 +145,6 @@ function acc_enqueue_stuff() {
        
         wp_enqueue_script('accordion_script');
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
-	  
-	
 
     /** Call landing-page-template-one enqueue */
   } else if ( is_page_template( 'archive-news-bulletins.php' ) ) {
@@ -177,9 +165,6 @@ function acc_enqueue_stuff() {
        
         wp_enqueue_script('accordion_script');
 	      wp_enqueue_style( 'accordion', get_stylesheet_directory_uri() . '/assets/css/lilo-accordion.css' ); 
-		
-		wp_register_script('accordion_script', get_stylesheet_directory_uri() . '/assets/js/jquery.matchHeight.js', array('jquery'),'1.0', true);
-
 	}
 }
 add_action( 'wp_enqueue_scripts', 'acc_enqueue_stuff' );

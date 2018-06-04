@@ -8,6 +8,13 @@ get_header();
 
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
+<style>
+	button#toggle {
+ padding: 7px 7px !important;
+    margin-top: 0em;
+		min-width: 110px;
+}
+</style>
 
 <div id="main-content">
 
@@ -48,11 +55,13 @@ if($teamintrotext) { ?>
 		
 		<?php echo $teamintrotext; ?>
 			</div>
+			
 <?php } ?>
 
 			
+			<div style="text-align:right;margin-bottom:23px;width:100%;"><button class="et_pb_button_0 et_pb_button button pdfbutton" id="toggle">Show All</button></div>
 			
- <div class="the-teams">
+ <div class="the-teams" style="clear:both;">
 			<?php $i = 0; ?>
 
 			<?php
@@ -69,6 +78,7 @@ foreach ($_terms as $term) :
     $term_slug = $term->slug;
     $_posts = new WP_Query( array(
                 'post_type'         => 'people',
+		    'category__not_in' => 37 ,
                 'posts_per_page'    => 50, //important for a PHP memory limit warning
 				'orederby' => 'publication_date',
 		'order' => 'ASC',
@@ -100,7 +110,7 @@ foreach ($_terms as $term) :
 		   <?php   while ( $_posts->have_posts() ) : $_posts->the_post();
         ?>
 			  
-				  <div class="col-md-3 col-sm-6">
+				  <div class="col-md-3 col-sm-6 col-xs-6 teamdiv">
 					  <div class="teamthumb">
 						  <a href="<?php echo get_permalink($post->ID); ?>"><?php
 if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
@@ -145,14 +155,48 @@ $i++;
  <script>
 	 
 jQuery( document ).ready(function( $ ) {
+	
+	
+
+	
+	
     jQuery('.the-teams').liloAccordion({
   onlyOneActive: false,
   initFirstActive: false,
   hideControl: false,
   openNextOnClose: false
 
-})
+});
+	
 
+	// jQuery('a#showall').click(function(e) {
+	//	        e.preventDefault();
+
+ //jQuery('.lilo-accordion-control').addClass( 'active' );
+	//	  jQuery('.lilo-accordion-content').css( 'display','block' );
+
+	// });
+	
+
+jQuery("#toggle").click(function() {
+		//	        e.preventDefault();
+
+ var elem = jQuery("#toggle").text();
+ if (elem == "Show All") {
+ //Stuff to do when btn is in the read more state
+ jQuery("#toggle").text("Close All");
+  jQuery('.lilo-accordion-control').addClass( 'active' );
+		  jQuery('.lilo-accordion-content').css( 'display','block' );
+
+ } else {
+ //Stuff to do when btn is in the read less state
+jQuery("#toggle").text("Show All");
+ jQuery('.lilo-accordion-control').removeClass( 'active' );
+		  jQuery('.lilo-accordion-content').css( 'display','none' );
+
+ }
+ 
+});
 	 
 
 jQuery(".lilo-accordion-content").click(function () {
@@ -170,7 +214,17 @@ jQuery(".lilo-accordion-content").click(function () {
 
 
 	});
-			
+	 
+	 
+	
+
+jQuery.noConflict();
+jQuery(document).ready(function(){
+jQuery('.teamdiv').matchHeight();
+                    });
+
+	
+
 	 
 	 window.onload = function() {
 

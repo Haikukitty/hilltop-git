@@ -34,10 +34,7 @@ get_header(); ?>
 
 	
 	
-	#cbrmap {
-		
-		background-color:#006D75;
-	}
+
 
 </style>
 
@@ -131,6 +128,8 @@ else {
 			$fapcheck = "";
 			$fapdcheck = "";
 			$lcbccheck = "";
+			$itecheck = "";
+			$stecheck = "";
 	
 		$cbrcondchecked = "";
 			$cbruncondchecked = "";
@@ -147,19 +146,45 @@ else {
 		
 		$x=$_GET["select"];
 		if ($x=="0") {$query=$query." ORDER BY StateDesc ";}	
-		if ($x=="cbr2") {$query=$query." WHERE cbr = 2 ORDER BY StateDesc ";}
-		if ($x=="cbr3") {$query=$query." WHERE cbr = 3 ORDER BY StateDesc ";}	
-		if ($x=="mmcbr") {$query=$query." WHERE mmcbr = 1 ORDER BY StateDesc ";}	
-		if ($x=="cbrr") {$query=$query." WHERE cbrr = 1 ORDER BY StateDesc ";}	
-		if ($x=="chna") {$query=$query." WHERE chna = 1 ORDER BY StateDesc ";}	
-		if ($x=="cbpis") {$query=$query." WHERE cbpis = 1 ORDER BY StateDesc ";}	
-		if ($x=="fap") {$query=$query." WHERE fap = 1 ORDER BY StateDesc ";}
-		if ($x=="fapd") {$query=$query." WHERE fapd = 1 ORDER BY StateDesc ";}	
-		if ($x=="lcbc") {$query=$query." WHERE lcbc = 1 ORDER BY StateDesc ";}
-		if ($x=="ite1") {$query=$query." WHERE ite = 1 ORDER BY StateDesc ";}	
-		if ($x=="ite2") {$query=$query." WHERE ite = 2 ORDER BY StateDesc ";}	
-		if ($x=="ste1") {$query=$query." WHERE ste = 1 ORDER BY StateDesc ";}		
-		if ($x=="ste2") {$query=$query." WHERE ste = 2 ORDER BY StateDesc ";}		
+		if ($x=="cbr2") {$query=$query." WHERE cbr = 2 ORDER BY StateDesc ";
+										$cbrchecks = "checked";
+}
+		if ($x=="cbr3") {$query=$query." WHERE cbr = 3 ORDER BY StateDesc ";
+										$cbrchecks = "checked";
+}	
+		if ($x=="mmcbr") {$query=$query." WHERE mmcbr = 1 ORDER BY StateDesc ";
+						 		$mmcbrcheck = "checked";
+}	
+		if ($x=="cbrr") {$query=$query." WHERE cbrr = 1 ORDER BY StateDesc ";
+								$cbrrcheck = "checked";
+}	
+		if ($x=="chna") {$query=$query." WHERE chna = 1 ORDER BY StateDesc ";
+								$chnacheck = "checked";
+}	
+		if ($x=="cbpis") {$query=$query." WHERE cbpis = 1 ORDER BY StateDesc ";
+						 		$cbpischeck = "checked";
+}	
+		if ($x=="fap") {$query=$query." WHERE fap = 1 ORDER BY StateDesc ";
+					   		$fapcheck = "checked";
+}
+		if ($x=="fapd") {$query=$query." WHERE fapd = 1 ORDER BY StateDesc ";
+								$fapdcheck = "checked";
+}	
+		if ($x=="lcbc") {$query=$query." WHERE lcbc = 1 ORDER BY StateDesc ";
+								$lcbccheck = "checked";
+}
+		if ($x=="ite1") {$query=$query." WHERE ite = 1 ORDER BY StateDesc ";
+						$itecheck = "checked";
+						}	
+		if ($x=="ite2") {$query=$query." WHERE ite = 2 ORDER BY StateDesc ";
+						$itecheck = "checked";
+						}	
+		if ($x=="ste1") {$query=$query." WHERE ste = 1 ORDER BY StateDesc ";
+						$stecheck = "checked";
+						}		
+		if ($x=="ste2") {$query=$query." WHERE ste = 2 ORDER BY StateDesc ";
+						$stecheck = "checked";
+						}		
 
 		if (isset($_POST['SubmitFilter'])) {
 			
@@ -364,9 +389,9 @@ else {
 				<img src="/wp-content/uploads/hcbp/usmap_sm.gif" border="0"></a></td>
 				
 				<td width="-1" bgcolor="white" bordercolor="white" bordercolorlight="white"></td>
-				<td align="center" valign="bottom">Income Tax Exemption</td>
+				<td align="center" valign="bottom" class="<?php echo $itecheck; ?>">Income Tax Exemption</td>
 				<td align="center" valign="bottom">Property Tax Exemption</td>
-				<td align="center" valign="bottom">Sales Tax Exemption</td>				
+				<td align="center" valign="bottom" class="<?php echo $stecheck; ?>">Sales Tax Exemption</td>				
 			</tr>
 			
 
