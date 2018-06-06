@@ -107,10 +107,10 @@ foreach ($_terms as $term) :
 		 
 		  <div class="lilo-accordion-content" id="tab<?php echo $i; ?>">
 			  <div class="row">
-		   <?php  $c=0; while ( $_posts->have_posts() ) : $_posts->the_post();
+		   <?php   while ( $_posts->have_posts() ) : $_posts->the_post();
         ?>
 			  
-				  <div id="pic<?php echo $c; ?>" class="col-md-3 col-sm-6 col-xs-6 teamdiv">
+				  <div class="col-md-3 col-sm-6 col-xs-6 teamdiv">
 					  <div class="teamthumb">
 						  <a href="<?php echo get_permalink($post->ID); ?>"><?php
 if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
@@ -122,7 +122,6 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
 
 			   </div>
 			   <?php
-				  $i++;
         endwhile; ?>
 				 
 			  </div>

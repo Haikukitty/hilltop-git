@@ -1257,6 +1257,22 @@ height: auto;
 
 
 
+
+
+.row.board {
+	margin-bottom:25px;
+}
+
+.main_title.board {
+    margin-bottom: 3px;
+
+}
+
+.stafftitle.boardco {
+	
+	margin-bottom: 13px;
+}
+
 p.staffexpert {
 	margin-top:9px;
 }
