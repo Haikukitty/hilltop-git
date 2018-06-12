@@ -352,6 +352,18 @@ h3 a:hover {
     color: #00a0af;
 }
 
+.entry-content table, body.et-pb-preview #main-content .container table {
+    width: 100%;
+    margin: 0 0 15px 0;
+    border: 0px solid #eee;
+    text-align: left;
+}
+
+.entry-content tr td, body.et-pb-preview #main-content .container tr td {
+    padding: 6px 19px;
+    border-top: 0px solid #eee;
+}
+
 /* Style Footer Credits - Lines 948 & 949 */
 
 /* #footer-info { 

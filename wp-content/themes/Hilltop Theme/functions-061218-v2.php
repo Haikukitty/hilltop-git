@@ -21,7 +21,6 @@ function divi_custom_posts( $query ) {
 
 }
 
-
 register_sidebar( array(
 		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
 		'id'            => 'bottomfooter',
@@ -191,52 +190,6 @@ function wdw_query_orderby_postmeta_date( $orderby ){
     return $new_orderby;
 }
 
-function bt_custom_post_status(){
-     register_post_status( 'unpublished', array(
-          'label'                     => _x( 'Unpublished', 'post' ),
-          'public'                    => true,
-          'show_in_admin_all_list'    => false,
-          'show_in_admin_status_list' => true,
-          'label_count'               => _n_noop( 'Unpublished <span class="count">(%s)</span>', 'Unpublished <span class="count">(%s)</span>' )
-     ) );
-}
-add_action( 'init', 'bt_custom_post_status' );
-
-add_action('admin_footer-post.php', 'bt_append_post_status_list');
-function bt_append_post_status_list(){
-     global $post;
-     $complete = '';
-     $label = '';
-     if($post->post_type == 'publication'){
-          if($post->post_status == 'unpublished'){
-               $complete = ' selected="selected"';
-               $label = '<span id="post-status-display"> Unpublished</span>';
-          }
-          echo '
-          <script>
-          jQuery(document).ready(function($){
-               $("select#post_status").append("<option value="unpublished" '.$complete.'>Unpublished</option>");
-               $(".misc-pub-section label").append("'.$label.'");
-          });
-          </script>
-          ';
-     }
-}
-
-function bt_display_archive_state( $states ) {
-     global $post;
-     $arg = get_query_var( 'post_status' );
-     if($arg != 'unpublished'){
-          if($post->post_status == 'unpublished'){
-               return array('Unpublished');
-          }
-     }
-    return $states;
-}
-add_filter( 'display_post_states', 'bt_display_archive_state' );
-
-
-
 /*
  * Add columns to staff post list
  */
@@ -259,7 +212,5 @@ add_filter( 'display_post_states', 'bt_display_archive_state' );
    }
  }
  add_action ( 'manage_people_posts_custom_column', 'people_custom_column', 10, 2 );
-
-
 
 
