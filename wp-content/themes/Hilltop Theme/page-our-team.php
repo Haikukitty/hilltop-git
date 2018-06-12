@@ -20,7 +20,8 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
 <?php if ( ! $is_page_builder_used ) : ?>
 
-	<?php $teamheader = get_field('team_header_image','cpt_people'); ?>
+	<?php $teamheader = get_field('team_header_image','cpt_people');
+	$teamtitle = get_field('our_teams_page_title','cpt_people');?>
 	
 	<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first feedpages">
 			
@@ -31,7 +32,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Our Teams</h1>
+						<h1 class="et_pb_module_header"><?php echo $teamtitle; ?></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -76,12 +77,14 @@ if($teamintrotext) { ?>
 foreach ($_terms as $term) :
 
     $term_slug = $term->slug;
+	add_filter( 'posts_orderby', 'wdw_query_orderby_postmeta_date', 10, 1);
     $_posts = new WP_Query( array(
                 'post_type'         => 'people',
 		    'category__not_in' => 37 ,
                 'posts_per_page'    => 50, //important for a PHP memory limit warning
-				'orederby' => 'publication_date',
-		'order' => 'ASC',
+				'meta_key'			=> 'staff_display_order_within_department',
+				'orderby'			=> 'meta_value',
+				'order'				=> 'ASC',
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'teams',
@@ -89,7 +92,9 @@ foreach ($_terms as $term) :
                         'terms'    => $term_slug,
                     ),
                 ),
-            )); ?>
+            )); 
+	 
+	 remove_filter( 'posts_orderby', 'wdw_query_orderby_postmeta_date', 10, 1); ?>
 
 
   <?php  if( $_posts->have_posts() ) : ?>
@@ -122,7 +127,7 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
 
 			   </div>
 			   <?php
-				  $i++;
+				  $c++;
         endwhile; ?>
 				 
 			  </div>

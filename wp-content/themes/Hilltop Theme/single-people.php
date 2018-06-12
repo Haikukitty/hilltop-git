@@ -82,6 +82,11 @@ display:none;
 a:active{
  color:#ffd323;
 }
+	
+	
+	.hidethis {
+		display:none;
+	}
 
 
 </style>
@@ -98,11 +103,14 @@ jQuery("#toggle").click(function() {
  //Stuff to do when btn is in the read more state
  jQuery("#toggle").text("Read Less");
  jQuery("#text").slideDown();
+	 	 jQuery("#quote").removeClass('hidethis')
+
  jQuery("#expand").removeClass('textfade');
  } else {
  //Stuff to do when btn is in the read less state
 jQuery("#toggle").text("Read More");
  jQuery("#text").slideUp();
+	 jQuery("#quote").addClass('hidethis')
  jQuery("#expand").addClass('textfade');
  }
  });
@@ -171,7 +179,10 @@ var body = document.body,
 	
 	<?php if ( ! $is_page_builder_used ) : ?>
 
-	<?php $teamheader = get_field('team_header_image','cpt_people'); ?>
+	<?php $teamheader = get_field('team_header_image','cpt_people');
+	$teamtitle = get_field('our_teams_page_title','cpt_people');
+	
+	$teamlink = get_field('link_back_to_main_our_team_page','cpt_people'); ?>
 	
 	<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first feedpages">
 			
@@ -182,7 +193,7 @@ var body = document.body,
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header"><a href="/our-team/">Our Teams</a></h1>
+						<h1 class="et_pb_module_header"><a href="<?php echo $teamlink; ?>"><?php echo $teamtitle; ?></a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						
@@ -263,10 +274,19 @@ return get_post_meta($post->ID, 'staff-email', true);
 					<div class="row">
 						<div class="col-md-4 col-sm-4 staff-pic">
 						<?php	if ( has_post_thumbnail() ) { 
-    the_post_thumbnail( 'size-full' ); 
+    the_post_thumbnail( 'size-full' ); } ?>
+						
 	
-	$emails = get_field('staff_email');
-} ?>
+		<?php $quote = get_field('staff_quote_or_personal_info_optional');
+								if ($quote): ?>
+							
+								<div id="quote" class="bioquote hidethis">
+									<?php echo $quote; ?>
+							</div>
+							<?php endif; ?>
+	
+<?php	$emails = get_field('staff_email');
+ ?>
 						</div>
 						
 						<div class="col-md-8 col-sm-8 staff-info">

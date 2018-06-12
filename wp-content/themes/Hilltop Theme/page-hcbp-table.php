@@ -329,7 +329,7 @@ else {
 				<td colspan="2" valign="bottom" align="center">
 				<br/><a href="/wp-content/uploads/hcbp/HCBP_Profiles_Table.mp4" target="_blank" style="color:#d97310;"><strong>Instructional Video</strong></a><br/>
 				------------------------<br/>
-				<a href="/hcbp-state-comparison?select=0">Select All States</a></td>
+				<a href="<?php echo get_permalink( $post->ID ); ?>?select=0">Select All States</a></td>
 				<td colspan="4" valign="top">
 					&nbsp; <img src="/wp-content/uploads/hcbp/image_circle_fill.gif"> &nbsp; Unconditional community benefit requirement<br />
 					&nbsp; <img src="/wp-content/uploads/hcbp/image_circle_open.gif"> &nbsp; Conditional community benefit requirement<br />
@@ -349,7 +349,7 @@ else {
 					&nbsp; Blank = &nbsp;State does not impose<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;this tax
 				</td>
 			</tr>
-	<form action="/hcbp-state-comparison/" method="post" name="req" id="REQ">	
+	<form action="<?php echo get_permalink( $post->ID ); ?>" method="post" name="req" id="REQ">	
 	
 			<tr class="headerCell">
 				<td align="middle" valign="bottom">&nbsp;Compare&nbsp;</td>

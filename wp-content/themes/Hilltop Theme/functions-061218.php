@@ -21,7 +21,6 @@ function divi_custom_posts( $query ) {
 
 }
 
-
 register_sidebar( array(
 		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
 		'id'            => 'bottomfooter',
@@ -184,34 +183,5 @@ function pubs_query( $query ){
     }
 }
 add_action( 'pre_get_posts', 'pubs_query' );
-
-
-function wdw_query_orderby_postmeta_date( $orderby ){
-    $new_orderby = str_replace( "wp_postmeta.meta_value", "STR_TO_DATE(wp_postmeta.meta_value, '%d-%m-%Y')", $orderby );
-    return $new_orderby;
-}
-
-/*
- * Add columns to staff post list
- */
-  function add_acf_columns ( $columns ) {
-   return array_merge ( $columns, array ( 
-     'staff_display_order_within_department' => __ ( 'Display Order' )
-   ) );
- }
- add_filter ( 'manage_people_posts_columns', 'add_acf_columns' );
-
-/*
- * Add columns to staff post list
- */
- function people_custom_column ( $column, $post_id ) {
-   switch ( $column ) {
-     case 'staff_display_order_within_department':
-       echo get_post_meta ( $post_id, 'staff_display_order_within_department', true );
-       break;
-     
-   }
- }
- add_action ( 'manage_people_posts_custom_column', 'people_custom_column', 10, 2 );
 
 

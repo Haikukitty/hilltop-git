@@ -42,9 +42,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				
 			</div>
 <?php endif; ?>
-	<div class="container">
+	<div class="container firstpara">
 		<div id="content-area" class="clearfix">
-			<div class="news-intro introtext">
+			<div class="pubs-intro">
 			<?php the_field('publications_archive_intro_text','cpt_publication'); ?>
 			</div>
 			

@@ -138,6 +138,13 @@ h5 {
     padding: 6px 20px;
 }
 
+#top-menu li a, .et_search_form_container input {
+    font-weight: normal;
+    font-style: normal;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
 #main-header .nav li ul a {
     color: rgba(0,0,0,1);
 }
@@ -145,6 +152,28 @@ h5 {
 .et_mobile_menu li a:hover, .nav ul li a:hover {
      opacity: 1; 
     background-color: rgba(0,0,0,.1);
+}
+
+.et-fixed-header #top-menu li.current-menu-ancestor > a, .et-fixed-header #top-menu li.current-menu-item > a {
+    color: #d97310 !important;
+}
+
+.nav li:last-child ul {
+    right: 0;
+}
+.nav li ul {
+    width: 210px;
+}
+
+.nav li li {
+    width: 210px;
+}
+
+#top-menu li li a {
+    width: 210px;
+    padding: 9px 15px;
+    text-transform: none;
+    line-height: 140%;
 }
 
 
@@ -318,6 +347,10 @@ filter: none; /* IE6-9 */
     margin-bottom: 0px;
 }
 
+h3 a:hover {
+  
+    color: #00a0af;
+}
 
 /* Style Footer Credits - Lines 948 & 949 */
 
@@ -401,6 +434,11 @@ h4.pubdate {
  .pubs {
 	padding-top: 294px;
 	padding-bottom: 0 !important;
+}
+
+.pubs-intro {
+	margin-bottom:17px;
+
 }
 
 .focus p {line-height:110%;
@@ -1020,7 +1058,7 @@ height: auto;
 	}
 
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
-		padding-top:224px !important;
+		padding-top:204px !important;
 	}
 	
 
@@ -1106,8 +1144,12 @@ height: auto;
 @media screen and (min-width:981px) and (max-width: 1399px) {
 
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
-		padding-top:274px !important;
+		padding-top:257px !important;
 	}
+	
+	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.headerphotoshort.et_pb_fullwidth_header_0 {
+    padding-top: 74px !important;
+}
 	
 
 	
@@ -1119,7 +1161,7 @@ height: auto;
 
 @media screen and (min-width:1400px) {
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
-		padding-top:373px !important;
+		padding-top:353px !important;
 	}
 	
 	
@@ -1280,4 +1322,9 @@ p.staffexpert {
 a.button.pdfbutton.expert {
 
     padding: 5px 13px !important;
+}
+
+.firstpara {
+	padding-top:37px !important;
+	padding: 37px 0 54px 0 !important;
 }
