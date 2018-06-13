@@ -91,7 +91,7 @@ if( $posts ): ?>
 			?>
 
 <div class="row board">
-	  <div class="col-md-3 col-sm-3 col-xs-6 teamdiv">
+	  <div class="col-md-3 col-sm-3 col-xs-12 teamdiv">
 					  <div class="teamthumb">
 						  <a href="<?php echo get_permalink($post->ID); ?>"><?php
 if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
@@ -99,7 +99,7 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
 }
 							  ?></a></div>
 	</div>
-		  <div class="col-md-9 col-sm-9 col-xs-6">
+		  <div class="col-md-9 col-sm-9 col-xs-12">
 <h4 class="main_title board"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h4>  
 					  							<h5 class="stafftitle"><?php the_field('board_title'); ?></h5>
 			  <h5 class="stafftitle boardco"><?php the_field('board_company'); ?></h5>

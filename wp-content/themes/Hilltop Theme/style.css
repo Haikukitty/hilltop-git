@@ -1200,6 +1200,20 @@ height: auto;
         margin-left: auto;
 	}
 	
+	.homethree {
+		width:100%;
+	}
+	
+	.homethreecolumns {
+	float: left;
+margin-right: 1.5%;
+width: 47.25% !important;
+		padding-left:0 !important;
+			padding-right:0 !important;
+	
+}
+
+	
 	#main-footer .container {
     width: 96%;
 	}
@@ -1263,8 +1277,83 @@ height: auto;
     width: 90%;
     font-size: 20px;
 	}
+	
+	.board .teamthumb {
+		padding-bottom:17px;
+	}
 		
 }  /* END MEDIA QUERY */
+
+
+@media screen and (min-width:600px) and (max-width:767px)  {
+	
+	.header-content {
+
+    position: relative;
+    top: -80px;
+
+}
+	
+		.homethree {
+		width:100%;
+	}
+	
+	.homethreecolumns {
+	float: left;
+margin-right: 1.5%;
+width: 47.25% !important;
+		padding-left:0 !important;
+			padding-right:0 !important;
+	
+}
+	
+.et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
+
+    /*background-image: url('http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/05/hilltop-building-peak-homepage.png'); */
+    background-size: contain;
+    background-position: bottom center;
+
+}
+	
+}  /* END MEDIA QUERY */
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 1334px) 
+  and (-webkit-min-device-pixel-ratio: 2)  
+	  and (-webkit-max-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+	  
+	  .header-content {
+
+    position: relative;
+    top: -80px !important;
+
+}
+	
+
+
+.et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
+
+    /*background-image: url('http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/05/hilltop-building-peak-homepage.png'); */
+    background-size: contain !important;
+    background-position: bottom center;
+
+}
+	  
+	  	.homeintro p {
+			font-size:19px !important;
+			line-height: 1.6em !important;
+	}
+	  
+	  .et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_scroll a .et-pb-icon {
+   /* display:none; */
+}
+
+}  /* END MEDIA QUERY */
+
+
 
 /* BEGIN MEDIA QUERY */
 @media screen and (max-width:600px) {
@@ -1294,14 +1383,59 @@ height: auto;
     padding: 15px 20px 20px 20px !important;  
 	}
 	
-	.the-news .pubsdate {
+	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {
     width: 21%;
     font-size: 14px;
 	}
 	
-	.the-news .main_title.feeds {
+	.the-news .main_title.feeds, .featuredpubs .main_title.feeds, .pubsarchive .main_title.feeds {
     width: 90%;
     font-size: 18px;
+	}
+	
+	.featuredpubs .pubslist p, .pubsarchive .pubslist p, .the-news p {
+    font-size: 16px;
+line-height: 150%;
+	}
+	
+	.focus a.focuslink {
+    line-height: 100%;
+    font-size: 10px;
+
+		}
+	
+	div.introtext {
+		padding-bottom: 33px;
+	}
+	
+	.introtext {
+		font-size:18px;
+	}
+	
+	h1.et_pb_module_header {
+    font-size: 24px !important;
+  
+	}
+		
+		.homeintro p {
+			font-size:19px !important;
+			line-height: 1.6em !important;
+	}
+	
+	.row.board p {
+		font-size:15px !important;
+		line-height:170% !important;
+	}
+	
+	
+	#expand {
+font-size: 16px;
+line-height: 1.7em;
+	}
+	
+	p {
+		font-size: 16px;
+line-height: 1.7em;
 	}
 	
 	
