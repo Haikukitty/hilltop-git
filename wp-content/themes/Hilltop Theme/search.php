@@ -42,7 +42,9 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
     width: 70%;
     height: 41px;
 }
-	
+		div.search .hcbpheaderphoto {
+			padding-top:134px !important;
+		}
 	
 </style>
 
@@ -52,12 +54,12 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 
 	
 
-<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
+<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first search" style="background-color:#006D75; !important;">
 			
 				
-					<section class="et_pb_fullwidth_header et_pb_module et_pb_bg_layout_dark et_pb_text_align_left hcbpheaderphoto et_pb_fullwidth_header_0 pubs" style="background-color:#006D75;">			
+					<section class="et_pb_fullwidth_header et_pb_module et_pb_bg_layout_dark et_pb_text_align_left hcbpheaderphoto et_pb_fullwidth_header_0" style="background-color:#006D75; !important;padding-top:134px !important;">			
 				
-				<div class="et_pb_fullwidth_header_container left">
+				<div class="et_pb_fullwidth_header_container left" style="background-color:#006D75; !important;">
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
