@@ -21,7 +21,6 @@ function divi_custom_posts( $query ) {
 
 }
 
-
 register_sidebar( array(
 		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
 		'id'            => 'bottomfooter',
@@ -271,7 +270,8 @@ function custom_fields_to_excerpts($content, $post, $query) {
     $content .= " " . $custom_field;
     $custom_field = get_post_meta($post->ID, 'publication_abstract', true);
     $content .= " " . $custom_field;
-
+	  $custom_field = get_post_meta($post->ID, 'publication_type', true);
+    $content .= " " . $custom_field;
 	$custom_field = get_post_meta($post->ID, 'news_section_intro_text', true);
     $content .= " " . $custom_field;
     

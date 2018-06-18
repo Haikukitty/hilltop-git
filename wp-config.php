@@ -113,6 +113,21 @@ else:
   endif;
 endif;
 
+
+//Hilltop Start
+if (isset($_ENV['PANTHEON_ENVIRONMENT']) && ($_SERVER['HTTP_HOST'] == 'data.hilltopinstitute.org') && (php_sapi_name() != "cli")) {
+	$newurl = 'https://live-hilltop.pantheonsite.io/data/'. $_SERVER['REQUEST_URI'];
+	header('HTTP/1.0 301 Moved Permanently');
+	header("Location: $newurl");
+	exit();
+  
+	# Name transaction "redirect" in New Relic for improved reporting (optional)
+	if (extension_loaded('newrelic')) {
+	  newrelic_name_transaction("redirect");
+	}
+  }
+//Hilltop Finish
+
 /** Standard wp-config.php stuff from here on down. **/
 
 /**

@@ -100,18 +100,20 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> style="margin-bottom:25px;">
 
 	<header class="entry-header">
-		<?php
+		<h3 class="entry-title"><a href="<?php echo get_permalink( $post->ID ); ?>"><?php relevanssi_the_title() ?></a></h3>
 		
-
-		if ( is_single() ) {
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		} elseif ( is_front_page() && is_home() ) {
-			the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
-		} else {
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		}
+		<?php
+		//if ( is_single() ) {
+		//	the_title( '<h1 class="entry-title">', '</h1>' );
+	//	} elseif ( is_front_page() && is_home() ) {
+	//		the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
+	//	} else {
+	//		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+	//	}
 		?>
 	</header><!-- .entry-header -->
+					
+					<?php the_excerpt() ?>
 
 			</article>
 

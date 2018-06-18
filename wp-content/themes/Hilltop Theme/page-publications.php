@@ -7,15 +7,19 @@ Template Name: Publications Main Page Template
 
 	
 get_header();
+ ?>
 
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
+<style>
+		#wp-admin-bar-et-use-visual-builder {
+		display:none;
+	}
+</style>
 
 <div id="main-content">
 	
 	<?php while( have_posts() ): the_post(); /* start main loop */ ?>
 
 
-<?php if ( ! $is_page_builder_used ) : ?>
 	<?php $pubheader = get_field('pubs_header_image','cpt_publication'); ?>
 	
 	<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
@@ -41,7 +45,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				
 				
 			</div>
-<?php endif; ?>
+
 	<div class="container firstpara">
 		<div id="content-area" class="clearfix">
 			<div class="pubs-intro">

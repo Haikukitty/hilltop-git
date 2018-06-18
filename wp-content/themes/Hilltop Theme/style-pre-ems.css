@@ -119,12 +119,10 @@ h5 {
     padding: 0px 0;
 }
 
-
 .nav li li.last-in-section {
 	    border-bottom: 0px solid #5cc0c5;
 
 }
-
 
 
 
@@ -152,6 +150,7 @@ h5 {
 .et_mobile_menu li a:hover, .nav ul li a:hover {
      opacity: 1; 
     background-color: rgba(0,0,0,.1);
+    color: #d97310 !important;
 }
 
 .et-fixed-header #top-menu li.current-menu-ancestor > a, .et-fixed-header #top-menu li.current-menu-item > a {
@@ -230,10 +229,6 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:'Candara','Orienta',sans-serif;
 }
 
-h3.entry-title {
-	color: #00a0af;
-}
-
 /*p {
 	font-family:'Calibri-Light','Open Sans',sans-serif;
 }*/
@@ -248,7 +243,6 @@ h1.et_pb_module_header a:hover {
 	font-family:'Candara','Orienta',sans-serif;
 
 }
-
 
 .et-fixed-header .logolink {
 display:none;
@@ -271,7 +265,6 @@ display:none;
     background-color: transparent;
     content: "";
 }
-
 
 .headerhilltop .et_pb_fullwidth_header_container {
 	width:90% !important;
@@ -418,7 +411,6 @@ color: pink;
 }
 */
 
-
 .et_pb_button {
 	font-family:'Candara','Orienta',sans-serif !important;
 }
@@ -453,8 +445,7 @@ h4.pubdate {
 }
 
 .pubs-intro {
-	margin-bottom: 1.3em;
-margin-top: 1.5em;
+	margin-bottom:17px;
 
 }
 
@@ -616,19 +607,6 @@ margin-top: 0px;
 margin-bottom: 0px;
 	width:90%;
 }
-
-.searchandfilter select.sf-input-select {
-padding:6px 0;
-font-weight: 400;
-}
-
-.sf-field-submit  input[type="submit"] {
-    padding: 3px 23px;
-font-weight: 400;
-
-
-}
-
 
 .searchandfilter ul li {
     list-style: none;
@@ -1097,7 +1075,7 @@ font-size: 2em;
 	}
 
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
-		padding-top:17em !important;
+		padding-top:204px !important;
 	}
 	
 
@@ -1146,7 +1124,7 @@ font-size: 2em;
 		float:none;
 	}
 	
-	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {  
+	.the-news .pubsdate {  
     width: 17%;
     font-size: 16px;
 	}
@@ -1155,11 +1133,7 @@ font-size: 2em;
     width: 82%;
 	}
 	
-.featuredpubs .pubslist, .pubsarchive .pubslist {
-    width: 99%;
-	}
-	
-	.the-news .main_title.feeds, .pubsholder .main_title.feeds, .pubsarchive .main_title.feeds {
+	.the-news .main_title.feeds {
    font-size:20px;
 }
 	
@@ -1170,12 +1144,12 @@ font-size: 2em;
 @media screen and (min-width:992px) and (max-width: 1200px) {
 
 	
-	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {  
+	.the-news .pubsdate {  
     width: 17%;
     font-size: 18px;
 	}
 	
-	.the-news .pubslist, .featuredpubs .pubslist, .pubsarchive .pubslist {
+	.the-news .pubslist {
     width: 82%;
 		font-size:20px;
 	}
@@ -1194,64 +1168,6 @@ font-size: 2em;
     padding-top: 74px !important;
 }
 	
-	#search-filter-form-746 {
-	
-		
-		
-	}
-	
-	.searchandfilter ul li {
-  
-    padding: 10px 9px 10px 0px;
-}
-	.sf-field-submit {
-		
-	}
-	
-	.sf-field-submit input[type="submit"] {
-    padding: 1% 23%;
-		width:100%;
-	}
-		
-		.sf-field-taxonomy-publication-category {
-		
-		}
-
-	.sf-field-taxonomy-publication-category select {
-	
-
-		font-size:1.0em;
-	}
-	
-	.sf-field-post-meta-publication_type  {
-		
-	}
-	
-	.sf-field-post-meta-publication_type select {
-
-
-		font-size:1.0em;
-	}
-	
-	.sf-field-sort_order select {
-		
-
-		font-size:1.0em;
-	}
-	.sf-field-sort_order {
-	
-	}
-	
-	.sf-field-search {
-		
-	}
-	
-	.sf-field-search input {
-		
-	max-width:120px;
-		font-size:1.0em;
-	}
-	
 
 	
 } /* END MEDIA QUERY */
@@ -1262,7 +1178,7 @@ font-size: 2em;
 
 @media screen and (min-width:1400px) {
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
-		padding-top:14.75em !important;
+		padding-top:353px !important;
 	}
 	
 	
@@ -1283,64 +1199,6 @@ font-size: 2em;
 
 	#top-menu li {
     padding-right: 15px;
-	}
-	
-	#search-filter-form-746 {
-	
-		
-		
-	}
-	
-	.searchandfilter ul li {
-  
-    padding: 10px 5px 10px 0px;
-}
-	.sf-field-submit {
-		
-	}
-	
-	.sf-field-submit input[type="submit"] {
-    padding: 1% 13%;
-		width:100%;
-	}
-		
-		.sf-field-taxonomy-publication-category {
-		
-		}
-
-	.sf-field-taxonomy-publication-category select {
-	
-
-		font-size:0.95em;
-	}
-	
-	.sf-field-post-meta-publication_type  {
-		
-	}
-	
-	.sf-field-post-meta-publication_type select {
-
-
-		font-size:0.95em;
-	}
-	
-	.sf-field-sort_order select {
-		
-
-		font-size:0.95em;
-	}
-	.sf-field-sort_order {
-	
-	}
-	
-	.sf-field-search {
-		
-	}
-	
-	.sf-field-search input {
-		
-	
-		font-size:0.95em;
 	}
 } /* END MEDIA QUERY */
 
@@ -1392,73 +1250,6 @@ width: 47.25% !important;
 	.footerbutton {
     font-size: 16px;
 }
-	
-	#search-filter-form-746 {
-	
-		
-		
-	}
-	
-	.searchandfilter ul li {
-  
-    padding: 10px 5px 10px 0px;
-}
-	.sf-field-submit {
-		width:13%;
-	}
-	
-	.sf-field-submit input[type="submit"] {
-    padding: 1% 7%;
-		width:100%;
-	}
-		
-		.sf-field-taxonomy-publication-category {
-			width:33%;
-		}
-
-	.sf-field-taxonomy-publication-category select {
-		min-width:90px !important;
-		max-width:100%;
-				width:100%;
-
-		font-size:0.9em;
-	}
-	
-	.sf-field-post-meta-publication_type  {
-		width:25%;
-	}
-	
-	.sf-field-post-meta-publication_type select {
-		min-width:70px !important;
-		max-width:100%;
-			width:100%;
-
-		font-size:0.9em;
-	}
-	
-	.sf-field-sort_order select {
-		min-width:60px !important;
-
-		max-width:100%;
-			width:100%;
-
-		font-size:0.9em;
-	}
-	.sf-field-sort_order {
-		width:18%;
-	}
-	
-	.sf-field-search {
-		width:11%;
-	}
-	
-	.sf-field-search input {
-		
-		min-width:60px !important;
-		width:100%;
-		max-width:100%;
-		font-size:0.9em;
-	}
 }
 /* END MEDIA QUERY */
 
@@ -1516,13 +1307,6 @@ width: 47.25% !important;
 
 }
 	
-	.focus {
-		margin-bottom:13px;
-	}
-	.focus p {
-		max-width:120px;
-	}
-	
 		.homethree {
 		width:100%;
 	}
@@ -1536,73 +1320,6 @@ width: 47.25% !important;
 	
 }
 	
-	#search-filter-form-746 {
-		margin-left:-9%;
-		margin-right:-9%;
-		
-		
-	}
-	
-	.searchandfilter ul li {
-  
-    padding: 10px 5px 10px 0px;
-}
-	.sf-field-submit {
-		width:13%;
-	}
-	
-	.sf-field-submit input[type="submit"] {
-    padding: 1% 7%;
-		width:100%;
-	}
-		
-		.sf-field-taxonomy-publication-category {
-			width:33%;
-		}
-
-	.sf-field-taxonomy-publication-category select {
-		min-width:90px !important;
-		max-width:100%;
-				width:100%;
-
-		font-size:0.77em;
-	}
-	
-	.sf-field-post-meta-publication_type  {
-		width:25%;
-	}
-	
-	.sf-field-post-meta-publication_type select {
-		min-width:70px !important;
-		max-width:100%;
-			width:100%;
-
-		font-size:0.77em;
-	}
-	
-	.sf-field-sort_order select {
-		min-width:60px !important;
-
-		max-width:100%;
-			width:100%;
-
-		font-size:0.77em;
-	}
-	.sf-field-sort_order {
-		width:18%;
-	}
-	
-	.sf-field-search {
-		width:11%;
-	}
-	
-	.sf-field-search input {
-		
-		min-width:60px !important;
-		width:100%;
-		max-width:100%;
-		font-size:0.77em;
-	}
 .et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
 
     /*background-image: url('http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/05/hilltop-building-peak-homepage.png'); */
@@ -1619,14 +1336,15 @@ width: 47.25% !important;
   and (max-device-width: 1334px) 
   and (-webkit-min-device-pixel-ratio: 2)  
 	  and (-webkit-max-device-pixel-ratio: 2)
-  and (orientation: landscape) 
-{ 
+  and (orientation: landscape) { 
 	  
-	 /* .header-content {
+	  .header-content {
 
     position: relative;
-top: -80px !important; }*/
+    top: -80px !important;
 
+}
+	
 
 
 .et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
@@ -1642,7 +1360,9 @@ top: -80px !important; }*/
 			line-height: 1.6em !important;
 	}
 	  
-
+	  .et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_scroll a .et-pb-icon {
+   /* display:none; */
+}
 
 }  /* END MEDIA QUERY */
 
@@ -1650,12 +1370,6 @@ top: -80px !important; }*/
 
 /* BEGIN MEDIA QUERY */
 @media screen and (max-width:600px) {
-	.focus {
-		margin-bottom:9px;
-	}
-	.focus p {
-		max-width:100px;
-	}
 
 	h3.lilo-accordion-control a {
     font-size: 20px;
@@ -1684,24 +1398,18 @@ top: -80px !important; }*/
 	
 	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {
     width: 21%;
-    font-size: 0.9em;
+    font-size: 14px;
 	}
 	
-	.the-news .main_title.feeds {
+	.the-news .main_title.feeds, .featuredpubs .main_title.feeds, .pubsarchive .main_title.feeds {
     width: 90%;
-    font-size: 1.1em;
-	}
-		.featuredpubs .main_title.feeds, .pubsarchive .main_title.feeds {
-    width: 100%;
-    font-size: 1.1em;
+    font-size: 18px;
 	}
 	
 	.featuredpubs .pubslist p, .pubsarchive .pubslist p, .the-news p {
     font-size: 16px;
 line-height: 150%;
 	}
-	
-
 	
 	.focus a.focuslink {
     line-height: 100%;
@@ -1776,4 +1484,6 @@ a.button.pdfbutton.expert {
 }
 
 .firstpara {
-padding: 1em 0 1.7em 0 !important;}
+	padding-top:37px !important;
+	padding: 37px 0 54px 0 !important;
+}

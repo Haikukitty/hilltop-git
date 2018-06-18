@@ -8,11 +8,17 @@ Template Name: News & Bulletins Main Page
 	
 get_header();
 
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
+ ?>
+
+<style>
+		#wp-admin-bar-et-use-visual-builder {
+		display:none;
+	}
+</style>
 
 <div id="main-content">
 
-<?php if ( ! $is_page_builder_used ) : ?>
+
 	<?php $newsheader = get_field('news_section_header_photo','cpt_news-bulletins'); ?>
 	
 	<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
@@ -38,7 +44,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				
 				
 			</div>
-<?php endif; ?>
+
 	<div class="container firstpara">
 		<div id="content-area" class="clearfix">
 			<div class="news-intro introtext">
@@ -129,18 +135,13 @@ endwhile;
 				</div>
 			
 
-			
-<?php if ( ! $is_page_builder_used ) :
-	
-							
-					?>
+
 					 
 				</div>
 			</div>
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 
-<?php endif; ?>
 
 </div> <!-- #main-content -->
 

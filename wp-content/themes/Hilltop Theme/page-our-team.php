@@ -6,7 +6,7 @@ Template Name: Our Team Main Page
 
 get_header();
 
-$is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
+ ?>
 
 <style>
 	button#toggle {
@@ -14,11 +14,14 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
     margin-top: 0em;
 		min-width: 110px;
 }
+	
+	#wp-admin-bar-et-use-visual-builder {
+		display:none;
+	}
 </style>
 
 <div id="main-content">
 
-<?php if ( ! $is_page_builder_used ) : ?>
 
 	<?php $teamheader = get_field('team_header_image','cpt_people');
 	$teamtitle = get_field('our_teams_page_title','cpt_people');?>
@@ -46,7 +49,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 				
 				
 			</div>
-<?php endif; ?><div class="container">
+<div class="container">
 		<div id="content-area" class="clearfix">
 			
 		<?php	$teamintrotext = get_field('our_team_main_page_intro_content_or_photo','cpt_people');

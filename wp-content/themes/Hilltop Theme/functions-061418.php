@@ -21,7 +21,6 @@ function divi_custom_posts( $query ) {
 
 }
 
-
 register_sidebar( array(
 		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
 		'id'            => 'bottomfooter',
@@ -260,23 +259,6 @@ add_filter( 'display_post_states', 'bt_display_archive_state' );
  }
  add_action ( 'manage_people_posts_custom_column', 'people_custom_column', 10, 2 );
 
-
-add_filter('relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3);
-function custom_fields_to_excerpts($content, $post, $query) {
-    $custom_field = get_post_meta($post->ID, 'staff_bio', true);
-    $content .= " " . $custom_field;
-    $custom_field = get_post_meta($post->ID, 'staff_bio_hidden', true);
-    $content .= " " . $custom_field;
-	$custom_field = get_post_meta($post->ID, 'staff_title', true);
-    $content .= " " . $custom_field;
-    $custom_field = get_post_meta($post->ID, 'publication_abstract', true);
-    $content .= " " . $custom_field;
-
-	$custom_field = get_post_meta($post->ID, 'news_section_intro_text', true);
-    $content .= " " . $custom_field;
-    
-    return $content;
-}
 
 
 
