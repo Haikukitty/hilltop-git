@@ -84,13 +84,13 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						if(get_field('upload_pdf')) { ?>
 						
-						<p style="text-align:center;margin:33px;"><a href="<?php the_field('upload_pdf'); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="blank">View PDF </a></p>
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field('upload_pdf'); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
 						
 
 						
 						<?php } else { ?>
 						
-						<p style="text-align:center;margin:33px;"><a href="<?php the_field("external_pdf_link"); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="blank">View PDF </a></p>
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field("external_pdf_link"); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
 						
 						<?php } ?>
 						
