@@ -316,8 +316,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 }
 
 .et_pb_fullwidth_header { 
-padding-bottom:10px;
+padding-bottom:0px;
 }
+
+ .et_pb_fullwidth_header.staffheaderphoto .header-content {
+   /* padding: 0px !important; */
+   
+}
+
+
 
 .et_pb_fullwidth_header_container.left .header-content {
     padding-left: 0px !important;
