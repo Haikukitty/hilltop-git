@@ -426,6 +426,14 @@ color: pink;
 */
 
 
+.staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom, .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.center {
+
+    margin-bottom: 0 !important;
+    bottom: -10px;
+    position: relative;
+
+}
+
 .et_pb_button {
 	font-family:'Candara','Orienta',sans-serif !important;
 }
