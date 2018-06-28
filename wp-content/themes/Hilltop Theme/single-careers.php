@@ -75,7 +75,10 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 	
 
 
-	 $jobsheader = get_field('careers_section_header_photo','cpt_careers'); ?>
+	 $jobsheader = get_field('careers_section_header_photo','cpt_careers');
+	$jobtitle = get_field('section_title_for_header_photo_area','cpt_careers');
+	
+	$joblink = get_field('link_back_to_main_jobs_page','cpt_careers'); ?>
 	
 	
 	
@@ -92,7 +95,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 					<div class="header-content-container bottom">
 					<div class="header-content">
 						
-						<h1 class="et_pb_module_header">Jobs</h1>
+						<h1 class="et_pb_module_header"><a href="<?php echo $joblink; ?>"><?php echo $jobtitle; ?></a></h1>
 						
 						<div class="et_pb_header_content_wrapper"></div>
 						

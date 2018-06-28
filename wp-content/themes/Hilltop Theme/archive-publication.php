@@ -68,20 +68,26 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 			
 			<?php echo do_shortcode( '[searchandfilter slug="publications"]' ); ?>
 			
-	<div id="results" class="pubsarchive">
+	<div id="results">
+		<div class="pubsarchive">
 		
-		 <h4 class="search-title"> <?php echo $wp_query->found_posts; ?>
-        <?php _e( 'Search Results Found', 'locale' ); ?></h4>
+	<?php $i = 0; ?>
 
-        <?php if ( have_posts() ) { ?>
+						<?php 
+			
+			
+			
+			
+			if (have_posts()) : while ( have_posts() ) : the_post(); ?>
+ 
 
-
-            <?php while ( have_posts() ) { the_post(); ?>
-
-              <article id="post-<?php the_ID(); ?> publist-<?php echo $i; ?>" <?php post_class(); ?>>
 
 				<?php if ( ! $is_page_builder_used ) : ?>
-				  <div class="pubsholder">
+				
+					<div class="lilo-accordion-control">
+
+
+					<div class="pubsholder">
 					  <div class="pubsdate">
 						  <?php the_time('m/d/Y', '<h4 class="pubdate">', '</h4>'); ?>
 
@@ -91,36 +97,45 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					<h2 class="main_title feeds"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></h2>
 									  
 					  </div>
+				  </div>
+		
+				</div>
 				
-				  
-
-				  				<?php endif; ?>
-
-				  				</article> <!-- .et_pb_post -->
-		
-		
-
 				
 
+						  <div class="lilo-accordion-content">
+	
+			 <?php the_field('publication_abstract'); ?> 
 						
-				        <?php } } ?>
-		
-
-						
-
-
-
-
-
-			
 					
+						
+						<?php
 
-			
+						if(get_field('upload_pdf')) { ?>
+						
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field('upload_pdf'); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
+						
 
-			
-			
+						
+						<?php } else { ?>
+						
+						<p style="text-align:center;margin:33px;"><a href="<?php the_field("external_pdf_link"); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
+						
+						<?php } ?>
+						
+						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
 
+				</div> 
+			<?php endif; ?>
+			
+			<?php 
+
+			$i++;
+endwhile;
+					
+?>
 				
+	<?php endif; ?>
 
 			
 <?php wp_reset_postdata(); 
@@ -130,15 +145,22 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 	'prev_text' => __( '< Back', 'textdomain' ),
 	'next_text' => __( 'Next >', 'textdomain' ),
 ) );
-								   
-								  
 
 ?>
 			
-
+<?php if ( ! $is_page_builder_used ) :
+	
+							
+					?>
+		</Div>
+				</div>
 			</div>
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
+
+<?php endif; ?>
+
+
 
 <script>
 	 
@@ -151,13 +173,23 @@ jQuery.noConflict();
 jQuery(document).ready(function(){
 jQuery('.focus').matchHeight();
                     });
-
 	
+
+	    jQuery('.pubsarchive').liloAccordion({
+  onlyOneActive: false,
+  initFirstActive: false,
+  hideControl: false,
+  openNextOnClose: false
+
+});
 
 	 
  });	
 
 	  
+  </script>
+ <script>
+
   </script>
 
 </div> <!-- #main-content -->

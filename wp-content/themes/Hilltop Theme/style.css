@@ -91,9 +91,11 @@ Template: Divi
 }
 
 body {
-	font-weight:300;
+	font-weight:300 !important;
 	font-size:16pt;
+
 }
+
 
 h5 {
 	color:#7f6707 !important;
@@ -695,8 +697,7 @@ padding-bottom: 47px;
 }
 
 .introtext, .introtext p, p.introtext {
-	font-family:'Raleway','Arial',sans-serif;
-	font-weight:300;
+	font-weight:300 !important;
 	font-size:24px;
 	line-height:140%;
 	color:#343434;
@@ -990,7 +991,7 @@ margin: 0 25%;
 }
 
 #et_top_search {
-    top: 7px;
+    top: 9px;
 }
 
 .et_pb_gutters3.et_pb_footer_columns3 .footer-widget .fwidget {
@@ -1821,3 +1822,9 @@ a.button.pdfbutton.expert {
 
 .firstpara {
 padding: 1em 0 1.7em 0 !important;}
+
+
+li.homeicon a {
+	padding-left: 0 !important;
+padding-right: 0 !important;
+}
