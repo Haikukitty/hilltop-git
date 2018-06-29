@@ -481,6 +481,7 @@ h4.pubdate {
 
 .pubs-intro {
 	margin-bottom: 1.3em;
+	font-size:18px;
 
 }
 
@@ -706,13 +707,17 @@ padding-bottom: 47px;
 }
 
 .introtext, .introtext p, p.introtext {
-	font-weight:300 !important;
 	font-size:16pt;
 	line-height:140%;
 }
 
 div.introtext {
 	padding-bottom:53px;
+}
+
+	
+.news-intro.introtext p {
+	font-size:18px;
 }
 
 h3.lilo-accordion-control a {
@@ -1772,6 +1777,7 @@ line-height: 150%;
 	
 	.news-intro.introtext {
 		font-size:17px;
+		font-weight:400 !important
 	}
 	
 	h1.et_pb_module_header {
