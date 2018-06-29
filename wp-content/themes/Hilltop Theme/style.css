@@ -92,11 +92,10 @@ Template: Divi
 
 body, .et_pb_text_inner li, .et_pb_text_inner p {
 	font-weight:400 !important;
-	font-size:16pt;
 
 }
 
-.content-area p {
+.content-area p, .board p {
 	
 		font-weight:400 !important;
 
@@ -482,7 +481,6 @@ h4.pubdate {
 
 .pubs-intro {
 	margin-bottom: 1.3em;
-margin-top: 1.5em;
 
 }
 
@@ -708,10 +706,9 @@ padding-bottom: 47px;
 }
 
 .introtext, .introtext p, p.introtext {
-	font-weight:400 !important;
-	font-size:24px;
+	font-weight:300 !important;
+	font-size:16pt;
 	line-height:140%;
-	color:#343434;
 }
 
 div.introtext {
@@ -1217,7 +1214,7 @@ font-size: 2em;
 	
 	.the-news .pubslist, .featuredpubs .pubslist, .pubsarchive .pubslist {
     width: 82%;
-		font-size:20px;
+		font-size:17px;
 	}
 	
 } /* END MEDIA QUERY */
@@ -1722,7 +1719,7 @@ top: -80px !important; }*/
 	}
 	
 	.introtext, .introtext p, p.introtext {
-    font-size: 20px; 
+    font-size: 16pt; 
 	}
 	
 	.lilo-accordion-content h4.main_title {
@@ -1753,7 +1750,7 @@ top: -80px !important; }*/
 	}
 	
 	.featuredpubs .pubslist p, .pubsarchive .pubslist p, .the-news p {
-    font-size: 16px;
+    font-size: 17px;
 line-height: 150%;
 	}
 	
@@ -1770,7 +1767,11 @@ line-height: 150%;
 	}
 	
 	.introtext {
-		font-size:18px;
+		font-size:16pt;
+	}
+	
+	.news-intro.introtext {
+		font-size:17px;
 	}
 	
 	h1.et_pb_module_header {
@@ -1832,7 +1833,13 @@ a.button.pdfbutton.expert {
 }
 
 .firstpara {
-padding: 1em 0 1.7em 0 !important;}
+padding: 1em 0 1.7em 0 !important;
+}
+
+.container.firstpara {
+margin-top:27px !important;
+}
+
 
 
 li.homeicon a {
