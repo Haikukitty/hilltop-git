@@ -90,8 +90,8 @@ Template: Divi
 	font-style: normal;
 }
 
-body {
-	font-weight:300 !important;
+body, .et_pb_text_inner li, .et_pb_text_inner p {
+	font-weight:400 !important;
 	font-size:16pt;
 
 }
@@ -150,10 +150,15 @@ h5 {
 #main-header .nav li ul a {
     color: rgba(0,0,0,1);
 }
+#main-header .nav li ul a:hover {
+    color: #d97310 !important;
+}
 
 .et_mobile_menu li a:hover, .nav ul li a:hover {
      opacity: 1; 
-    background-color: rgba(0,0,0,.1);
+
+    background-color: rgba(139,115,15,0.13);
+    color: #d97310 !important;
 }
 
 .et-fixed-header #top-menu li.current-menu-ancestor > a, .et-fixed-header #top-menu li.current-menu-item > a {
@@ -224,7 +229,7 @@ transition: all .4s ease-in-out;
 }
 
 #main-header .nav li ul {
-    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-color: rgba(255, 255, 255, 0.93) !important;
     /* opacity: 0.5; */
 }
 
