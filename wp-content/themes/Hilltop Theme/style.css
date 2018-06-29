@@ -96,6 +96,12 @@ body, .et_pb_text_inner li, .et_pb_text_inner p {
 
 }
 
+.content-area p {
+	
+		font-weight:400 !important;
+
+}
+
 
 h5 {
 	color:#7f6707 !important;
@@ -702,7 +708,7 @@ padding-bottom: 47px;
 }
 
 .introtext, .introtext p, p.introtext {
-	font-weight:300 !important;
+	font-weight:400 !important;
 	font-size:24px;
 	line-height:140%;
 	color:#343434;
