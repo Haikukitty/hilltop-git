@@ -148,8 +148,10 @@ function db014_user_css($plugin) {
 		-webkit-transform: translate(-50%,-50%); -moz-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); 
 	}
 	
+	/* Hide extra icons */
 	.et_pb_gallery .et_pb_gallery_image .et_pb_inline_icon[data-icon^="wtfdivi014"]:before,
-	.et_pb_blog_grid .et_pb_inline_icon[data-icon^="wtfdivi014"]:before	{ 
+	.et_pb_blog_grid .et_pb_inline_icon[data-icon^="wtfdivi014"]:before,
+	.et_pb_image .et_pb_image_wrap .et_pb_inline_icon[data-icon^="wtfdivi014"]:before	{ 
 		display:none; 
 	}
 <?php 

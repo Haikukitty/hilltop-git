@@ -4,7 +4,7 @@ Tags: buttons, share, icons, social media, share buttons, sharing, share button,
 Requires at least: 3.7
 Tested up to: 5.0
 Requires PHP: 5.2
-Stable tag: 1.7.27
+Stable tag: 1.7.28
 
 Share buttons for WordPress including the AddToAny sharing button, Facebook, Twitter, Google+, Pinterest, WhatsApp, many more, and follow icons too.
 
@@ -344,6 +344,11 @@ Upload (or move) the `add-to-any` plugin directory into the `/wp-content/mu-plug
 5. Settings for Floating Share Bars
 
 == Changelog ==
+
+= 1.7.28 =
+* New option to hide a floating bar until scrolled past a header region
+* New option to hide a floating bar when scrolled to a footer region
+* New "Center docked" option for the horizontal floating bar
 
 = 1.7.27 =
 * New "Attach to content" option for the vertical floating bar
@@ -969,8 +974,11 @@ Upload (or move) the `add-to-any` plugin directory into the `/wp-content/mu-plug
 
 == Upgrade Notice ==
 
+= 1.7.28 =
+New floating options! Hide a bar until the page is scrolled past a header. Hide a bar where it would overlap a footer. Center your floating horizontal bar, too.
+
 = 1.7.27 =
-* New "Attach to content" option for the floating vertical bar!
+New "Attach to content" option for the floating vertical bar!
 
 = 1.7.23 =
 If you have CSS code customizations referencing the universal button (`.addtoany_share_save`) or the standard share buttons container (`.addtoany_share_save_container`), those class names have been deprecated and will be removed in a future plugin update. The new class names are `.addtoany_share` and `.addtoany_content` respectively. Please update your custom CSS if you are referencing the deprecated class names.

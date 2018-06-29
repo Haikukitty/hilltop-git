@@ -5,7 +5,7 @@
  * Plugin URI:  http://www.sean-barton.co.uk
  * Description: A plugin to add a module to create and trigger modal windows
  * Author:      Sean Barton - Tortoise IT
- * Version:     1.7
+ * Version:     1.8
  * Author URI:  http://www.sean-barton.co.uk
  *
  *
@@ -32,6 +32,9 @@
  * - Added Licensing/Auto Update
  * - Added 'Theme Style' skin which picks up accent color from the theme and uses a more modern style
  *
+ * V1.8 (05/04/18)
+ * - Added URL parameter for page load option
+ * - Fixed iframe when used in class/id trigger
  *
  *
  */
@@ -40,7 +43,7 @@ $sb_dpb_enqueued_ei = false;
 $sb_dpb_enqueued_sd = false;
 
 //constants
-define('SB_DPB_VERSION', '1.7');
+define('SB_DPB_VERSION', '1.8');
 define('SB_DPB_STORE_URL', 'https://elegantmarketplace.com');
 define('SB_DPB_ITEM_NAME', 'DIVI POPUP MODAL Module');
 define('SB_DPB_AUTHOR_NAME', 'Sean Barton');
@@ -193,6 +196,8 @@ function sb_dpb_theme_setup()
                     'trigger_button_align',
                     'trigger_button_text_colour',
                     'trigger_page_load_delay',
+                    'trigger_page_load_qs_key',
+                    'trigger_page_load_qs_val',
                     'trigger_scroll_delay',
                     'trigger_class_id',
                     'trigger_blur_class_id',
@@ -242,6 +247,15 @@ function sb_dpb_theme_setup()
                             ),
                             'font_size' => array('default' => '30px'),
                             'line_height' => array('default' => '1.5em'),
+                        ),
+                    ),
+                    'button' => array(
+                        'button' => array(
+                            'label' => esc_html__( 'Button', 'et_builder' ),
+                            'css' => array(
+                                'main' => $this->main_css_element . ' .et_pb_button.et_pb_button sb_pb_modal_button',
+                                'plugin_main' => "{$this->main_css_element}.et_pb_module",
+                            ),
                         ),
                     ),
                     'background' => array(
@@ -301,7 +315,7 @@ function sb_dpb_theme_setup()
                 , 'onblur' => 'On Blur (Class/ID of input element)'
                 , 'scroll_delay' => 'Scroll Delay (%)'
                 , 'exit_intent' => 'When the user leaves the page (or closes the window)'
-                , 'page_load' => 'At Page Load (after X seconds)'
+                , 'page_load' => 'At Page Load (after X seconds and/or based on querystring parameters)'
                 );
 
                 $modal_style_options = array(
@@ -330,7 +344,6 @@ function sb_dpb_theme_setup()
                             '#et_pb_video_url',
                             '#et_pb_image_url',
                             '#et_pb_image_size',
-                            //'#et_pb_popup_wysiwyg',
                             '#et_pb_divi_layout',
                             '#et_pb_iframe_url',
                         ),
@@ -394,6 +407,8 @@ function sb_dpb_theme_setup()
                             '#et_pb_trigger_button_align',
                             '#et_pb_trigger_button_text_colour',
                             '#et_pb_trigger_page_load_delay',
+                            '#et_pb_trigger_page_load_qs_key',
+                            '#et_pb_trigger_page_load_qs_val',
                             '#et_pb_trigger_scroll_delay',
                             '#et_pb_trigger_class_id',
                             '#et_pb_trigger_blur_class_id',
@@ -431,6 +446,20 @@ function sb_dpb_theme_setup()
                         'toggle_slug' => 'main_settings',
                         'depends_show_if' => 'page_load',
                         'description' => __('If the popup is to be triggered at page load then should it be instant (on document ready) or after a number of seconds. Enter a whole number in seconds.', 'et_builder'),
+                    ),
+                    'trigger_page_load_qs_key' => array(
+                        'label' => __('Querystring Key', 'et_builder'),
+                        'type' => 'text',
+                        'toggle_slug' => 'main_settings',
+                        'depends_show_if' => 'page_load',
+                        'description' => __('Should the presence of a querystring parameter trigger the popup (yourdomain.com/?test=1 where the key is "test"). Using this without a value will trigger with ANY value.', 'et_builder'),
+                    ),
+                    'trigger_page_load_qs_val' => array(
+                        'label' => __('Querystring Value', 'et_builder'),
+                        'type' => 'text',
+                        'toggle_slug' => 'main_settings',
+                        'depends_show_if' => 'page_load',
+                        'description' => __('This goes with "Querystring Key" above. This requires BOTH the KEY and VALUE to be defined and match to trigger the popup. (yourdomain.com/?test=foo where key is test and value is foo).', 'et_builder'),
                     ),
                     'trigger_class_id' => array(
                         'label' => __('Class / ID', 'et_builder'),
@@ -481,6 +510,14 @@ function sb_dpb_theme_setup()
                         'options' => $modal_style_options,
                         'description' => __('The style of the popup. Pick one of four styles. Click the following links for examples. <a target="_blank" href="' . plugins_url('/colorbox/example1/index.html', __FILE__) . '">Style 1</a>, <a target="_blank" href="' . plugins_url('/colorbox/example2/index.html', __FILE__) . '">Style 2</a>, <a target="_blank" href="' . plugins_url('/colorbox/example3/index.html', __FILE__) . '">Style 3</a>, <a target="_blank" href="' . plugins_url('/colorbox/example4/index.html', __FILE__) . '">Style 4</a>, <a target="_blank" href="' . plugins_url('/colorbox/example5/index.html', __FILE__) . '">Style 5</a>.', 'et_builder'),
                     ),
+                    /*'masonry_tile_background_color' => array(
+                        'label' => esc_html__('Grid Tile Background Color', 'et_builder'),
+                        'type' => 'color-alpha',
+                        'custom_color' => true,
+                        'tab_slug' => 'advanced',
+                        'toggle_slug' => 'main_settings',
+                        'depends_show_if' => 'off',
+                    ),*/
                     'modal_width' => array(
                         'label' => __('Popup Width', 'et_builder'),
                         'type' => 'text',
@@ -584,6 +621,8 @@ function sb_dpb_theme_setup()
                 $button_align = $this->shortcode_atts['trigger_button_align'];
                 $trigger_page_load_delay = $this->shortcode_atts['trigger_page_load_delay'];
                 $trigger_scroll_delay = $this->shortcode_atts['trigger_scroll_delay'];
+                $trigger_page_load_qs_key = $this->shortcode_atts['trigger_page_load_qs_key'];
+                $trigger_page_load_qs_val = $this->shortcode_atts['trigger_page_load_qs_val'];
                 $trigger_class_id = $this->shortcode_atts['trigger_class_id'];
                 $trigger_blur_class_id = $this->shortcode_atts['trigger_blur_class_id'];
                 $title = $this->shortcode_atts['title'];
@@ -716,6 +755,7 @@ function sb_dpb_theme_setup()
                     case 'iframe':
                         $trigger_content .= '<a class="trigger_sb_divi_modal trigger_' . $unique_id . '" href="' . $this->shortcode_atts['iframe_url'] . '">';
                         $additional_args[] = 'iframe: true';
+                        $additional_args[] = 'href: "' . $this->shortcode_atts['iframe_url'] . '"';
                         $additional_args[] = 'width: "' . $width . '%"';
                         $additional_args[] = 'height: "' . $height . '%"';
 
@@ -750,7 +790,7 @@ function sb_dpb_theme_setup()
                     //break;
 
                     case 'button':
-                        $trigger_content .= '<span class="sb_pb_modal_button">' . $this->shortcode_atts['trigger_button_text'] . '</span>';
+                        $trigger_content .= '<span class="et_pb_button sb_pb_modal_button">' . $this->shortcode_atts['trigger_button_text'] . '</span>';
                         break;
 
                     case 'scroll_delay':
@@ -811,16 +851,22 @@ function sb_dpb_theme_setup()
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 if ($this->shortcode_atts['trigger_condition'] == 'page_load') {
-                    $trigger_page_load_delay *= 1000;
+                    if (
+                        !$trigger_page_load_qs_key ||
+                        ($trigger_page_load_qs_key && !$trigger_page_load_qs_val && isset($_GET[$trigger_page_load_qs_key])) ||
+                        ($trigger_page_load_qs_key && $trigger_page_load_qs_val && isset($_GET[$trigger_page_load_qs_key]) && $_GET[$trigger_page_load_qs_key] == $trigger_page_load_qs_val)
+                    ) {
+                        $trigger_page_load_delay *= 1000;
 
-                    $colorbox_trigger .= 'jQuery(document).ready(function() {
+                        $colorbox_trigger .= 'jQuery(document).ready(function() {
                                                 jQuery.colorbox(' . $args . ');
 					                     });';
 
-                    if ($trigger_page_load_delay) {
-                        $content .= 'setTimeout(function() {' . $colorbox_trigger . '}, ' . $trigger_page_load_delay . ');';
-                    } else {
-                        $content .= $colorbox_trigger;
+                        if ($trigger_page_load_delay) {
+                            $content .= 'setTimeout(function() {' . $colorbox_trigger . '}, ' . $trigger_page_load_delay . ');';
+                        } else {
+                            $content .= $colorbox_trigger;
+                        }
                     }
 
                 } else if ($this->shortcode_atts['trigger_condition'] == 'exit_intent') {

@@ -118,11 +118,13 @@ var gresults = {
     },
 
     getMoreResults: function (formId, fieldId) {
-        var container = jQuery('#gresults-results-field-content-' + fieldId);
-        var results = jQuery("#gresults-results");
-        var offset = jQuery(container).data('offset');
-        var viewSlug = jQuery("#gresults-view-slug").val();
-        var searchCriteria = results.data('searchcriteria');
+        var container = jQuery('#gresults-results-field-content-' + fieldId),
+            results = jQuery("#gresults-results"),
+            offset = jQuery(container).data('offset'),
+            viewSlug = jQuery("#gresults-view-slug").val(),
+            searchCriteria = results.data('searchcriteria'),
+            nonce = jQuery("#_gf_results_nonce").val();
+
         jQuery.ajax({
             url     : ajaxurl,
             type    : 'POST',
@@ -133,7 +135,8 @@ var gresults = {
                 form_id: formId,
                 field_id: fieldId,
                 offset: offset,
-                search_criteria: searchCriteria
+                search_criteria: searchCriteria,
+                _gf_results_nonce: nonce
             },
             success : function (response) {
                 if (response === -1) {

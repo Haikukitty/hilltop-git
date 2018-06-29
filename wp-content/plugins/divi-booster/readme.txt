@@ -3,8 +3,8 @@ Contributors: danmossop
 Donate link: 
 Tags: divi theme, elegant themes
 Requires at least: 3.0
-Tested up to: 4.9.4
-Stable tag: 2.7.2
+Tested up to: 4.9.5
+Stable tag: 2.7.3
 
 Enhancements to the Divi Theme by Elegant Themes, including bug fixes and extra configuration options.
 
@@ -51,6 +51,11 @@ The Divi Booster plugin is an independent product which is not associated with, 
 To follow...
 
 == Changelog ==
+
+= 2.7.3 =
+* Fixed submit buttons hidden on full-screen Divi Builder windows
+* Fixed extra icons on custom hover icon when used with image module
+* Added option to set a target URL for the header image
 
 = 2.7.2 =
 * Updated full screen divi builder feature to work with new layouts section

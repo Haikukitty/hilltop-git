@@ -219,7 +219,7 @@ function A2A_SHARE_SAVE_options_page() {
 		if ( 'floating' == $current_screen ) {
 			// Floating options screen
 			
-			$possible_floating_values = array( 'left_docked', 'right_docked', 'left_attached', 'right_attached', 'none' );
+			$possible_floating_values = array( 'left_docked', 'right_docked', 'center_docked', 'left_attached', 'right_attached', 'none' );
 			
 			$new_options['floating_vertical'] = ( in_array( $_POST['A2A_SHARE_SAVE_floating_vertical'], $possible_floating_values ) ) ? $_POST['A2A_SHARE_SAVE_floating_vertical'] : 'none';
 			$new_options['floating_horizontal'] = ( in_array( $_POST['A2A_SHARE_SAVE_floating_horizontal'], $possible_floating_values ) ) ? $_POST['A2A_SHARE_SAVE_floating_horizontal'] : 'none';
@@ -243,6 +243,26 @@ function A2A_SHARE_SAVE_options_page() {
 				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] ) && 
 				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] ) 
 			) ? $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] : '981';
+
+			$new_options['floating_horizontal_scroll_top'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_top'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_top']
+			) ? '1' : '-1';
+
+			$new_options['floating_horizontal_scroll_top_pixels'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_top_pixels'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_top_pixels'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_top_pixels'] : '100';
+			
+			$new_options['floating_horizontal_scroll_bottom'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_bottom'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_bottom']
+			) ? '1' : '-1';
+
+			$new_options['floating_horizontal_scroll_bottom_pixels'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_bottom_pixels'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_bottom_pixels'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_horizontal_scroll_bottom_pixels'] : '100';
 			
 			$new_options['floating_horizontal_icon_size'] = ( 
 				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_icon_size'] ) && 
@@ -275,6 +295,26 @@ function A2A_SHARE_SAVE_options_page() {
 				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] ) && 
 				is_numeric( $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] ) 
 			) ? $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] : '980';
+			
+			$new_options['floating_vertical_scroll_top'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_top'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_top']
+			) ? '1' : '-1';
+
+			$new_options['floating_vertical_scroll_top_pixels'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_top_pixels'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_top_pixels'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_top_pixels'] : '100';
+			
+			$new_options['floating_vertical_scroll_bottom'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_bottom'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_bottom']
+			) ? '1' : '-1';
+
+			$new_options['floating_vertical_scroll_bottom_pixels'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_bottom_pixels'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_bottom_pixels'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_vertical_scroll_bottom_pixels'] : '100';
 			
 			$new_options['floating_vertical_icon_size'] = ( 
 				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_icon_size'] ) && 
@@ -506,7 +546,7 @@ function A2A_SHARE_SAVE_options_page() {
 						<input name="A2A_SHARE_SAVE_button" value="CUSTOM" id="A2A_SHARE_SAVE_button_is_custom" type="radio"<?php if ( isset( $options['button'] ) && 'CUSTOM' == $options['button'] ) echo ' checked="checked"'; ?> style="margin:9px 0;vertical-align:middle">
 						<span style="margin:0 9px;vertical-align:middle"><?php _e("Image URL"); ?>:</span>
 					</label>
-					<input name="A2A_SHARE_SAVE_button_custom" type="text" class="code" size="50" onclick="document.getElementById('A2A_SHARE_SAVE_button_is_custom').checked=true" style="vertical-align:middle" value="<?php if ( isset( $options['button_custom'] ) ) esc_attr_e( $options['button_custom'] ); ?>" />
+					<input name="A2A_SHARE_SAVE_button_custom" type="text" class="code" size="50" onclick="document.getElementById('A2A_SHARE_SAVE_button_is_custom').checked=true" style="vertical-align:middle" value="<?php if ( isset( $options['button_custom'] ) ) echo esc_attr( $options['button_custom'] ); ?>" />
 				</div>
 				<div class="addtoany_extra_element">
 					<label>
@@ -536,7 +576,7 @@ function A2A_SHARE_SAVE_options_page() {
 			<th scope="row"><?php _e('Sharing Header', 'add-to-any'); ?></th>
 			<td><fieldset id="addtoany_extra_section_sharing_header" class="addtoany_extra_section<?php if ( ! empty( $options['header'] ) ) echo ' addtoany_show_extra'; ?>" role="region">
 				<label>
-					<input name="A2A_SHARE_SAVE_header" type="text" class="code" placeholder="<?php esc_attr_e( 'Share this:' ); ?>" size="50" value="<?php if ( isset( $options['header'] ) ) esc_attr_e( $options['header'] ); ?>" />
+					<input name="A2A_SHARE_SAVE_header" type="text" class="code" placeholder="<?php esc_attr_e( 'Share this:' ); ?>" size="50" value="<?php if ( isset( $options['header'] ) ) echo esc_attr( $options['header'] ); ?>" />
 				</label>
 			</fieldset></td>
 			</tr>
@@ -655,14 +695,14 @@ function A2A_SHARE_SAVE_options_page() {
 						<input name="A2A_SHARE_SAVE_custom_icons" id="A2A_SHARE_SAVE_custom_icons" type="checkbox"<?php if ( isset( $options['custom_icons'] ) && $options['custom_icons'] == 'url' ) echo ' checked="checked"'; ?> value="url"/>
 					<?php _e('Use custom icons. URL:', 'add-to-any'); ?>
 					</label>
-					<input name="A2A_SHARE_SAVE_custom_icons_url" type="text" class="code" size="50" style="vertical-align:middle" placeholder="//example.com/blog/uploads/addtoany/icons/custom/" value="<?php if ( isset( $options['custom_icons_url'] ) ) esc_attr_e( $options['custom_icons_url'] ); ?>" />
+					<input name="A2A_SHARE_SAVE_custom_icons_url" type="text" class="code" size="50" style="vertical-align:middle" placeholder="//example.com/blog/uploads/addtoany/icons/custom/" value="<?php if ( isset( $options['custom_icons_url'] ) ) echo esc_attr( $options['custom_icons_url'] ); ?>" />
 					<br/>
 					<label for="A2A_SHARE_SAVE_custom_icons_type"><?php _e('Filename extension', 'add-to-any'); ?></label>
-					<input name="A2A_SHARE_SAVE_custom_icons_type" type="text" class="code" size="5" maxlength="4" placeholder="png" value="<?php if ( isset( $options['custom_icons_type'] ) ) esc_attr_e( $options['custom_icons_type'] ); else echo 'png'; ?>" />
+					<input name="A2A_SHARE_SAVE_custom_icons_type" type="text" class="code" size="5" maxlength="4" placeholder="png" value="<?php if ( isset( $options['custom_icons_type'] ) ) echo esc_attr( $options['custom_icons_type'] ); else echo 'png'; ?>" />
 					<label for="A2A_SHARE_SAVE_custom_icons_width"><?php _e('Width'); ?></label>
-					<input name="A2A_SHARE_SAVE_custom_icons_width" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" id="A2A_SHARE_SAVE_custom_icons_width" value="<?php if ( isset( $options['custom_icons_width'] ) ) esc_attr_e( $options['custom_icons_width'] ); ?>" class="small-text" />
+					<input name="A2A_SHARE_SAVE_custom_icons_width" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" id="A2A_SHARE_SAVE_custom_icons_width" value="<?php if ( isset( $options['custom_icons_width'] ) ) echo esc_attr( $options['custom_icons_width'] ); ?>" class="small-text" />
 					<label for="A2A_SHARE_SAVE_custom_icons_height"><?php _e('Height'); ?></label>
-					<input name="A2A_SHARE_SAVE_custom_icons_height" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" id="A2A_SHARE_SAVE_custom_icons_height" value="<?php if ( isset( $options['custom_icons_height'] ) ) esc_attr_e( $options['custom_icons_height'] ); ?>" class="small-text" />
+					<input name="A2A_SHARE_SAVE_custom_icons_height" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" id="A2A_SHARE_SAVE_custom_icons_height" value="<?php if ( isset( $options['custom_icons_height'] ) ) echo esc_attr( $options['custom_icons_height'] ); ?>" class="small-text" />
 					<p class="description">
 						<?php _e("Specify the URL of the directory containing your custom icons. For example, a URL of <code>//example.com/blog/uploads/addtoany/icons/custom/</code> containing <code>facebook.png</code> and <code>twitter.png</code>. Be sure that custom icon filenames match the icon filenames in <code>plugins/add-to-any/icons</code>. For AddToAny's Universal Button, select Image URL and specify the URL of your AddToAny universal share icon (<a href=\"#\" onclick=\"document.getElementsByName('A2A_SHARE_SAVE_button_custom')[0].focus();return false\">above</a>).", 'add-to-any'); ?>
 					</p>
@@ -703,7 +743,7 @@ function A2A_SHARE_SAVE_options_page() {
 				<div class="addtoany_floating_vertical_attached_to">
 				<br>
 				<label>
-					Attach to <input name="A2A_SHARE_SAVE_floating_vertical_attached_to" type="text" class="regular-text code" placeholder=".content-area" value="<?php if ( isset( $options['floating_vertical_attached_to'] ) ) esc_attr_e( $options['floating_vertical_attached_to'] ); else esc_attr_e( 'main, [role="main"], article, .status-publish' ); ?>" />
+					Attach to <input name="A2A_SHARE_SAVE_floating_vertical_attached_to" type="text" class="regular-text code" placeholder=".content-area" value="<?php if ( isset( $options['floating_vertical_attached_to'] ) ) echo esc_attr( $options['floating_vertical_attached_to'] ); else echo esc_attr( 'main, [role="main"], article, .status-publish' ); ?>" />
 					<p class="description">Enter a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" class="description" rel="noopener" target="_blank">CSS selector</a>,or group of selectors, that match the HTML element you want to attach to.</p>
 				</label>
 				</div>
@@ -715,26 +755,38 @@ function A2A_SHARE_SAVE_options_page() {
 				<label>
 					<input id="A2A_SHARE_SAVE_floating_vertical_responsive" name="A2A_SHARE_SAVE_floating_vertical_responsive" type="checkbox"<?php 
 						if ( ! isset( $options['floating_vertical_responsive'] ) || $options['floating_vertical_responsive'] != '-1' ) echo ' checked="checked"'; ?> value="1" />
-					Only display when screen is larger than <input name="A2A_SHARE_SAVE_floating_vertical_responsive_max_width" type="number" value="<?php if ( isset( $options['floating_vertical_responsive_max_width'] ) ) esc_attr_e( $options['floating_vertical_responsive_max_width'] ); else echo '980'; ?>" class="small-text" /> pixels wide
+					Hide on mobile screens <input name="A2A_SHARE_SAVE_floating_vertical_responsive_max_width" type="number" value="<?php if ( isset( $options['floating_vertical_responsive_max_width'] ) ) echo esc_attr( $options['floating_vertical_responsive_max_width'] ); else echo '980'; ?>" class="small-text" /> pixels or narrower
+				</label>
+				<br>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_vertical_scroll_top" name="A2A_SHARE_SAVE_floating_vertical_scroll_top" type="checkbox"<?php 
+						if ( ! empty( $options['floating_vertical_scroll_top'] ) && $options['floating_vertical_scroll_top'] == '1' ) echo ' checked="checked"'; ?> value="1" />
+					Hide until page is scrolled <input name="A2A_SHARE_SAVE_floating_vertical_scroll_top_pixels" type="number" value="<?php if ( isset( $options['floating_vertical_scroll_top_pixels'] ) ) echo esc_attr( $options['floating_vertical_scroll_top_pixels'] ); else echo '100'; ?>" class="small-text" /> pixels or more from the top
+				</label>
+				<br>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_vertical_scroll_bottom" name="A2A_SHARE_SAVE_floating_vertical_scroll_bottom" type="checkbox"<?php 
+						if ( ! empty( $options['floating_vertical_scroll_bottom'] ) && $options['floating_vertical_scroll_bottom'] == '1' ) echo ' checked="checked"'; ?> value="1" />
+					Hide when page is scrolled <input name="A2A_SHARE_SAVE_floating_vertical_scroll_bottom_pixels" type="number" value="<?php if ( isset( $options['floating_vertical_scroll_bottom_pixels'] ) ) echo esc_attr( $options['floating_vertical_scroll_bottom_pixels'] ); else echo '100'; ?>" class="small-text" /> pixels or less from the bottom
 				</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Position", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_vertical_position" type="number" value="<?php if ( isset( $options['floating_vertical_position'] ) ) esc_attr_e( $options['floating_vertical_position'] ); else echo '100'; ?>" class="small-text" /> pixels from top</label>
+				<label><input name="A2A_SHARE_SAVE_floating_vertical_position" type="number" value="<?php if ( isset( $options['floating_vertical_position'] ) ) echo esc_attr( $options['floating_vertical_position'] ); else echo '100'; ?>" class="small-text" /> pixels from top</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Offset", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_vertical_offset" type="number" value="<?php if ( isset( $options['floating_vertical_offset'] ) ) esc_attr_e( $options['floating_vertical_offset'] ); else echo '0'; ?>" class="small-text" /> pixels from left <span id="addtoany_vertical_offset_text">or right</span></label>
+				<label><input name="A2A_SHARE_SAVE_floating_vertical_offset" type="number" value="<?php if ( isset( $options['floating_vertical_offset'] ) ) echo esc_attr( $options['floating_vertical_offset'] ); else echo '0'; ?>" class="small-text" /> pixels from left <span id="addtoany_vertical_offset_text">or right</span></label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Icon Size", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_vertical_icon_size" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" placeholder="32" value="<?php if ( isset( $options['floating_vertical_icon_size'] ) ) esc_attr_e( $options['floating_vertical_icon_size'] ); else echo '32'; ?>" class="small-text"> pixels</label>
+				<label><input name="A2A_SHARE_SAVE_floating_vertical_icon_size" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" placeholder="32" value="<?php if ( isset( $options['floating_vertical_icon_size'] ) ) echo esc_attr( $options['floating_vertical_icon_size'] ); else echo '32'; ?>" class="small-text"> pixels</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
@@ -760,6 +812,8 @@ function A2A_SHARE_SAVE_options_page() {
 				<br>
 				<label><input type="radio" name="A2A_SHARE_SAVE_floating_horizontal" value="right_docked"<?php if ( isset( $options['floating_horizontal'] ) && 'right_docked' == $options['floating_horizontal'] ) echo ' checked="checked"'; ?>> <?php _e('Right docked', 'add-to-any'); ?></label>
 				<br>
+				<label><input type="radio" name="A2A_SHARE_SAVE_floating_horizontal" value="center_docked"<?php if ( isset( $options['floating_horizontal'] ) && 'center_docked' == $options['floating_horizontal'] ) echo ' checked="checked"'; ?>> <?php _e('Center docked', 'add-to-any'); ?></label>
+				<br>
 				<label><input type="radio" name="A2A_SHARE_SAVE_floating_horizontal" value="none"<?php if ( ! isset( $options['floating_horizontal'] ) || 'none' == $options['floating_horizontal'] ) echo ' checked="checked"'; ?>> <?php _e('None', 'add-to-any'); ?></label>
 			</fieldset></td>
 			</tr>
@@ -769,26 +823,38 @@ function A2A_SHARE_SAVE_options_page() {
 				<label>
 					<input id="A2A_SHARE_SAVE_floating_horizontal_responsive" name="A2A_SHARE_SAVE_floating_horizontal_responsive" type="checkbox"<?php 
 						if ( ! isset( $options['floating_horizontal_responsive'] ) || $options['floating_horizontal_responsive'] != '-1' ) echo ' checked="checked"'; ?> value="1" />
-					Only display when screen is smaller than <input name="A2A_SHARE_SAVE_floating_horizontal_responsive_min_width" type="number" value="<?php if ( isset( $options['floating_horizontal_responsive_min_width'] ) ) esc_attr_e( $options['floating_horizontal_responsive_min_width'] ); else echo '981'; ?>" class="small-text" /> pixels wide
+					Hide on desktop screens <input name="A2A_SHARE_SAVE_floating_horizontal_responsive_min_width" type="number" value="<?php if ( isset( $options['floating_horizontal_responsive_min_width'] ) ) echo esc_attr( $options['floating_horizontal_responsive_min_width'] ); else echo '981'; ?>" class="small-text" /> pixels or wider
+				</label>
+				<br>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_horizontal_scroll_top" name="A2A_SHARE_SAVE_floating_horizontal_scroll_top" type="checkbox"<?php 
+						if ( ! empty( $options['floating_horizontal_scroll_top'] ) && $options['floating_horizontal_scroll_top'] == '1' ) echo ' checked="checked"'; ?> value="1" />
+					Hide until page is scrolled <input name="A2A_SHARE_SAVE_floating_horizontal_scroll_top_pixels" type="number" value="<?php if ( isset( $options['floating_horizontal_scroll_top_pixels'] ) ) echo esc_attr( $options['floating_horizontal_scroll_top_pixels'] ); else echo '100'; ?>" class="small-text" /> pixels or more from the top
+				</label>
+				<br>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_horizontal_scroll_bottom" name="A2A_SHARE_SAVE_floating_horizontal_scroll_bottom" type="checkbox"<?php 
+						if ( ! empty( $options['floating_horizontal_scroll_bottom'] ) && $options['floating_horizontal_scroll_bottom'] == '1' ) echo ' checked="checked"'; ?> value="1" />
+					Hide when page is scrolled <input name="A2A_SHARE_SAVE_floating_horizontal_scroll_bottom_pixels" type="number" value="<?php if ( isset( $options['floating_horizontal_scroll_bottom_pixels'] ) ) echo esc_attr( $options['floating_horizontal_scroll_bottom_pixels'] ); else echo '100'; ?>" class="small-text" /> pixels or less from the bottom
 				</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Position", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_horizontal_position" type="number" value="<?php if ( isset( $options['floating_horizontal_position'] ) ) esc_attr_e( $options['floating_horizontal_position'] ); else echo '0'; ?>" class="small-text" /> pixels from left or right</label>
+				<label><input name="A2A_SHARE_SAVE_floating_horizontal_position" type="number" value="<?php if ( isset( $options['floating_horizontal_position'] ) ) echo esc_attr( $options['floating_horizontal_position'] ); else echo '0'; ?>" class="small-text" /> pixels from left or right</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Offset", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_horizontal_offset" type="number" value="<?php if ( isset( $options['floating_horizontal_offset'] ) ) esc_attr_e( $options['floating_horizontal_offset'] ); else echo '0'; ?>" class="small-text" /> pixels from bottom</label>
+				<label><input name="A2A_SHARE_SAVE_floating_horizontal_offset" type="number" value="<?php if ( isset( $options['floating_horizontal_offset'] ) ) echo esc_attr( $options['floating_horizontal_offset'] ); else echo '0'; ?>" class="small-text" /> pixels from bottom</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
 			<th scope="row"><?php _e("Icon Size", 'add-to-any'); ?></th>
 			<td><fieldset>
-				<label><input name="A2A_SHARE_SAVE_floating_horizontal_icon_size" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" placeholder="32" value="<?php if ( isset( $options['floating_horizontal_icon_size'] ) ) esc_attr_e( $options['floating_horizontal_icon_size'] ); else echo '32'; ?>" class="small-text"> pixels</label>
+				<label><input name="A2A_SHARE_SAVE_floating_horizontal_icon_size" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" placeholder="32" value="<?php if ( isset( $options['floating_horizontal_icon_size'] ) ) echo esc_attr( $options['floating_horizontal_icon_size'] ); else echo '32'; ?>" class="small-text"> pixels</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
