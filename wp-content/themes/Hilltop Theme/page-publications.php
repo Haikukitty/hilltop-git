@@ -66,7 +66,7 @@ get_header();
 					
 					?>
 					<div class="col-md-2 col-sm-2 col-xs-4 focus">
-						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="<?php echo $iconimage['alt'] ?>" /></a><br>
+						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="" /><br>
 							<a href="<?php echo $iconlink; ?>" class="focuslink"><?php echo $icontitle; ?></a>
 						</p>
 						
@@ -111,6 +111,24 @@ if( $my_loop->have_posts() ):
 									  
 					<?php
 						the_field('publication_abstract'); ?>
+									  
+									  						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
+
+									  
+									  <?php
+
+						if(get_field('upload_pdf')) { ?>
+						
+						<p style="text-align:center;margin:33px 33px 33px 33px;"><a href="<?php the_field('upload_pdf'); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
+						
+
+						
+						<?php } else { ?>
+						
+						<p style="text-align:center;margin:33px 33px 33px 33px;"><a href="<?php the_field("external_pdf_link"); ?>" class="et_pb_button_0 et_pb_button button pdfbutton" target="_blank">View PDF </a></p>
+						
+						<?php } ?>
+						
 						  
 										  </div>
 					
@@ -126,17 +144,18 @@ wp_reset_postdata(); ?>
 				<p class="clear:both;">&nbsp;</p>
 			
 			</div>
-					 			
-<div class="pubs-archive-link" style="clear:both;min-height:100px;margin-top:40px;">
+			<div class="pubsholder">
+			 <div class="pubsdate">&nbsp; </div>		 			
+<div class="pubs-archive-link pubslist" style="min-height:100px;margin-top:40px;">
 	<p><a href="<?php echo site_url(); ?>/publication/" class="et_pb_button button pdfbutton">Publications Archive</a></p>
-				</div>		
+				</div>	
+			</div>
 					
 					 
 			
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 
-</div>
 
 <?php	 endwhile; ?>
 

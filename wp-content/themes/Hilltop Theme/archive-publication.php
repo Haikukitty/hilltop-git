@@ -56,7 +56,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 					
 					?>
 					<div class="col-md-2 col-sm-2 col-xs-4 focus">
-						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="<?php echo $iconimage['alt'] ?>" /></a><br>
+						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="" /><br>
 							<a href="<?php echo $iconlink; ?>" class="focuslink"><?php echo $icontitle; ?></a>
 						</p>
 						

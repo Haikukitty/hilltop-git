@@ -102,9 +102,14 @@ foreach( $newsposts as $post ) :  //setup_postdata($ppost);
 
 	
 			<?php the_content(); ?>
+					 
+					 					 <?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
+
 							  	<p class="published-dates newspage"><em><?php
 						the_time('m/d/Y');
 								?></em></p>
+					 
+
 					 
 
 					 
@@ -138,7 +143,7 @@ endwhile;
 
 					 
 				</div>
-			</div>
+			
 		</div> <!-- #content-area -->
 	</div> <!-- .container -->
 

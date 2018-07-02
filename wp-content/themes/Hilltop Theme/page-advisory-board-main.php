@@ -127,7 +127,7 @@ if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned
 
 
 
-			</div>		</div>	
+			</div>		
 
 			
 

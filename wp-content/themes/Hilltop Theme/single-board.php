@@ -122,6 +122,7 @@ a:active{
 				
 				
 			</div>
+
 <?php endif; ?>
 	
 
@@ -189,6 +190,8 @@ a:active{
 							</div>
 							
 						</div>
+						
+					</div>
 					
 				</article> <!-- .et_pb_post -->
 					

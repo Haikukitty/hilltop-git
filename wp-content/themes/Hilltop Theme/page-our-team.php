@@ -104,7 +104,7 @@ foreach ($_terms as $term) :
 	
 	
 	<h3 class="lilo-accordion-control" id="tab<?php echo $i; ?>1" data-tab-index="<?php echo $i; ?>">
-		<a name="tab<?php echo $i; ?>"><?php echo $term->name; ?></a>
+		<a name="tab<?php echo $i; ?>" id="tab<?php echo $i; ?>link"><?php echo $term->name; ?></a>
        
     
    
@@ -148,7 +148,7 @@ $i++;
 <?php endforeach;
 ?>
 
-			</div>		</div>	
+			</div>		
 
 			
 
