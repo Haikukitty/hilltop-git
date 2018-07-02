@@ -1611,6 +1611,12 @@ font-size: 2em;
 }  /* END MEDIA QUERY */
 
 
+@media screen and (min-width:992px) and (max-width:1070px) {
+	
+	.et_header_style_left #et-top-navigation nav>ul>li>a, .et_header_style_split #et-top-navigation nav>ul>li>a {
+    padding-left: 7px;
+	}
+}  /* END MEDIA QUERY */
 
 
 .row.board {
