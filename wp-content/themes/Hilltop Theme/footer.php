@@ -56,6 +56,6 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 	</div> <!-- #page-container -->
 
 	<?php wp_footer(); ?>
-<script type="text/javascript" src="http://dev-hilltop.pantheonsite.io/wp-content/themes/Hilltop Theme/assets/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="/wp-content/themes/Hilltop Theme/assets/js/jquery.matchHeight-min.js"></script>
 </body>
 </html>
