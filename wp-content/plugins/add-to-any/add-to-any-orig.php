@@ -338,7 +338,7 @@ function ADDTOANY_SHARE_SAVE_ICONS( $args = array() ) {
 			$counter = $counter_enabled ? ' a2a_counter' : '';
 			$class_attr = $custom_service ? '' : ' class="a2a_button_' . $safe_name . $counter . '"';
 			$href_attr = $basic_html && ! isset( $href ) ? '' : ' href="' . $url . '"';
-			$title_attr = $basic_html ? '' : ' alt="' . $name . '"';
+			$title_attr = $basic_html ? '' : ' title="' . $name . '"';
 
 			if ( isset( $service['target'] ) ) {
 				$target_attr = empty( $service['target'] ) ? '' : ' target="' . $service['target'] . '"';
@@ -830,8 +830,6 @@ function A2A_SHARE_SAVE_head_script() {
 	$script_configs = ( ( $cache ) ? "\n" . 'a2a_config.static_server="' . $static_server . '";' : '' )
 		. ( $icon_color ? "\n" . 'a2a_config.icon_color="' . $icon_color . '";' : '' )
 		. ( isset( $options['onclick'] ) && '1' == $options['onclick'] ? "\n" . 'a2a_config.onclick=1;' : '' )
-		. ( isset( $options['onkeypress'] ) && '1' == $options['onkeypress'] ? "\n" . 'a2a_config.onkeypress=1;' : '' )
-
 		. ( $additional_js ? "\n" . stripslashes( $additional_js ) : '' );
 	
 	$javascript_header = "\n"
