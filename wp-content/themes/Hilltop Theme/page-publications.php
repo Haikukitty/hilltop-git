@@ -66,8 +66,8 @@ get_header();
 					
 					?>
 					<div class="col-md-2 col-sm-2 col-xs-4 focus">
-						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>"><img src="<?php echo $iconimage['url']; ?>" alt="" /><br>
-							<a href="<?php echo $iconlink; ?>" class="focuslink"><?php echo $icontitle; ?></a>
+						<p style="text-align:center;"><a href="<?php echo $iconlink; ?>" class="focuslink"><img src="<?php echo $iconimage['url']; ?>" alt="" /><br>
+							<?php echo $icontitle; ?></a>
 						</p>
 						
 					</div>
