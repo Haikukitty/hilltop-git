@@ -1698,37 +1698,6 @@ width: 47.25% !important;
 }  /* END MEDIA QUERY */
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 1334px) 
-  and (-webkit-min-device-pixel-ratio: 2)  
-	  and (-webkit-max-device-pixel-ratio: 2)
-  and (orientation: landscape) 
-{ 
-	  
-	 /* .header-content {
-
-    position: relative;
-top: -80px !important; }*/
-
-
-
-.et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
-
-    /*background-image: url('http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/05/hilltop-building-peak-homepage.png'); */
-    background-size: contain !important;
-    background-position: bottom center;
-
-}
-	  
-	  	.homeintro p {
-			font-size:19px !important;
-			line-height: 1.6em !important;
-	}
-	  
-
-
-}  /* END MEDIA QUERY */
 
 
 
@@ -1882,7 +1851,9 @@ padding: 1.5em 0 1.7em 0 !important;
 margin-top:27px !important;
 }
 
-
+	.board .teamdiv {
+		padding-bottom:17px;
+	}
 
 li.homeicon a {
 	padding-left: 0 !important;
