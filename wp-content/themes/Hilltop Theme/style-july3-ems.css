@@ -90,10 +90,6 @@ Template: Divi
 	font-style: normal;
 }
 
-html {
-	font-size:16px;
-}
-
 body, .et_pb_text_inner li, .et_pb_text_inner p {
 	font-weight:400 !important;
 
@@ -108,7 +104,6 @@ body, .et_pb_text_inner li, .et_pb_text_inner p {
 h5 {
 	color:#7f6707 !important;
 }
-
 
 
 
@@ -133,18 +128,9 @@ h5 {
     padding: 0px 0;
 }
 
-
 .nav li li.last-in-section {
 	    border-bottom: 0px solid #5cc0c5;
 
-}
-
-.nav > li > a {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-        padding-right: 15px;
-        padding-bottom: 10px;
 }
 
 #top-menu li li {
@@ -157,12 +143,10 @@ h5 {
     padding: 6px 20px;
 }
 
-
-
 #top-menu li a, .et_search_form_container input {
     font-weight: normal;
     font-style: normal;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     text-decoration: none;
 }
 
@@ -175,7 +159,6 @@ h5 {
 
 .et_mobile_menu li a:hover, .nav ul li a:hover {
      opacity: 1; 
-
     background-color: rgba(139,115,15,0.13);
     color: #d97310 !important;
 }
@@ -280,7 +263,6 @@ h1.et_pb_module_header a:hover {
 	font-family:'Candara','Orienta',sans-serif;
 }
 
-
 .et-fixed-header .logolink {
 display:none;
 }
@@ -301,7 +283,6 @@ display:none;
     background-color: transparent;
     content: "";
 }
-
 
 .headerhilltop .et_pb_fullwidth_header_container {
 	width:90% !important;
@@ -389,7 +370,6 @@ h3 a:hover {
     border-top: 0px solid #eee;
 }
 
-
 .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom, .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.center {
     margin-bottom: 0 !important;
     bottom: -10px;
@@ -429,8 +409,8 @@ h4.pubdate {
 }
 
 .pubs-intro {
-	margin-bottom: 1.3rem;
-	font-size:1.1rem;
+	margin-bottom: 1.3em;
+	font-size:1.1em;
 }
 
 .focus p {line-height:110%;
@@ -438,7 +418,7 @@ h4.pubdate {
 
 .focus a.focuslink {
 	line-height:110%;
-	font-size:0.7rem;
+	font-size:0.7em;
 	color:#007181;
 	text-transform:uppercase;
 }
@@ -452,14 +432,14 @@ h4.pubdate {
 }
 .pdfbutton::after, .pdfbutton::before {
     position: absolute;
-    margin-left: -1rem;
+    margin-left: -1em;
     opacity: 0;
     text-shadow: none;
-    font-size: 1.8rem;
+    font-size: 1.8em;
     font-weight: 400;
     font-style: normal;
     font-variant: none;
-    line-height: 1rem;
+    line-height: 1em;
     text-transform: none;
     content: "";
     -webkit-transition: all .2s;
@@ -475,7 +455,7 @@ h4.pubdate {
 .lilo-accordion-control {
     color: #d97310;
     font-family: 'Raleway', Arial, sans-serif;
-    font-size: 1rem;
+    font-size: 1em;
     padding: 16px 53px 16px 0px;
     font-weight: 900;
     border-bottom: 0px solid #d97310;
@@ -555,14 +535,14 @@ margin-top: 0px;
 	padding-top:0;
 	margin-bottom:20px;
 	min-height:50px;
-	font-size:1rem;
+	font-size:1em;
 	color:#7f6707;
 }
 
 .the-news .lilo-accordion-control {
     color: #d97310;
     font-family: 'Raleway', Arial, sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.1em;
     padding: 16px 32px 10px 0px;
     font-weight: 900;
     border-bottom: 0px solid #d97310;
@@ -628,7 +608,7 @@ padding-bottom: 47px;
 }
 
 .main_title.feeds {
-	font-size:1.45rem;
+	font-size:1.45em;
 	margin-bottom:0;
 	margin-top:5px;	
 }
@@ -642,7 +622,7 @@ padding-top: 10px;
 }
 
 .introtext, .introtext p, p.introtext {
-	font-size:1.2rem;
+	font-size:1.2em;
 	line-height:140%;
 }
 
@@ -651,11 +631,11 @@ div.introtext {
 }
 	
 .news-intro.introtext p {
-	font-size:1.1rem;
+	font-size:1.1em;
 }
 
 h3.lilo-accordion-control a {	
-	font-size:1.4rem;
+	font-size:1.4em;
 	color: #00a0af;
 	    font-family: 'Candara','Orienta',sans-serif;
 }
@@ -679,7 +659,7 @@ text-decoration:none;
     width: 11%;
     color: #333333;
     font-weight: normal;
-    font-size: 1.1rem;
+    font-size: 1.1em;
     padding-top: 2px;
 }
 
@@ -723,7 +703,7 @@ h4.search-title {
 }
 
 .pubslist p:last-of-type {
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.5em;
 }
 
 .formshow .formholder {
@@ -884,14 +864,14 @@ input[type="file"], .ginput_preview {
 
 #footer-widgets .footer-widget li a {
     color: #007181 !important;
-	font-size:1rem;
+	font-size:1em;
 	text-transform:uppercase;
 	font-weight:500 !important;
 	line-height:150%;
 }
 
 #menu-footer li {
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
 }
 
 #menu-footer {
@@ -961,14 +941,14 @@ margin: 0 25%;
 
 .footerbutton::after, .pdfbutton::before {
     position: absolute;
-    margin-left: -1rem;
+    margin-left: -1em;
     opacity: 0;
     text-shadow: none;
-    font-size: 2rem;
+    font-size: 2em;
     font-weight: 400;
     font-style: normal;
     font-variant: none;
-    line-height: 1rem;
+    line-height: 1em;
     text-transform: none;
     content: "";
     -webkit-transition: all .2s;
@@ -999,14 +979,14 @@ height: auto;
     text-align: center;
     line-height: 200%;
     padding-top: 17px;
-    border-top: 1px solid rgba(140,115,42,0.17);
+    border-top:0px solid rgba(140,115,42,0.17);
     margin-top: 17px;
 }
 
 .bottom-nav, .bottom-nav a, .bottom-nav li.current-menu-item a {
     color: #007181 !important;
 	font-weight:700 !important;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	padding:5px 17px;
 }
 
@@ -1023,14 +1003,13 @@ height: auto;
 
 .headerhilltop .header-content {
     position: absolute;
-    top: 3rem;
+    top: 2.95em;
     left: 0;
     right: 0;
 }
 .headerhilltop .header-content  h1.et_pb_module_header {
-font-size: 2.1rem !important;
+font-size: 2em;
 }
-
 
 .widget_search input#searchsubmit {
     color: #ffffff;
@@ -1103,7 +1082,7 @@ font-weight:300;
 	
 	.et_pb_blog_grid h2, .et_pb_post h2 {
     padding-bottom: 7px;
-    font-size: 1.375rem;
+    font-size: 1.375em;
     padding-top: 7px;
 	}
 	
@@ -1123,7 +1102,7 @@ font-weight:300;
 	
 	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {  
     width: 17%;
-    font-size: 1rem;
+    font-size: 1em;
 	}
 	
 	.the-news .pubslist {
@@ -1135,7 +1114,7 @@ font-weight:300;
 	}
 	
 	.the-news .main_title.feeds, .pubsholder .main_title.feeds, .pubsarchive .main_title.feeds {
-   font-size:1.25rem;
+   font-size:1.25em;
 	}
 	
 	#top-menu li {
@@ -1154,12 +1133,12 @@ font-weight:300;
 	
 	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {  
     width: 17%;
-    font-size: 1.1rem;
+    font-size: 1.1em;
 	}
 	
 	.the-news .pubslist, .featuredpubs .pubslist, .pubsarchive .pubslist {
     width: 82%;
-		font-size:1.07rem;
+		font-size:1.07em;
 	}
 	
 	#top-menu li {
@@ -1199,20 +1178,20 @@ font-weight:300;
 	}
 
 	.sf-field-taxonomy-publication-category select {
-		font-size:1.0rem;
+		font-size:1.0em;
 	}
 	
 	.sf-field-post-meta-publication_type select {
-		font-size:1.0rem;
+		font-size:1.0em;
 	}
 	
 	.sf-field-sort_order select {
-		font-size:1.0rem;
+		font-size:1.0em;
 	}
 	
 	.sf-field-search input {		
 	max-width:120px;
-		font-size:1.0rem;
+		font-size:1.0em;
 	}
 	
 
@@ -1235,7 +1214,7 @@ font-weight:300;
 
 @media screen and (min-width:1600px) {
 	.headerhilltop .header-content  h1.et_pb_module_header {
-	font-size:2.2rem !important;
+	font-size:3em;
 	}
 	
 	.et_pb_fullwidth_header.et_pb_module.et_pb_bg_layout_dark.et_pb_text_align_left.staffheaderphoto.et_pb_fullwidth_header_0 {
@@ -1250,14 +1229,14 @@ font-weight:300;
 @media screen and (min-width:981px) and (max-width:1100px) {
 
 	#top-menu li {
-    padding-right: 15px;
+    padding-right: 0px;
 	}
 
 	
 	#top-menu li {
     display: inline-block;
     padding-right: 0px !important;
-    font-size: 1.14rem;
+    font-size: 1.14em;
 	}
 	
 	.searchandfilter ul li { 
@@ -1270,19 +1249,19 @@ font-weight:300;
 	}
 
 	.sf-field-taxonomy-publication-category select {
-		font-size:0.95rem;
+		font-size:0.95em;
 	}
 
 	.sf-field-post-meta-publication_type select {
-		font-size:0.95rem;
+		font-size:0.95em;
 	}
 	
 	.sf-field-sort_order select {
-		font-size:0.95rem;
+		font-size:0.95em;
 	}
 	
 	.sf-field-search input {	
-		font-size:0.95rem;
+		font-size:0.95em;
 	}
 } /* END MEDIA QUERY */
 
@@ -1330,7 +1309,7 @@ font-weight:300;
 	}
 	
 	.footerbutton {
-    font-size: 1rem;
+    font-size: 1em;
 	}
 	
 	.searchandfilter ul li {
@@ -1354,7 +1333,7 @@ font-weight:300;
 		min-width:90px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.9rem;
+		font-size:0.9em;
 	}
 	
 	.sf-field-post-meta-publication_type  {
@@ -1365,14 +1344,14 @@ font-weight:300;
 		min-width:70px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.9rem;
+		font-size:0.9em;
 	}
 	
 	.sf-field-sort_order select {
 		min-width:60px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.9rem;
+		font-size:0.9em;
 	}
 	.sf-field-sort_order {
 		width:18%;
@@ -1386,7 +1365,7 @@ font-weight:300;
 		min-width:60px !important;
 		width:100%;
 		max-width:100%;
-		font-size:0.9rem;
+		font-size:0.9em;
 	}
 }
 /* END MEDIA QUERY */
@@ -1419,13 +1398,13 @@ font-weight:300;
 	
 	.the-news .pubsdate {
     width: 21%;
-    font-size: 1rem;
+    font-size: 1em;
 	}
 	
 	.the-news .main_title.feeds {
     margin-bottom: 0px;
     width: 90%;
-    font-size: 1.25rem;
+    font-size: 1.25em;
 	}
 	
 	.board .teamthumb {
@@ -1492,7 +1471,7 @@ font-weight:300;
 		min-width:90px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.77rem;
+		font-size:0.77em;
 	}
 	
 	.sf-field-post-meta-publication_type  {
@@ -1503,14 +1482,14 @@ font-weight:300;
 		min-width:70px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.77rem;
+		font-size:0.77em;
 	}
 	
 	.sf-field-sort_order select {
 		min-width:60px !important;
 		max-width:100%;
 		width:100%;
-		font-size:0.77rem;
+		font-size:0.77em;
 	}
 	.sf-field-sort_order {
 		width:18%;
@@ -1524,7 +1503,7 @@ font-weight:300;
 		min-width:60px !important;
 		width:100%;
 		max-width:100%;
-		font-size:0.77rem;
+		font-size:0.77em;
 	}
 	.et_pb_fullwidth_header_0.et_pb_fullwidth_header .et_pb_fullwidth_header_overlay {
     	/*background-image: url('http://dev-hilltop.pantheonsite.io/wp-content/uploads/2018/05/hilltop-building-peak-homepage.png'); */
@@ -1559,7 +1538,6 @@ font-weight:300;
     font-size: 1.25;
 	}
 	
-
 	#menu-footer li {
 		margin-bottom:3px;
 	}	
@@ -1569,11 +1547,11 @@ font-weight:300;
 	}
 	
 	.introtext, .introtext p, p.introtext {
-    font-size: 1.2rem; 
+    font-size: 1.2em; 
 	}
 	
 	.lilo-accordion-content h4.main_title {
-		font-size: 1.1rem;
+		font-size: 1.1em;
 	}
 	
 	div.staff-pic {		
@@ -1587,26 +1565,26 @@ font-weight:300;
 	
 	.the-news .pubsdate, .featuredpubs .pubsdate, .pubsarchive .pubsdate {
     width: 21%;
-    font-size: 0.9rem;
+    font-size: 0.9em;
 	}
 	
 	.the-news .main_title.feeds {
     width: 90%;
-    font-size: 1.1rem;
+    font-size: 1.1em;
 	}
 		.featuredpubs .main_title.feeds, .pubsarchive .main_title.feeds {
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 1.1em;
 	}
 	
 	.featuredpubs .pubslist p, .pubsarchive .pubslist p, .the-news p {
-    font-size: 1.05rem;
+    font-size: 1.05em;
 	line-height: 150%;
 	}
 		
 	.focus a.focuslink {
     line-height: 100%;
-    font-size: 0.625rem;
+    font-size: 0.625em;
 	}
 	
 	div.introtext {
@@ -1614,11 +1592,11 @@ font-weight:300;
 	}
 	
 	.introtext {
-		font-size:1.2rem;
+		font-size:1.2em;
 	}
 	
 	.news-intro.introtext {
-		font-size:1.1rem;
+		font-size:1.05em;
 		font-weight:400 !important
 	}
 	
@@ -1627,23 +1605,23 @@ font-weight:300;
 	}
 		
 	.homeintro p {
-		font-size:1.2rem !important;
-		line-height: 1.6rem !important;
+		font-size:1.2em !important;
+		line-height: 1.6em !important;
 	}
 	
 	.row.board p {
-		font-size:0.95rem !important;
+		font-size:0.95em !important;
 		line-height:170% !important;
 	}
 	
 	#expand {
-		font-size: 1.1rem;
-		line-height: 1.7rem;
+		font-size: 1.1em;
+		line-height: 1.7em;
 	}
 	
 	p {
 		font-size: 1.1;
-		line-height: 1.7rem;
+		line-height: 1.7em;
 	}	
 	
 }  /* END MEDIA QUERY */
