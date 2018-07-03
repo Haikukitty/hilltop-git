@@ -112,7 +112,7 @@ if( $my_loop->have_posts() ):
 					<?php
 						the_field('publication_abstract'); ?>
 									  
-									  						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
+									  						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,linkedin,email"]'); ?> 
 
 									  
 									  <?php

@@ -103,7 +103,7 @@ foreach( $newsposts as $post ) :  //setup_postdata($ppost);
 	
 			<?php the_content(); ?>
 					 
-					 					 <?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
+					 					 <?php echo do_shortcode('[addtoany buttons="facebook,twitter,linkedin,email"]'); ?> 
 
 							  	<p class="published-dates newspage"><em><?php
 						the_time('m/d/Y');

@@ -123,7 +123,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() ); ?>
 						
 						<?php } ?>
 						
-						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,email"]'); ?> 
+						<?php echo do_shortcode('[addtoany buttons="facebook,twitter,linkedin,email"]'); ?> 
 
 				</div> 
 			<?php endif; ?>
