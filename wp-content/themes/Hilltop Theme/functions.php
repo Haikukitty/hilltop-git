@@ -247,6 +247,19 @@ function bt_display_archive_state( $states ) {
 add_filter( 'display_post_states', 'bt_display_archive_state' );
 
 
+// Removes et_add_viewport_meta from the wp_head phase
+function remove_divi_actions() {
+remove_action( ‘wp_head’, ‘et_add_viewport_meta’ );
+}
+
+// Call ‘remove_divi_actions’ during WP initialization
+add_action(‘init’,’remove_divi_actions’);
+
+function et_add_viewport_meta_2(){
+echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />';
+}
+add_action( ‘wp_head’, ‘et_add_viewport_meta_2’ );
+
 
 /*
  * Add columns to staff post list

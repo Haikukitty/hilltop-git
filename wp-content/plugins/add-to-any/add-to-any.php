@@ -455,7 +455,7 @@ function ADDTOANY_SHARE_SAVE_BUTTON( $args = array() ) {
 		} elseif ( ! empty( $button_src ) ) {
 			$button	= '<img src="' . $button_src . '"' . $button_width . $button_height . ' alt="Share">';
 		} else {
-			$button = '';
+			$button = $button_class;
 		}
 		
 		// Add additional classNames to .a2a_dd
