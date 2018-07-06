@@ -443,6 +443,15 @@ h4.pubdate {
 	text-transform:uppercase;
 }
 
+a.focuslink img {
+	transition: all .2s ease-in-out;
+
+}
+	a.focuslink img:hover {
+transform: scale(1.2);
+
+}
+
 .pdfbutton {
     color: #ffffff !important;
     border-width: 0px !important;
