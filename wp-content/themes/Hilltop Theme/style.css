@@ -445,10 +445,12 @@ h4.pubdate {
 
 a.focuslink img {
 	transition: all .2s ease-in-out;
+		cursor:pointer;
+
 
 }
 	a.focuslink img:hover {
-transform: scale(1.2);
+transform: scale(1.1);
 
 }
 
