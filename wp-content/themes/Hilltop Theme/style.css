@@ -2019,6 +2019,10 @@ display:none;
 
 }
 
+#mojo-sp-right p {
+    color: #333333 !important;
+}
+
 .mojo-sp-button span {
     font-size: 46px;
     font-weight: bold;
