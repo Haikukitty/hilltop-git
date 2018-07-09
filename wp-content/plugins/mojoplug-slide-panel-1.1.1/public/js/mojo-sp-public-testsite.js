@@ -193,7 +193,7 @@
         if (leftOK)
             togglePanel($leftWrap, $leftPanel, $leftTarget, 'right', 'left');
         else
-           alertNoElement();
+            alertNoElement();
     });
 	
 //$('#mojosp-toggle-right, .mojosp-toggle-right, #mojo-sp-right-button').click(function (e) {
@@ -217,7 +217,7 @@
 	
 	
 		
-
+		
 		
 
     /**
@@ -229,10 +229,10 @@
      * @since 1.0.0
      * @access private
      */
-     function alertNoElement()
-     {
+    // function alertNoElement()
+    // {
     //    alert('Oops, something went wrong. Please check in Wordpress Admin section that you have added minimum one widget in the panel (Appearance->Widgets) and in the Settings->MojoPlug Slide Panel that you have defined an existing Target Element.');
-    }
+    // }
 
     /**
      * @summary Toggle panel function.
@@ -328,9 +328,7 @@
      */
     function resetPanel(side)
     {        
-        var visibility = 'hidden';
-		
-
+        var visibility = 'visible';
 		
 		
 		
@@ -366,7 +364,6 @@
         else
         {
             setRightAnimCSS();
-
             if (visibility === 'hidden')
             {
                 $('#mojo-sp-right-button > span').addClass(rightIconOpen).removeClass(rightIconClose);
@@ -566,10 +563,7 @@
     });
 
 	
- setTimeout(function() {
-                              $('#mojosp-toggle-right').get(0).click();
-                            }, 1700);
-	
+
 	
 
 	
