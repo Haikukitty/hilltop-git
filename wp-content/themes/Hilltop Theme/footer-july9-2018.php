@@ -55,17 +55,6 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 
 	</div> <!-- #page-container -->
 
-<?php
- if ((is_active_sidebar('side-tab')) && (is_front_page())) : ?>
-		<div id="sidetab">
-				<?php dynamic_sidebar('side-tab'); ?>
-
-				</div>
-
-      <?php  endif;
-
-?>
-
 	<?php wp_footer(); ?>
 <script type="text/javascript" src="/wp-content/themes/Hilltop Theme/assets/js/jquery.matchHeight-min.js"></script>
 </body>

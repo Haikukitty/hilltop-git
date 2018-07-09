@@ -21,20 +21,6 @@ function divi_custom_posts( $query ) {
 
 }
 
-
-
-        register_sidebar(array(
-            'name' => __('Homepage Side Tab'),
-            'id' => 'side-tab',
-            'description' => __('Drop your widgets here'),
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget' => '</aside>',
-            'before_title' => '',
-            'after_title' => '',
-        ));
-
-
-
 register_sidebar( array(
 		'name'          => __( 'Footer Bottom Area', 'hilltop' ),
 		'id'            => 'bottomfooter',
