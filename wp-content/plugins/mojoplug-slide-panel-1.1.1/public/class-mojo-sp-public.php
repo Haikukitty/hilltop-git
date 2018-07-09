@@ -148,7 +148,7 @@ class Mojo_SP_Public
 
         endif;
         
-        if (is_active_sidebar('mojo-sp-right')) :
+        if ((is_active_sidebar('mojo-sp-right')) && (is_front_page())) :
             echo '      <div id="mojo-sp-right-wrap">
                             <div id="mojo-sp-right" class="mojo-sp">
                                 <div class="mojosp-widget-area">';
