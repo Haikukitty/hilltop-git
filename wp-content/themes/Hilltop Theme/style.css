@@ -2011,20 +2011,17 @@ display:none;
 }
 #mojo-sp-right-wrap.mojosp-panel-visible .mojo-sp-button {
 	display:block;
-	background-color: #d97310 !important;
 }
 
 .mojo-sp {
     height: auto;
-    /* background-color: #e4dec7 !important; */
-	    background-color: #ffffff !important;
+  
 
 }
 
 .mojo-sp-button span {
     font-size: 46px;
     font-weight: bold;
-    color: #ffffff !important;
     position: absolute;
 }
 
@@ -2035,7 +2032,4 @@ display:none;
 
 .mojosp-widget-area h3.widget-title {
 	color:#8b730f !important;
-}
-#mojo-sp-right p {
-    color: #333333 !important;
 }
