@@ -566,7 +566,7 @@
     });
 
 	
- setTimeout(function() {
+ 					setTimeout(function() {
                               $('#mojosp-toggle-right').get(0).click();
                             }, 1700);
 	
