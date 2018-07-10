@@ -1952,7 +1952,11 @@ font-weight:300;
 	p {
 		font-size: 1.1rem;
 		line-height: 1.7rem;
-	}	
+	}
+	
+	.headerhilltop .header-content h1.et_pb_module_header {
+    font-size: 1.6rem !important;
+}
 	
 }  /* END MEDIA QUERY */
 
@@ -2003,7 +2007,7 @@ li.homeicon a {
 }
 
 #mojo-sp-right-wrap {
-    top: 117px;
+    top: 121px;
 }
 
 #mojo-sp-right-wrap .mojo-sp-button {
