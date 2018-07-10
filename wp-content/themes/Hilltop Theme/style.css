@@ -253,6 +253,24 @@ opacity:1;
 -moz-transition: all .4s ease-in-out;
 transition: all .4s ease-in-out;
 }
+	
+	
+	#footer-widgets div.footer-widget:nth-of-type(even)
+{
+    width:21%
+}
+#footer-widgets div.footer-widget:nth-of-type(odd)
+{
+    width: 33%;
+}
+	
+	#media_image-2 img {
+		float: left;
+padding-left: 2%;
+		
+		
+	}
+	
 } /* END MEDIA INQUIRY */
 
 
