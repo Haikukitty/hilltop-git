@@ -1962,7 +1962,7 @@ font-weight:300;
 	
 	.headerhilltop .header-content h1.et_pb_module_header {
     font-size: 1.6rem !important;
-		margin: 0.47em 0 0.13em 0 !important;
+		margin: 0.07em 0 0.53em 0 !important;
 }
 	
 }  /* END MEDIA QUERY */
@@ -2015,7 +2015,7 @@ li.homeicon a {
 
 #mojo-sp-right-wrap {
     top: 121px;
-	z-index:999999 !important;
+	z-index:9999 !important;
 }
 
 #mojo-sp-right-wrap .mojo-sp-button {
