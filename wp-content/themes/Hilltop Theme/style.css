@@ -1739,6 +1739,12 @@ font-weight:300;
 	.board .teamthumb {
 		padding-bottom:17px;
 	}
+	
+	#main-header{
+		
+		
+		z-index: 24151699999999432246543;
+	}
 		
 }  /* END MEDIA QUERY */
 
@@ -2009,6 +2015,7 @@ li.homeicon a {
 
 #mojo-sp-right-wrap {
     top: 121px;
+	z-index:999999 !important;
 }
 
 #mojo-sp-right-wrap .mojo-sp-button {
