@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 						<img src="<?php echo esc_attr( $logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" id="logo" data-height-percentage="<?php echo esc_attr( et_get_option( 'logo_height', '54' ) ); ?>" />
 					</a>
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="/wp-content/uploads/2018/07/hilltop-umbc-color.png" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" id="logo" class="second-logo" data-height-percentage="<?php echo esc_attr( et_get_option( 'logo_height', '54' ) ); ?>" />
+						<img src="/wp-content/uploads/logos/hilltop-umbc-color.png" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" id="logo" class="second-logo" data-height-percentage="<?php echo esc_attr( et_get_option( 'logo_height', '54' ) ); ?>" />
 					</a>
 
 				</div>
