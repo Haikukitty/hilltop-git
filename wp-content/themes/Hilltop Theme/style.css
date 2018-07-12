@@ -2034,7 +2034,11 @@ li.homeicon a {
 #mojo-sp-right-wrap {
     top: 133px;
 	z-index:9999 !important;
+	    height: auto !important;
+
 }
+
+
 
 #mojo-sp-right-wrap .mojo-sp-button {
 display:none;

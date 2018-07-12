@@ -7,6 +7,13 @@
 if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 
 			<footer id="main-footer">
+				
+
+				
+				
+				
+				
+				
 				<?php get_sidebar( 'footer' ); ?>
 
 
@@ -48,25 +55,27 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 				?>
 					</div>	<!-- .container -->
 				</div>
+									<?php
+ if ((is_active_sidebar('side-tab')) && (is_front_page())) : ?>
+				<?php dynamic_sidebar('side-tab'); ?>
+
+
+      <?php  endif;
+
+?>
 			</footer> <!-- #main-footer -->
 		</div> <!-- #et-main-area -->
 
 <?php endif; // ! is_page_template( 'page-template-blank.php' ) ?>
 
+
+
 	</div> <!-- #page-container -->
 
-<?php
- if ((is_active_sidebar('side-tab')) && (is_front_page())) : ?>
-		<div id="sidetab">
-				<?php dynamic_sidebar('side-tab'); ?>
 
-				</div>
-
-      <?php  endif;
-
-?>
 
 	<?php wp_footer(); ?>
+					
 <script type="text/javascript" src="/wp-content/themes/Hilltop Theme/assets/js/jquery.matchHeight-min.js"></script>
 </body>
 </html>

@@ -27,8 +27,8 @@ function divi_custom_posts( $query ) {
             'name' => __('Homepage Side Tab'),
             'id' => 'side-tab',
             'description' => __('Drop your widgets here'),
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget' => '</aside>',
+            'before_widget' => '',
+            'after_widget' => '',
             'before_title' => '',
             'after_title' => '',
         ));
