@@ -112,4 +112,63 @@ add_action( 'init', 'board_taxonomy', 0 );
 												
 
 
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+	/* Jobs Postings Post Type */
+	/*-------------------------------------------------------------------------------------------*/
+	class html_bulletin {
+
+		function html_bulletin() {
+			add_action('init',array($this,'create_post_type'));
+		}
+
+		function create_post_type() {
+			$labels = array(
+			    'name' => 'HTML Bulletin',
+			    'singular_name' => 'HTML Bulletin',
+			    'add_new' => 'Add HTML Bulletin',
+			    'all_items' => 'All HTML Bulletins',
+			    'add_new_item' => 'Add New HTML Bulletin',
+			    'edit_item' => 'Edit HTML Bulletin',
+			    'new_item' => 'New HTML Bulletin',
+			    'view_item' => 'View HTML Bulletin',
+			    'search_items' => 'Search HTML Bulletins',
+			    'not_found' =>  'No HTML Bulletin found',
+			    'not_found_in_trash' => 'No HTML Bulletins found in trash',
+			    'parent_item_colon' => 'Parent Post:',
+			    'menu_name' => 'HTML Bulletins'
+			);
+			$args = array(
+				'labels' => $labels,
+				'description' => "HTML Bulletins section",
+				'public' => true,
+				'exclude_from_search' => false,
+				'publicly_queryable' => true,
+				'show_ui' => true,
+				'show_in_nav_menus' => false,
+				'show_in_menu' => true,
+				'show_in_admin_bar' => true,
+				'menu_position' => 20,
+				'menu_icon' => '/absolute/url/to/icon',
+				'capability_type' => 'post',
+				'hierarchical' => false,
+				'supports' => array('title','editor','author','thumbnail','custom-fields','revisions'),
+				'has_archive' => true,
+				'rewrite' => array('slug' => 'bulletin','with_front' => false),
+				'query_var' => true,
+				'can_export' => true
+			);
+			register_post_type('bulletin',$args);
+		}
+	}
+
+	$html_bulletin = new html_bulletin();
+
+
+
 ?>
