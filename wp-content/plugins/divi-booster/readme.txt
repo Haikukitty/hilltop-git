@@ -4,7 +4,7 @@ Donate link:
 Tags: divi theme, elegant themes
 Requires at least: 3.0
 Tested up to: 4.9.5
-Stable tag: 2.7.3
+Stable tag: 2.7.4
 
 Enhancements to the Divi Theme by Elegant Themes, including bug fixes and extra configuration options.
 
@@ -51,6 +51,9 @@ The Divi Booster plugin is an independent product which is not associated with, 
 To follow...
 
 == Changelog ==
+
+= 2.7.4 =
+* Fixed missing argument error when page layout option enabled in Divi 3.10
 
 = 2.7.3 =
 * Fixed submit buttons hidden on full-screen Divi Builder windows
