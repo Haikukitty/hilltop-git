@@ -232,7 +232,7 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 
 <tr>
 
-                <td style="height:340px;background-image:url(<?php if( !empty($htmlheader) ): ?><?php echo $htmlheader['url']; ?><?php endif; ?>);">
+                <td style="height:340px;background-color:#00a0af;background-image:url(<?php if( !empty($htmlheader) ): ?><?php echo $htmlheader['url']; ?><?php endif; ?>);overflow:hidden;">
 					
 					<table width="680" align="center">
 						<tr>
