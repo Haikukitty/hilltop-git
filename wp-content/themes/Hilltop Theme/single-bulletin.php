@@ -141,6 +141,8 @@ a:hover {
 	text-decoration: underline;
 }
 			
+			
+			
 			.aligncenter {
 				display: block;
 margin-right: auto;
@@ -193,6 +195,10 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 		color:#ffffff;
 					padding-left:5px;
 	}
+			
+			.entry-content.html p {
+				text-align:justify;
+			}
 </style>
 
 </head>
@@ -345,7 +351,7 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 				<?php  } ?>
 	<tr><td style="font-family:'Raleway','Arial',sans-serif;">
 		
-					<div class="entry-content">
+					<div class="entry-content html">
 					<?php
 						do_action( 'et_before_content' );
 
