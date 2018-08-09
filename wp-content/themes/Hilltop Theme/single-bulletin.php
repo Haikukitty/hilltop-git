@@ -196,6 +196,7 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 					padding-left:5px;
 	}
 			
+			
 			.entry-content.html p {
 				text-align:justify;
 			}
