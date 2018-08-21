@@ -100,7 +100,8 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 	font-weight: bold;
 	text-decoration: none;
 }
-	
+			
+
 		a strong {
 	color: #d97310;
 	font-weight: bold;
@@ -128,7 +129,7 @@ a:link {
 	text-decoration: none;
 }
 a:visited {
-	color: #00302F;
+	color: #d97310;
 	font-weight: bold;
 }
 a:active {
@@ -198,7 +199,7 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 			
 			
 			.entry-content.html p {
-				text-align:justify;
+				/*text-align:justify;*/
 			}
 </style>
 
@@ -350,7 +351,7 @@ td { font-family:'raleway',calibri,arial; font-size:12pt;}
 							</td>
 						</tr>
 				<?php  } ?>
-	<tr><td style="font-family:'Raleway','Arial',sans-serif;">
+	<tr style="padding-top:30px;"><td style="font-family:'Raleway','Arial',sans-serif;">
 		
 					<div class="entry-content html">
 					<?php
