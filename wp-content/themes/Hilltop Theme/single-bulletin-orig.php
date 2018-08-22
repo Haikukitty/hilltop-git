@@ -1,6 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional //EN">
-
-
 <?php
 
 
@@ -9,24 +6,13 @@ $show_default_title = get_post_meta( get_the_ID(), '_et_pb_show_title', true );
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
-
 <html>
 	<head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
-
-		<title>Hilltop Bulletin - <?php the_title(); ?></title>
+		<title>Hilltop Bulletin - <?php
+						the_title();
+					?></title>
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
 
-		
-			
-<!--[if mso]>
-<style type="text/css">
-body, table, td, p {font-family: Calibri, Arial, Helvetica, sans-serif !important;}
-			h1 {font-family:candara,cambria,serif !important;}
-h3 {font-family:calibri,arial,sans-serif !important;}
-</style>
-<![endif]-->
 		
 		<style>
 	
@@ -100,106 +86,22 @@ h3 {font-family:calibri,arial,sans-serif !important;}
 	font-weight: normal;
 	font-style: normal;
 }
-			
- /* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Raleway Light Italic'), local('Raleway-LightItalic'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptpg8zYS_SKggPNyCgw5qN_DNCb71ka4ZiO.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Raleway Light Italic'), local('Raleway-LightItalic'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptpg8zYS_SKggPNyCgw5qN_AtCb71ka4Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Raleway Bold Italic'), local('Raleway-BoldItalic'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptpg8zYS_SKggPNyCgw9qR_DNCb71ka4ZiO.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Raleway Bold Italic'), local('Raleway-BoldItalic'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptpg8zYS_SKggPNyCgw9qR_AtCb71ka4Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-			
-			/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Raleway'), local('RalewayRegular'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyCMIT4ttDfCmxA.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Raleway'), local('RalewayRegular'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Raleway Light'), local('RalewayLight'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwIYqWqhPANqczVsq4A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Raleway Light'), local('RalewayLight'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwIYqWqZPANqczVs.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Raleway Bold'), local('Raleway-Bold'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwJYtWqhPANqczVsq4A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Raleway Bold'), local('Raleway-Bold'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwJYtWqZPANqczVs.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-				
-				body {
-    font-family: RalewayLight,RalewayRegular,Raleway,Arial, Sans-Serif;
-					font-weight:300;
-					line-height:120%;
-					color:#333333;
-  }
-			
-			p {font-family:RalewayLight,RalewayRegular,Raleway,Calibri,Arial,sans-serif;
-			font-weight:300 !important;}
-			
 
+
+.textWrap {
+	float: left;
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 20px;
+	padding-bottom: 10px;	
+}
 	a {
 	color: #d97310;
 	font-weight: bold;
 	text-decoration: none;
 }
 			
+
 		a strong {
 	color: #d97310;
 	font-weight: bold;
@@ -218,6 +120,7 @@ h3 {font-family:calibri,arial,sans-serif !important;}
 	font-weight: bold;
 	text-decoration: none;
 			font-style:italic;
+
 }
 
 a:link {
@@ -256,14 +159,53 @@ margin-left: 15px;
 				display: inline;
 float: left;
 margin-right: 15px;
-			}		
-				
+			}
+	
+	h1.entry-title { font-family:'Candara','orienta',arial;  font-size: 20pt; color: #333333;font-weight:normal;}
+
+
+h1.bulletin { font-family:'Candara-Bold','Candara',times new roman; font-size: 36pt;padding:0;margin:0;padding-top:0;magin-top:0;padding-bottom:5px;margin-bottom:2px; }
+
+.newsHead { font-family:'Candara-Bold','Candara',times new roman; font-size: 11pt; font-style:italic; font-weight:bold;}
+
+.contentTitle { font-family:'raleway',calibri,arial; font-size: 14pt; font-weight:bold;}
+
+	
+	#content-area { max-width: 710px; margin:0 auto;}
+
+
+.links  { font-family:'raleway',calibri,arial; font-size:12pt;}
+
+td { font-family:'raleway',calibri,arial; font-size:12pt;}
+
+.info { font-family:'raleway',calibri,arial; font-size:11pt; font-style:italic }
+
+.elevator { font-family:'raleway',calibri,arial; font-size:10pt }
+.style1 {font-family:'Candara',times new roman; font-size: 36pt;padding:0;margin:0;padding-top:0;magin-top:0;padding-bottom:5px;margin-bottom:2px; }
+.style2 {
+	font-family:'raleway',calibri,arial; 
+	font-style: italic;
+}
+			
+				h3.thedate {
+		margin-top:0;
+					padding-top:0;
+		font-size:14pt;
+					font-weight:normal;
+					font-family:'Raleway','arial',sans-serif;
+		color:#ffffff;
+					padding-left:5px;
+	}
+			
+			
+			.entry-content.html p {
+				/*text-align:justify;*/
+			}
 </style>
 
 </head>
-
 	
-<body style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size: 13pt; line-height: 140%; color: #333333; font-weight:300;background-color:#ffffff;">
+	<body>
 <div id="main-content">
 	<?php
 		if ( et_builder_is_product_tour_enabled() ):
@@ -298,50 +240,35 @@ margin-right: 15px;
 
 <tr>
 
-
-                <td background='<?php echo $htmlheader['url']; ?>' width="700" height="300" valign="top" style="height:300px;overflow:hidden;">
-  <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:300px;">
-    <v:fill type="tile" src="<?php echo $htmlheader['url']; ?>" color="#ffffff" />
-    <v:textbox inset="0,0,0,0">
-  <![endif]-->
-  <div>
+                <td background:"<?php if( !empty($htmlheader) ): ?><?php echo $htmlheader['url']; ?><?php endif; ?>" style="height:340px;background-color:#00a0af;background-image:url(<?php if( !empty($htmlheader) ): ?><?php echo $htmlheader['url']; ?><?php endif; ?>);overflow:hidden;" >
 					
-					<table width="700" height="300" align="center" style="max-height:320px;overflow:hidden;" cellpadding="10" cellspacing="0">
+					<table width="680" align="center">
 						<tr>
-							<td valign="top" style="vertical-align:top;">	
-								<img src="<?php echo get_site_url(); ?>/images/the-hilltop-institute.png"  width="673" height="132" style="padding-left:0px;display:block;border:none;padding-bottom:0;padding-top:0;" alt="The Hilltop Institute" />						
-							 <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="33" alt="" style="display:block;border:none;"/>
-								<h1 style="text-align:left;color:#ffffff;font-family:Candara,times,serif; font-size:39pt;padding:0;margin:0;padding-top:0;margin-top:0;padding-bottom:0px;margin-bottom:9px;font-weight:normal;line-height:130%;padding-left:2px;">Bulletin</h1>
-								<p style="color:#ffffff;margin-top:0;margin-bottom:0;font-size:14pt;font-weight:normal;font-family:RalewayLight,RalewayRegular,Raleway,Arial,sans-serif;padding-left:5px;padding-bottom:0;padding-top:0;clear:both;"><?php the_time('F j, Y'); ?></p>
-							 
-
-								
+							<td>
+								<img src="<?php echo get_site_url(); ?>/images/the-hilltop-institute.png" style="padding-left:7px;display:block;border:none;padding-bottom:73px;padding-top:11px;" />					
 							</td>
 						</tr>
-						
+						<tr>
+							<td>
+								<h1 class="style1" style="text-align:left;color:#ffffff;font-family:'Candara',times new roman; font-size:39pt;padding:0;margin:0;padding-top:0;magin-top:0;padding-bottom:5px;margin-bottom:2px;font-weight:normal;padding-left:2px;">Bulletin</h1>
+								
+								<h3 class="thedate"><?php the_time('F j, Y'); ?></h3>
+						</tr>
 					</table>
-    </div>
-  <!--[if gte mso 9]>
-    </v:textbox>
-  </v:rect>
-  <![endif]-->
-</td>
+	</td>
 						</tr>
 						
 						<tr>
 							<td>
-									<table width="680" align="center" cellpadding="0" cellspacing="0" border="0">
+								
+													<table width="680" align="center">
 														<tr>
 															<td>
-																	  <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="15" alt="" style="display:block;border:none;" /><br>
-
-													
-
 
 	
+	
 					
-							<h1 style="margin:0;text-align:center;font-family:candara,cambria,serif; font-size: 20pt; font-weight: bold;margin-bottom:0;line-height:110%;margin-top:0;"><?php the_title(); ?></h1>
+							<h1 class="entry-title" style="text-align:center;font-family:candara,cambria,times new roman; font-size: 20pt; font-weight: bold;padding-top:27px;padding-bottom:3px;margin-bottom:0;"><?php the_title(); ?></h1>
 
 						<?php
 							if ( ! post_password_required() ) :
@@ -424,11 +351,9 @@ margin-right: 15px;
 							</td>
 						</tr>
 				<?php  } ?>
-	<tr>
-						
+	<tr style="padding-top:30px;"><td style="font-family:'Raleway','Arial',sans-serif;">
 		
-						<td style="font-family:RalewayLight,RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-weight:300;font-size:13pt;line-height:120%;color:#333333;">
-							  <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="7" alt=""/><br>
+					<div class="entry-content html">
 					<?php
 						do_action( 'et_before_content' );
 
@@ -436,7 +361,7 @@ margin-right: 15px;
 
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 					?>
-		 <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="20" alt=""/>
+					</div> <!-- .entry-content -->
 		</td>
 						</tr>
 								</table>
@@ -444,22 +369,11 @@ margin-right: 15px;
 							
 						</tr>
 						
-					<tr>
-							<td style="background-color:#E2DCC3;color:#8b730f;">
-								
-								
-								<table width="700" align="center" cellpadding="10" cellspacing="0">
 						<tr>
-							<td style="font-family:RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-size:11pt;line-height:120%;color:#8b730f;font-weight:300;">	
+							<td style="background:#E2DCC3;padding:15px;font-family:'Raleway','Arial',sans-serif;">
 													
  <?php the_field('footer_content');
 	?>
-							</td>
-									</tr>
-							</table>
-												
-
-							
 							</td>
 						</tr>
 						<tr>
