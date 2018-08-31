@@ -371,18 +371,29 @@ margin-right: 15px;
 </head>
 
 	
-   <body style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size:13pt; line-height: 140%; color: #333333;font-weight:300;background-color:#ffffff;">
+   <body
+
+style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size:
+
+13pt; line-height: 140%; color: #333333;
+
+font-weight:300;background-color:#ffffff;">
 
  
 
  
 
-<p align="center" style="text-align:center;font-size:10pt;font-family:calibri,arial;display:none;">
+<p align="center"
+
+style="text-align:center;font-size:10pt;font-family:calibri,arial;display:none;">
+
 <a href="<?php echo get_permalink( $post->ID ); ?>">
+
 <font color="#00a0af">View Online</font>
+
 </a>
+
 </p>
-	   
 <div id="main-content">
 	<?php
 		if ( et_builder_is_product_tour_enabled() ):
