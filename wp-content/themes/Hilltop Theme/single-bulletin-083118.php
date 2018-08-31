@@ -385,7 +385,7 @@ font-weight:300;background-color:#ffffff;">
 
 <p align="center"
 
-style="text-align:center;font-size:10pt;font-family:calibri,arial;display:none;">
+style="text-align:center;font-size:10pt;font-family:calibri,arial;">
 
 <a href="<?php echo get_permalink( $post->ID ); ?>">
 
