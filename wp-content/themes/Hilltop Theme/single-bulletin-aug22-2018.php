@@ -16,6 +16,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
 
 		<title>Hilltop Bulletin - <?php the_title(); ?></title>
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i" rel="stylesheet">
 
 		
 			
@@ -182,218 +183,87 @@ h3 {font-family:calibri,arial,sans-serif !important;}
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 				
-				 body {
+				body {
+    font-family: RalewayLight,RalewayRegular,Raleway,Arial, Sans-Serif;
+					font-weight:300;
+					line-height:120%;
+					color:#333333;
+  }
+			
+			p {font-family:RalewayLight,RalewayRegular,Raleway,Calibri,Arial,sans-serif;
+			font-weight:300 !important;}
+			
 
-     font-family: RalewayLight,RalewayRegular,Raleway,Arial, Sans-Serif;
-
-                     font-weight:300;
-
-                     line-height:120%;
-
-                     color:#333333;
-
-   }
-
- 
-
-             p
-
-{font-family:RalewayLight,RalewayRegular,Raleway,Calibri,Arial,sans-serif;
-
-             font-weight:300 !important;}
-
- 
-
- 
-
- 
-
- 
-
- 
-
-.textWrap {
-
-     float: left;
-
-     padding-top: 10px;
-
-     padding-left: 0px;
-
-     padding-right: 20px;
-
-     padding-bottom: 10px;
-
+	a {
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: none;
 }
-
-     a {
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: none;
-
+			
+		a strong {
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: none;
 }
-
- 
-
- 
-
-         a strong {
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: none;
-
+	
+		a strong em {
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: none;
+			font-style:italic;
 }
-
- 
-
-         a strong em {
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: none;
-
-             font-style:italic;
-
+	
+		a em{
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: none;
+			font-style:italic;
 }
-
- 
-
-         a em{
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: none;
-
-             font-style:italic;
-
- 
-
-}
-
- 
 
 a:link {
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: none;
-
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: none;
 }
-
 a:visited {
-
-     color: #d97310;
-
-     font-weight: bold;
-
+	color: #d97310;
+	font-weight: bold;
 }
-
 a:active {
-
-     color: #00302F;
-
-     font-weight: bold;
-
+	color: #00302F;
+	font-weight: bold;
 }
-
 a:hover {
-
-     color: #d97310;
-
-     font-weight: bold;
-
-     text-decoration: underline;
-
+	color: #d97310;
+	font-weight: bold;
+	text-decoration: underline;
 }
-
- 
-
- 
-
- 
-
-             .aligncenter {
-
-                 display: block;
-
+			
+			
+			
+			.aligncenter {
+				display: block;
 margin-right: auto;
-
 margin-left: auto;
-
-             }
-
- 
-
-             .alignright {
-
-             display: inline;
-
+			}
+			
+			.alignright {
+			display: inline;
 float: right;
-
 margin-left: 15px;
-
-             }
-
-             .alignleft {
-
-                 display: inline;
-
+			}
+			.alignleft {
+				display: inline;
 float: left;
-
 margin-right: 15px;
-
-             }
-
- 
-
- 
-
- 
-
- 
-
-     #content-area { max-width: 710px; margin:0 auto;}
+			}		
 				
 </style>
 
 </head>
 
 	
-   <body
-
-style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size:
-
-13pt; line-height: 140%; color: #333333;
-
-font-weight:300;background-color:#ffffff;">
-
- 
-
- 
-
-<p align="center"
-
-style="text-align:center;font-size:10pt;font-family:calibri,arial;">
-
-<a href="<?php echo get_permalink( $post->ID ); ?>">
-
-<font color="#00a0af">View Online</font>
-
-</a>
-
-</p>
+<body style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size: 13pt; line-height: 140%; color: #333333; font-weight:300;background-color:#ffffff;">
 <div id="main-content">
 	<?php
 		if ( et_builder_is_product_tour_enabled() ):
@@ -424,74 +294,54 @@ style="text-align:center;font-size:10pt;font-family:calibri,arial;">
  <?php $htmlheader = get_field('html_header_photo');
 	?>
 					
-					 <table width="700" style="width:700px;max-width:700px;" align="center" cellpadding="0" cellspacing="0">
+					<table width="700" style="width:700px;max-width:700px;" align="center" cellpadding="0" cellspacing="0">
 
 <tr>
 
- 
 
- 
-
- 
-
- 
-
-                         <td background='<?php echo $htmlheader['url']; ?>' width="700" height="300" valign="top" style="height:300px;overflow:hidden;">
-
-   <!--[if gte mso 9]>
-   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:300px;">
-     <v:fill type="tile" src="<?php echo $htmlheader['url']; ?>" color="#ffffff" />
+                <td background='<?php echo $htmlheader['url']; ?>' width="700" height="300" valign="top" style="height:300px;overflow:hidden;">
+  <!--[if gte mso 9]>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:300px;">
+    <v:fill type="tile" src="<?php echo $htmlheader['url']; ?>" color="#ffffff" />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
   <div>
 					
 					<table width="700" height="300" align="center" style="max-height:320px;overflow:hidden;" cellpadding="10" cellspacing="0">
+						<tr>
+							<td valign="top" style="vertical-align:top;">	
+								<img src="<?php echo get_site_url(); ?>/images/the-hilltop-institute.png"  width="673" height="132" style="padding-left:0px;display:block;border:none;padding-bottom:0;padding-top:0;" alt="The Hilltop Institute" />						
+							 <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="33" alt="" style="display:block;border:none;"/>
+								<h1 style="text-align:left;color:#ffffff;font-family:Candara,times,serif; font-size:39pt;padding:0;margin:0;padding-top:0;margin-top:0;padding-bottom:0px;margin-bottom:9px;font-weight:normal;line-height:130%;padding-left:2px;">Bulletin</h1>
+								<p style="color:#ffffff;margin-top:0;margin-bottom:0;font-size:14pt;font-weight:normal;font-family:RalewayLight,RalewayRegular,Raleway,Arial,sans-serif;padding-left:5px;padding-bottom:0;padding-top:0;clear:both;"><?php the_time('F j, Y'); ?></p>
+							 
 
-                         <tr>
-                             <td valign="top" style="vertical-align:top;">
-
-                                 <img src="https://hilltopinstitute.org/images/the-hilltop-institute.png" width="673" height="132" style="padding-left:0px;display:block;border:none;padding-bottom:0;padding-top:0;" alt="The Hilltop Institute" />
-
-                                   <img src="https://hilltopinstitute.org/wp-content/uploads/2018/08/spacer.png" width="680" height="37" alt=""/>
-
-                                 <h1 style="text-align:left;color:#ffffff;font-family:Candara,times,serif;font-size:39pt;padding:0;margin:0;padding-top:0;margin-top:0;padding-bottom:9px;margin-bottom:0px;font-weight:normal;padding-left:2px;">Bulletin</h1>
-
-                                 <h3 style="color:#ffffff;margin-top:0;margin-bottom:0;font-size:14pt;font-weight:normal;font-family:RalewayLight,RalewayRegular,Raleway,Arial,sans-serif;padding-left:5px;padding-bottom:0;"><?php the_time('F j, Y'); ?></h3>
-							 <img src="https://hilltopinstitute.org/wp-content/uploads/2018/08/spacer.png" width="680" height="7" alt=""/>
-
-                             </td>
-
-                         </tr>
-
- 
-
-                     </table>
+								
+							</td>
+						</tr>
+						
+					</table>
     </div>
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
   <![endif]-->
 </td>
+						</tr>
+						
+						<tr>
+							<td>
+									<table width="680" align="center" cellpadding="0" cellspacing="0" border="0">
+														<tr>
+															<td>
+																	  <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="15" alt="" style="display:block;border:none;" /><br>
 
-                         </tr>
+													
 
- 
 
-                         <tr>
-
-                             <td>
-
- 
-
-                                   <table width="680" align="center" cellpadding="0" cellspacing="0" border="0">
-
-                                   <tr>
-
-		<td>
-
-       <img src="https://hilltopinstitute.org/wp-content/uploads/2018/08/spacer.png" width="680" height="15" alt=""/><br>
 	
-							 <h1 style="margin:0;text-align:center;font-family:candara,cambria,serif;font-size: 20pt; font-weight:bold;margin-bottom:0;line-height:110%;margin-top:0;"><?php the_title(); ?></h1>
+					
+							<h1 style="margin:0;text-align:center;font-family:candara,cambria,serif; font-size: 20pt; font-weight: bold;margin-bottom:0;line-height:110%;margin-top:0;"><?php the_title(); ?></h1>
 
 						<?php
 							if ( ! post_password_required() ) :
@@ -575,10 +425,10 @@ style="text-align:center;font-size:10pt;font-family:calibri,arial;">
 						</tr>
 				<?php  } ?>
 	<tr>
-
- 			<td style="font-family:RalewayLight,RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-weight:300;font-size:13pt;line-height:120%;color:#333333;">
-
-                               <img src="https://hilltopinstitute.org/wp-content/uploads/2018/08/spacer.png" width="680" height="7" alt=""/><br>
+						
+		
+						<td style="font-family:RalewayLight,RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-weight:300;font-size:13pt;line-height:120%;color:#333333;">
+							  <img src="<?php echo get_site_url(); ?>/images/spacer.png" width="680" height="7" alt=""/><br>
 					<?php
 						do_action( 'et_before_content' );
 
@@ -594,15 +444,13 @@ style="text-align:center;font-size:10pt;font-family:calibri,arial;">
 							
 						</tr>
 						
-					  <tr>
-
-                             <td style="background-color:#E2DCC3;color:#8b730f;">
-
- 							<table width="700" align="center" cellpadding="10" cellspacing="0">
-
-                         <tr>
-
-                             <td style="font-family:RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-size:11pt;line-height:120%;color:#8b730f;font-weight:300;"> 
+					<tr>
+							<td style="background-color:#E2DCC3;color:#8b730f;">
+								
+								
+								<table width="700" align="center" cellpadding="10" cellspacing="0">
+						<tr>
+							<td style="font-family:RalewayRegular,Raleway,Trebuchet,Arial,sans-serif;font-size:11pt;line-height:120%;color:#8b730f;font-weight:300;">	
 													
  <?php the_field('footer_content');
 	?>
