@@ -611,7 +611,7 @@ margin-right: 15px;
 
         <td>
 
-            <a href="htmlspecialchars(https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink( $post->ID ); ?>);"><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink( $post->ID ); ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
 
         <td>
 
