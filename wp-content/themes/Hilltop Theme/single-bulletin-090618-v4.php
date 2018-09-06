@@ -371,29 +371,18 @@ margin-right: 15px;
 </head>
 
 	
-   <body
-
-style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size:
-
-13pt; line-height: 140%; color: #333333;
-
-font-weight:300;background-color:#ffffff;">
+   <body style="font-family:RalewayLight,RalewayRegular,Raleway,Arial,Sans-Serif;font-size:13pt; line-height: 140%; color: #333333;font-weight:300;background-color:#ffffff;">
 
  
 
  
 
-<p align="center"
-
-style="text-align:center;font-size:10pt;font-family:calibri,arial;">
-
+<p align="center" style="text-align:center;font-size:10pt;font-family:calibri,arial;display:none;">
 <a href="<?php echo get_permalink( $post->ID ); ?>">
-
 <font color="#00a0af">View Online</font>
-
 </a>
-
 </p>
+	   
 <div id="main-content">
 	<?php
 		if ( et_builder_is_product_tour_enabled() ):
@@ -436,16 +425,16 @@ style="text-align:center;font-size:10pt;font-family:calibri,arial;">
 
  
 
-                         <td background='<?php echo $htmlheader['url']; ?>' width="700" height="300" valign="top" style="height:300px;overflow:hidden;">
+                         <td style="background-image:url('<?php echo $htmlheader['url']; ?>'); background-repeat:no-repeat;" background="<?php echo $htmlheader['url']; ?>" width="700" height="300" valign="top" style="height:300px;overflow:hidden;">
 
    <!--[if gte mso 9]>
    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:300px;">
-     <v:fill type="tile" src="<?php echo $htmlheader['url']; ?>" color="#ffffff" />
+     <v:fill type="frame" src="<?php echo $htmlheader['url']; ?>" color="#00a0af" />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
   <div>
 					
-					<table width="700" height="300" align="center" style="max-height:320px;overflow:hidden;" cellpadding="10" cellspacing="0">
+					<table width="700" height="300" align="center" style="max-height:300px;overflow:hidden;" cellpadding="10" cellspacing="0">
 
                          <tr>
                              <td valign="top" style="vertical-align:top;">
@@ -621,20 +610,20 @@ style="text-align:center;font-size:10pt;font-family:calibri,arial;">
     <tr>
 
         <td>
-
-            <a href='https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
-
-        <td>
-
-            <a href='https://twitter.com/home?status=<?php the_title(); ?>%3A%20<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/twitter.png" width="45" height="61" alt="Twitter"></a></td>
+			<?php $social = get_permalink(); ?>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $social; ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
 
         <td>
 
-            <a href='https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_permalink( $post->ID ); ?>&title=<?php the_title(); ?>&summary=&source=The%20Hilltop%20Institute'><img src="https://hilltopinstitute.org/wp-content/uploads/social/linkedin.png" width="40" height="61" alt="Linked In"></a></td>
+            <a href="https://twitter.com/home?status=<?php the_title_attribute(); ?>%3A%20<?php echo $social; ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/twitter.png" width="45" height="61" alt="Twitter"></a></td>
 
         <td>
 
-            <a href='mailto:?&subject=<?php the_title(); ?>&body=<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/email.png" width="43" height="61" alt="Email"></a></td>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $social; ?>&title=<?php   the_title_attribute(); ?>&summary=&source=The%20Hilltop%20Institute"><img src="https://hilltopinstitute.org/wp-content/uploads/social/linkedin.png" width="40" height="61" alt="Linked In"></a></td>
+
+        <td>
+
+            <a href="mailto:?&subject=<?php the_title_attribute(); ?>&body=<?php echo $social; ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/email.png" width="43" height="61" alt="Email"></a></td>
 
     </tr>
 
