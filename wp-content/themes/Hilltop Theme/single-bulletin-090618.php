@@ -611,19 +611,19 @@ margin-right: 15px;
 
         <td>
 
-            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink( $post->ID ); ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
+            <a href='https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/facebook.png" width="34" height="61" alt="Facebook"></a></td>
 
         <td>
 
-            <a href="https://twitter.com/home?status=<?php the_title(); ?>%3A%20<?php echo get_permalink( $post->ID ); ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/twitter.png" width="45" height="61" alt="Twitter"></a></td>
+            <a href='https://twitter.com/home?status=<?php the_title(); ?>%3A%20<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/twitter.png" width="45" height="61" alt="Twitter"></a></td>
 
         <td>
 
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_permalink( $post->ID ); ?>&title=<?php the_title(); ?>&summary=&source=The%20Hilltop%20Institute"><img src="https://hilltopinstitute.org/wp-content/uploads/social/linkedin.png" width="40" height="61" alt="Linked In"></a></td>
+            <a href='https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_permalink( $post->ID ); ?>&title=<?php the_title(); ?>&summary=&source=The%20Hilltop%20Institute'><img src="https://hilltopinstitute.org/wp-content/uploads/social/linkedin.png" width="40" height="61" alt="Linked In"></a></td>
 
         <td>
 
-            <a href="mailto:?&subject=<?php the_title(); ?>&body=<?php echo get_permalink( $post->ID ); ?>"><img src="https://hilltopinstitute.org/wp-content/uploads/social/email.png" width="43" height="61" alt="Email"></a></td>
+            <a href='mailto:?&subject=<?php the_title(); ?>&body=<?php echo get_permalink( $post->ID ); ?>'><img src="https://hilltopinstitute.org/wp-content/uploads/social/email.png" width="43" height="61" alt="Email"></a></td>
 
     </tr>
 
