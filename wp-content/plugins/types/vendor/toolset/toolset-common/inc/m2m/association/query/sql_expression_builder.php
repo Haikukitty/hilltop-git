@@ -66,7 +66,6 @@ class Toolset_Association_Query_Sql_Expression_Builder {
 		$need_found_rows,
 		IToolset_Association_Query_Result_Transformation $result_transformation
 	) {
-
 		$associations_table = $this->table_name->association_table();
 
 		// Before building JOIN clauses, allow the ORDERBY builder also to add its own.
@@ -97,6 +96,7 @@ class Toolset_Association_Query_Sql_Expression_Builder {
 		$where_clause = $root_condition->get_where_clause();
 		$orderby_clause = $orderby->get_orderby_clause();
 		$result_transformation->request_element_selection( $element_selector );
+
 		$join_clause = $this->join_manager->get_join_clause( $element_selector ) . ' ' . ' ' . $join_clause;
 		$select_elements = $element_selector->get_select_clauses();
 		// End of the timing-critical part.
@@ -109,12 +109,11 @@ class Toolset_Association_Query_Sql_Expression_Builder {
 		$limit = (int) $limit;
 		$offset = (int) $offset;
 
+		$maybe_distinct = $element_selector->maybe_get_distinct_modifier();
+
 		// Make sure we glue the pieces together well and leave no extra comma at the end
 		// in case $select_elements is empty.
-		$final_select_elements = array(
-			'associations.id AS id',
-			'associations.relationship_id AS relationship_id'
-		);
+		$final_select_elements = array();
 		$select_elements_trimmed = trim( $select_elements );
 		if( ! empty( $select_elements_trimmed ) ) {
 			$final_select_elements[] = $select_elements;
@@ -123,13 +122,13 @@ class Toolset_Association_Query_Sql_Expression_Builder {
 
 		// We rely on all the moving parts which are supposed to have provided properly escaped strings.
 		$query = "
-			SELECT
-				{$sql_found_rows} 		
-				{$final_select_elements}				
-			FROM {$associations_table} AS associations {$join_clause} 
+			SELECT {$maybe_distinct}
+				{$sql_found_rows}
+				{$final_select_elements}
+			FROM {$associations_table} AS associations {$join_clause}
 			WHERE {$where_clause}
-			{$orderby_clause}			
-			LIMIT {$limit} 
+			{$orderby_clause}
+			LIMIT {$limit}
 			OFFSET {$offset}";
 
 		return $query;

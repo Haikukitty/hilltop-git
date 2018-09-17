@@ -49,7 +49,7 @@
  *
  * @since 2.5.8
  */
-class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset_Query {
+class Toolset_Association_Query_V2 extends Toolset_Wpdb_User {
 
 
 	/** @var IToolset_Association_Query_Condition[] */
@@ -115,6 +115,21 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	/** @var IToolset_Association_Query_Restriction[] */
 	private $restrictions = array();
 
+	/** @var string|null */
+	private $translation_language;
+
+	/** @var Toolset_WPML_Compatibility */
+	private $wpml_service;
+
+
+	private $use_cache = true;
+
+
+	private $cache_object;
+
+
+	private $result_transformation_factory;
+
 
 	/**
 	 * Toolset_Association_Query_V2 constructor.
@@ -128,6 +143,9 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 * @param Toolset_Association_Query_Table_Join_Manager|null $join_manager_di
 	 * @param Toolset_Association_Query_Orderby_Factory|null $orderby_factory_di
 	 * @param Toolset_Association_Query_Element_Selector_Provider|null $element_selector_provider_di
+	 * @param Toolset_WPML_Compatibility|null $wpml_service_di
+	 * @param Toolset_Association_Query_Cache|null $cache_object_di
+	 * @param Toolset_Association_Query_Result_Transformation_Factory|null $result_transformation_factory_di
 	 */
 	public function __construct(
 		wpdb $wpdb_di = null,
@@ -138,7 +156,10 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		Toolset_Relationship_Definition_Repository $definition_repository_di = null,
 		Toolset_Association_Query_Table_Join_Manager $join_manager_di = null,
 		Toolset_Association_Query_Orderby_Factory $orderby_factory_di = null,
-		Toolset_Association_Query_Element_Selector_Provider $element_selector_provider_di = null
+		Toolset_Association_Query_Element_Selector_Provider $element_selector_provider_di = null,
+		Toolset_WPML_Compatibility $wpml_service_di = null,
+		Toolset_Association_Query_Cache $cache_object_di = null,
+		Toolset_Association_Query_Result_Transformation_Factory $result_transformation_factory_di = null
 	) {
 		parent::__construct( $wpdb_di );
 		$this->unique_table_alias = $unique_table_alias_di ?: new Toolset_Relationship_Database_Unique_Table_Alias();
@@ -149,6 +170,9 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		$this->orderby_factory = $orderby_factory_di ?: new Toolset_Association_Query_Orderby_Factory();
 		$this->element_selector_provider = $element_selector_provider_di ?: new Toolset_Association_Query_Element_Selector_Provider();
 		$this->_definition_repository = $definition_repository_di;
+		$this->wpml_service = $wpml_service_di ?: Toolset_WPML_Compatibility::get_instance();
+		$this->cache_object = $cache_object_di ?: Toolset_Association_Query_Cache::get_instance();
+		$this->result_transformation_factory = $result_transformation_factory_di ?: new Toolset_Association_Query_Result_Transformation_Factory();
 	}
 
 
@@ -273,6 +297,9 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 			$this->return_association_instances();
 		}
 
+		// Sometimes it's not as straightforward as "get current language"
+		$this->determine_translation_language();
+
 		$this->apply_restrictions();
 
 		// We do this only after restrictions have been applied.
@@ -281,6 +308,24 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		);
 
 		$query = $this->build_sql_query();
+
+		$cache_key = '';
+		if( $this->use_cache ) {
+			$cached_result_exists = false;
+			$cache_key = $this->build_cache_key( $query );
+			$cached_result = $this->cache_object->get( $cache_key, $cached_result_exists );
+
+			if( $cached_result_exists ) {
+				$this->clear_restrictions();
+
+				if( $this->need_found_rows ) {
+					$this->found_rows = (int) count( $cached_result );
+				}
+
+				return $cached_result;
+			}
+		}
+
 		$rows = toolset_ensarr( $this->wpdb->get_results( $query ) );
 
 		if( $this->need_found_rows ) {
@@ -297,6 +342,10 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		}
 
 		$this->clear_restrictions();
+
+		if( $this->use_cache ) {
+			$this->cache_object->push( $cache_key, $results );
+		}
 
 		return $results;
 	}
@@ -356,6 +405,10 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	}
 
 
+	public function not( IToolset_Association_Query_Condition $condition ) {
+		return $this->condition_factory->not( $condition );
+	}
+
 	/**
 	 * Query by a row ID of a relationship definition.
 	 *
@@ -364,6 +417,16 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 */
 	public function relationship_id( $relationship_id ) {
 		return $this->condition_factory->relationship_id( $relationship_id );
+	}
+
+	/**
+	 * Query by a row intermediary_id of a relationship definition.
+	 *
+	 * @param int $relationship_id
+	 * @return IToolset_Association_Query_Condition
+	 */
+	public function intermediary_id( $relationship_id ) {
+		return $this->condition_factory->intermediary_id( $relationship_id );
 	}
 
 
@@ -444,6 +507,8 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 *     as stored in the association table. Default is false.
 	 * @param bool $translate_provided_id If true, this will try to translate the element ID (if
 	 *     applicable on the domain) and use the translated one in the final condition. Default is true.
+	 * @param bool $set_its_translation_language If true, the query may try to use the element's language
+	 *     to determine the desired language of the results (see determine_translation_language() for details)
 	 *
 	 * @return Toolset_Association_Query_Condition_Element_Id_And_Domain
 	 * @since 2.5.10
@@ -453,8 +518,13 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		$domain,
 		IToolset_Relationship_Role $for_role,
 		$query_original_element = false,
-		$translate_provided_id = true
+		$translate_provided_id = true,
+		$set_its_translation_language = true
 	) {
+		if( $set_its_translation_language ) {
+			$this->set_translation_language_by_element_id_and_domain( $element_id, $domain );
+		}
+
 		return $this->condition_factory->element_id_and_domain(
 			$element_id,
 			$domain,
@@ -462,6 +532,38 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 			$this->element_selector_provider,
 			$query_original_element,
 			$translate_provided_id
+		);
+	}
+
+
+	/**
+	 * Query by a set of element IDs in the selected role.
+	 *
+	 * @param int[] $element_ids
+	 * @param string $domain
+	 * @param IToolset_Relationship_Role $for_role
+	 * @param bool $query_original_element If true, the query will check the element ID in the original language
+	 *     as stored in the association table. Default is false.
+	 * @param bool $translate_provided_ids If true, this will try to translate the element ID (if
+	 *     applicable on the domain) and use the translated one in the final condition. Default is true.
+	 *
+	 * @return Toolset_Association_Query_Condition_Multiple_Elements
+	 * @since 3.0.3
+	 */
+	public function multiple_elements(
+		$element_ids,
+		$domain,
+		IToolset_Relationship_Role $for_role,
+		$query_original_element = false,
+		$translate_provided_ids = true
+	) {
+		return $this->condition_factory->multiple_elements(
+			$element_ids,
+			$domain,
+			$for_role,
+			$this->element_selector_provider,
+			$query_original_element,
+			$translate_provided_ids
 		);
 	}
 
@@ -475,6 +577,8 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 *     as stored in the association table. Default is false.
 	 * @param bool $translate_provided_id If true, this will try to translate the element ID (if
 	 *     applicable on the domain) and use the translated one in the final condition. Default is true.
+	 * @param bool $set_its_translation_language If true, the query may try to use the element's language
+	 *     to determine the desired language of the results (see determine_translation_language() for details)
 	 *
 	 * @return IToolset_Association_Query_Condition
 	 */
@@ -482,14 +586,18 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 		IToolset_Element $element,
 		IToolset_Relationship_Role $for_role = null,
 		$query_original_element = false,
-		$translate_provided_id = true
+		$translate_provided_id = true,
+		$set_its_translation_language = true
 	) {
+		if( $set_its_translation_language ) {
+			$this->set_translation_language_by_element_id_and_domain( $element->get_id(), $element->get_domain() );
+		}
 
 		if( null === $for_role ) {
 			$conditions = array();
 			foreach( Toolset_Relationship_Role::all() as $role ) {
 				$conditions[] = $this->element(
-					$element, $role, $query_original_element, $translate_provided_id
+					$element, $role, $query_original_element, $translate_provided_id, false
 				);
 			}
 			return $this->do_or( $conditions );
@@ -579,17 +687,17 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	/**
 	 * Query by an element status.
 	 *
-	 * @param string $status 'any'|'is_available'|'is_public'. Meaning of these options
-	 *     is domain-dependant.
+	 * @param string|string[] $statuses 'any'|'is_available'|'is_public' or one or more specific status values in an array.
+	 *      Meaning of these options is domain-dependant.
 	 * @param IToolset_Relationship_Role $for_role
 	 *
 	 * @return IToolset_Association_Query_Condition
 	 */
-	public function element_status( $status, IToolset_Relationship_Role $for_role ) {
+	public function element_status( $statuses, IToolset_Relationship_Role $for_role ) {
 		$this->has_element_status_condition = true;
 
 		return $this->condition_factory->element_status(
-			$status, $for_role, $this->join_manager, $this->element_selector_provider
+			$statuses, $for_role, $this->join_manager, $this->element_selector_provider
 		);
 	}
 
@@ -687,6 +795,28 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 
 
 	/**
+	 * Condition that a relationship has a certain origin.
+	 *
+	 * @param String $origin Origin.
+	 *
+	 * @return IToolset_Association_Query_Condition
+	 */
+	public function has_origin( $origin ) {
+		return $this->condition_factory->has_origin( $origin, $this->join_manager );
+	}
+
+
+	/**
+	 * Condition that the association has an intermediary id.
+	 *
+	 * @return IToolset_Association_Query_Condition
+	 */
+	public function has_intermediary_id() {
+		return $this->condition_factory->has_intermediary_id();
+	}
+
+
+	/**
 	 * Query by a WP_Query arguments applied on an element of a specified role.
 	 *
 	 * WARNING: It is important that you read the documentation of Toolset_Association_Query_Condition_Wp_Query
@@ -762,7 +892,7 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 * @return $this
 	 */
 	public function return_association_instances() {
-		$this->result_transformation = new Toolset_Association_Query_Result_Transformation_Association_Instance();
+		$this->result_transformation = $this->result_transformation_factory->association_instance();
 		return $this;
 	}
 
@@ -773,7 +903,7 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 * @return $this
 	 */
 	public function return_association_uids() {
-		$this->result_transformation = new Toolset_Association_Query_Result_Transformation_Association_Uid();
+		$this->result_transformation = $this->result_transformation_factory->association_uids();
 		return $this;
 	}
 
@@ -785,7 +915,7 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 * @return $this
 	 */
 	public function return_element_ids( IToolset_Relationship_Role $role ) {
-		$this->result_transformation = new Toolset_Association_Query_Result_Transformation_Element_Id( $role );
+		$this->result_transformation = $this->result_transformation_factory->element_ids( $role );
 		return $this;
 	}
 
@@ -797,8 +927,23 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 	 * @return $this
 	 */
 	public function return_element_instances( IToolset_Relationship_Role $role ) {
-		$this->result_transformation = new Toolset_Association_Query_Result_Transformation_Element_Instance( $role );
+		$this->result_transformation = $this->result_transformation_factory->element_instances( $role );
 		return $this;
+	}
+
+
+	/**
+	 * Indicate that get_results() should return arrays with elements indexed by their role names.
+	 *
+	 * This needs further configuration, see Toolset_Association_Query_Result_Transformation_Element_Per_Role for
+	 * further details.
+	 *
+	 * @return Toolset_Association_Query_Result_Transformation_Element_Per_Role
+	 * @since 3.0.9
+	 */
+	public function return_per_role() {
+		$this->result_transformation = $this->result_transformation_factory->element_per_role( $this );
+		return $this->result_transformation;
 	}
 
 
@@ -978,6 +1123,92 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 
 
 	/**
+	 * Make sure that the elements in results will never get translated.
+	 *
+	 * @since 2.6.4
+	 * @return $this
+	 */
+	public function dont_translate_results() {
+		$this->element_selector_provider->attempt_translating_elements( false );
+		return $this;
+	}
+
+
+	/**
+	 * Set the preferred translation language.
+	 *
+	 * See determine_translation_language() for details.
+	 *
+	 * @param string $lang_code Valid language code.
+	 *
+	 * @return $this
+	 */
+	public function set_translation_language( $lang_code ) {
+		if( ! is_string( $lang_code ) ) {
+			throw new InvalidArgumentException();
+		}
+
+		$this->translation_language = $lang_code;
+
+		return $this;
+	}
+
+
+	/**
+	 * Set the preferred translation language from a given element ID and domain.
+	 *
+	 * See determine_translation_language() for details.
+	 *
+	 * @param int $element_id ID of the element to take the language from.
+	 * @param string $domain Element domain.
+	 *
+	 * @return $this
+	 * @since 2.6.8
+	 */
+	public function set_translation_language_by_element_id_and_domain( $element_id, $domain ) {
+		if( Toolset_Element_Domain::POSTS !== $domain ) {
+			// no language information there
+			return $this;
+		}
+
+		$post_language = $this->wpml_service->get_post_language( $element_id );
+		if( ! empty( $post_language ) ) {
+			$this->set_translation_language( $post_language );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Determine an alternative to the translation language (what language version of the results should be chosen).
+	 *
+	 * This will be used only if applicable - if WPML is active and the current language is set to "All languages",
+	 * in which case we're forced to pick one.
+	 *
+	 * If we have a valid lang code, we'll pass it to the element selector. Otherwise, it will use the default language.
+	 *
+	 * @since 2.6.8
+	 */
+	private function determine_translation_language() {
+		if( ! $this->wpml_service->is_wpml_active_and_configured() ) {
+			return;
+		}
+
+		if( ! $this->wpml_service->is_showing_all_languages() ) {
+			return;
+		}
+
+		if( null === $this->translation_language ) {
+			// Here, we may try to determine the language by some other means.
+			return;
+		}
+
+		$this->element_selector_provider->set_translation_language( $this->translation_language );
+	}
+
+
+	/**
 	 * Perform the query to only return the number of found rows, if we're not interested in
 	 * the actual results.
 	 *
@@ -990,5 +1221,20 @@ class Toolset_Association_Query_V2 extends Toolset_Wpdb_User implements IToolset
 			->get_results();
 
 		return $this->get_found_rows();
+	}
+
+
+	public function use_cache( $use_cache = true ) {
+		$this->use_cache = (bool) $use_cache;
+		return $this;
+	}
+
+
+	public function build_cache_key( $query_string ) {
+		$normalized_query_string = Toolset_Utils::trim_deep( $query_string );
+		$transformation_class = get_class( $this->result_transformation );
+		$key_source = "$normalized_query_string|$transformation_class";
+
+		return md5( $key_source );
 	}
 }

@@ -30,7 +30,15 @@ function wpcf_fields_checkbox()
 }
 
 
-add_action( 'save_post', 'wpcf_fields_checkbox_save_check', 15, 1 );
+// We call this function late and wherever we *think* it might be necessary
+// to fix any potential mess created by other legacy code.
+//
+// wpcf_fields_checkbox_save_check() is the final authority when it comes to saving checkboxes
+// field values.
+add_action( 'save_post', 'wpcf_fields_checkbox_save_check', 100, 1 );
+add_action( 'wpcf_relationship_save_child', 'wpcf_fields_checkbox_save_check', 100, 1 );
+
+
 add_action( 'edit_attachment', 'wpcf_fields_checkbox_save_check', 15, 1 );
 
 /**
@@ -80,6 +88,8 @@ function wpcf_fields_checkbox_meta_box_form($field, $field_object)
 
 /**
  * Editor callback form.
+ *
+ * @since m2m Probably DEPRECATED
  */
 function wpcf_fields_checkbox_editor_callback($field, $settings)
 {
@@ -113,6 +123,8 @@ function wpcf_fields_checkbox_editor_callback($field, $settings)
 
 /**
  * Editor callback form submit.
+ *
+ * @since m2m Probably DEPRECATED
  */
 function wpcf_fields_checkbox_editor_submit($data, $field, $context)
 {
@@ -249,10 +261,16 @@ function wpcf_fields_checkbox_view($params)
  *
  * Currently used on Relationship saving.
  *
- * @param int $post_id
+ * @param int|WP_Post $post_source
  */
-function wpcf_fields_checkbox_save_check($post_id)
+function wpcf_fields_checkbox_save_check( $post_source )
 {
+	if( $post_source instanceof WP_Post ) {
+		$post_id = (int) $post_source->ID;
+	} else {
+		$post_id = (int) $post_source;
+	}
+
     $meta_to_unset = array();
     $meta_to_unset[$post_id] = array();
     $cf = new WPCF_Field();
@@ -273,6 +291,10 @@ function wpcf_fields_checkbox_save_check($post_id)
             $mode = 'save_child';
             break;
         }
+    }
+
+    if( apply_filters( 'types_updating_child_post', false ) ) {
+    	$mode = 'save_child';
     }
 
     // Update edited post's checkboxes
@@ -324,7 +346,11 @@ function wpcf_fields_checkbox_save_check($post_id)
             $re = sprintf('/\-(%s)$/', implode('|', $children));
             $checkboxes = array();
             foreach(array_keys($_POST['_wptoolset_checkbox']) as $key) {
-                $checkboxes[] = preg_replace($re, '', $key);
+            	// make sure to only collect checkboxes which are assigned to the children post type
+            	if( preg_match( $re, $key ) ) {
+		            $checkboxes[] = preg_replace($re, '', $key);
+	            }
+
             }
             foreach( $children as $child_id ) {
                 foreach( array_unique($checkboxes) as $slug ) {
@@ -342,7 +368,7 @@ function wpcf_fields_checkbox_save_check($post_id)
         foreach ( $_POST['_wpcf_check_checkbox'] as $child_id => $slugs ) {
             foreach ( $slugs as $slug => $true ) {
 
-                $cf->set( $child_id, $cf->__get_slug_no_prefix( $slug ) );
+                $cf->set( $child_id, $cf->get_slug_no_prefix( $slug ) );
 
                 // First check main post
                 if ( $mode == 'save_main'
@@ -384,7 +410,7 @@ function wpcf_fields_checkbox_save_check($post_id)
     // After collected - delete them
     foreach ( $meta_to_unset as $child_id => $slugs ) {
         foreach ( $slugs as $slug => $true ) {
-            $cf->set( $child_id, $cf->__get_slug_no_prefix( $slug ) );
+            $cf->set( $child_id, $cf->get_slug_no_prefix( $slug ) );
             if ( $cf->cf['data']['save_empty'] != 'no' ) {
                 update_post_meta( $child_id, $slug, 0 );
             } else {
@@ -396,7 +422,7 @@ function wpcf_fields_checkbox_save_check($post_id)
 
 function wpcf_fields_checkbox_update_one($post_id, $slug, $array_to_check) {
 	$cf = new WPCF_Field();
-	$field_slug = $cf->__get_slug_no_prefix( $slug );
+	$field_slug = $cf->get_slug_no_prefix( $slug );
 
 	$cf->set( $post_id, $field_slug );
 
@@ -454,9 +480,13 @@ function wpcf_update_checkboxes_field( $field_definition_array, $meta_type, $obj
 	$meta_value = array();
 
 	$field_options = wpcf_getnest( $field_definition_array, array( 'data', 'options' ), null );
+	$is_updating_types_child = apply_filters( 'types_updating_child_post', false );
 
 	if( is_array( $field_options ) ) {
-		$field_id = wpcf_getarr( $field_definition_array, 'id' );
+		// When saving a legacy child post, meta keys are used instead of a field slug.
+		$field_id_key = ( $is_updating_types_child ? 'meta_key' : 'id' );
+
+		$field_id = wpcf_getarr( $field_definition_array, $field_id_key );
 		$save_zero_if_empty = ( 'yes' == wpcf_getnest( $field_definition_array, array( 'data', 'save_empty' ) ) );
 
 		foreach( $field_options as $option_id => $option_settings ) {
@@ -464,9 +494,18 @@ function wpcf_update_checkboxes_field( $field_definition_array, $meta_type, $obj
 
 			if( $is_option_checked ) {
 				// Use actual option value coming from the form submission.
-				$meta_value[ $option_id ] = $wpcf_form_data[ $field_id ][ $option_id ];
+				$option_value = $wpcf_form_data[ $field_id ][ $option_id ];
+
+				// When saving a legacy child post, the value may not be encapsulated in the array,
+				// how it is supposed to be.
+				if( $is_updating_types_child && ! is_array( $option_value ) ) {
+					$option_value = array( $option_value );
+				}
+				$meta_value[ $option_id ] = $option_value;
 
 			} elseif( $save_zero_if_empty ) {
+				// Beware, "zero if empty" value is stored as-is, without the encapsulating array,
+				// unlike any other values.
 				$meta_value[ $option_id ] = 0;
 			}
 

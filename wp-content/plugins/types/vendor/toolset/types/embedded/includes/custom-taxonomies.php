@@ -61,9 +61,9 @@ function wpcf_custom_taxonomies_init()
     $custom_taxonomies = get_option( WPCF_OPTION_NAME_CUSTOM_TAXONOMIES, array() );
     if ( !empty( $custom_taxonomies ) ) {
         foreach ( $custom_taxonomies as $taxonomy => $data ) {
-            if ( 
-				! isset( $data['_builtin'] ) 
-				|| ! $data['_builtin'] 
+            if (
+				! isset( $data['_builtin'] )
+				|| ! $data['_builtin']
 			) {
                 wpcf_custom_taxonomies_register( $taxonomy, $data );
             }
@@ -173,6 +173,9 @@ function wpcf_custom_taxonomies_register( $taxonomy, $data ) {
 		foreach ( $data['labels'] as $label_key => $label ) {
 			$data['labels'][ $label_key ] = $label = stripslashes( $label );
 
+			// Allows several instances of %s in the label.
+			$label = str_replace( '%s', '%1$s', $label );
+
 			switch ( $label_key ) {
 
 				case 'parent_item':
@@ -244,6 +247,13 @@ function wpcf_custom_taxonomies_register( $taxonomy, $data ) {
 	if ( ( ! isset( $taxonomy_args['name'] ) ) || false == $taxonomy_args['name'] ) {
 		$taxonomy_args['name'] = $taxonomy;
 	}
+
+	/**
+	 * Translate (and register with WPML) the taxonomy strings in the correct gettext context
+	 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/types-1323
+	 */
+	$taxonomy_args['labels']['name']          = _x( $taxonomy_args['labels']['name'], 'taxonomy general name', 'Types-TAX' );
+	$taxonomy_args['labels']['singular_name'] = _x( $taxonomy_args['labels']['singular_name'], 'taxonomy singular name', 'Types-TAX' );
 
 	$result = register_taxonomy( $taxonomy, $object_types_filtered, $taxonomy_args );
 

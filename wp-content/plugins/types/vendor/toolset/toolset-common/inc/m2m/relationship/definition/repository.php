@@ -175,7 +175,7 @@ class Toolset_Relationship_Definition_Repository {
 	 * @since m2m
 	 */
 	public function definition_exists( $slug ) {
-		return array_key_exists( $slug, $this->definitions );
+		return ( ( is_string( $slug ) || is_int( $slug ) ) && array_key_exists( $slug, $this->definitions ) );
 	}
 
 
@@ -297,11 +297,16 @@ class Toolset_Relationship_Definition_Repository {
 	/**
 	 * Update a single relationship definition.
 	 *
-	 * @param Toolset_Relationship_Definition $relationship_definition
+	 * @param IToolset_Relationship_Definition $relationship_definition
+	 *
 	 * @since 2.5.2
+	 * @return Toolset_Result
 	 */
-	public function persist_definition( Toolset_Relationship_Definition $relationship_definition ) {
-		$this->get_definition_persistence()->persist_definition( $relationship_definition );
+	public function persist_definition( IToolset_Relationship_Definition $relationship_definition ) {
+		if( ! $relationship_definition instanceof Toolset_Relationship_Definition ) {
+			throw new RuntimeException( 'Unable to persist a foreign relationship definition object.' );
+		}
+		return $this->get_definition_persistence()->persist_definition( $relationship_definition );
 	}
 
 

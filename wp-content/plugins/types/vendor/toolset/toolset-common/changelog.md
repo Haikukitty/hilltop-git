@@ -1,5 +1,118 @@
 # Toolset Common Library
 
+# 3.2.1
+* Added a link to documentation for the code snippets.
+* Fixed a regression on the Toolset widgets for Elementor when used inside templates.
+
+## 3.2
+* Custom PHP code snippets for Toolset (toolsetcommon-419).
+* New class for toolset_get_related_post() and toolset_get_related_post() and usability improvements.
+* [types-1768] Improve the querying by post statuses in the public m2m API.
+* [types-1772] Fix a check for role name validity in Toolset_Relationship_Role.
+* [types-1778] When exporting field groups, also include the information about the group's purpose.
+
+## 3.1
+* [types-1514] Support for relationship transformations - generic batch process dialog and several smaller improvements.
+* [types-851] Extend the preview support for image fields in the Types Yoast integration.
+* [types-1734] Improve the RFG loading times on post edit screens.
+* Extend the Views Elementor widget.
+* Include a Forms Elementor widget.
+* Make sure that select fields can be disabled, and that hidden fields can be empty, in Toolset Forms.
+* Fixed some glitches on the shortcodes API when combiing single and double quotes for attribute values.
+* Fixed some compatibility issues with the Fusion Builder.
+* Fixed some compatibility issues with Beaver Builder.
+* Fixed an issue with Skype fields.
+
+## 3.0.7
+* [types-1600] Inconsistency between toolset_connect_posts and toolset_disconnect_posts functions
+* [types-1623] Secondary language child post is listed when secondary language parent post was connected previously to default language child post
+* [toolsetcommon-385] When saving a relationship, register strings for translation 
+
+## 3.0.6
+* [toolsetcommon-421] No longer show registration notice for Types + Views Lite
+* [types-1709] Select field display values not translated with WPML
+
+## 3.0.5
+* Include a first version for Toolset widgets in the Elementor page builder.
+* Embed Auryn, the dependency injection container, with a script to safely update and namespace it.
+* Update Codemirror to v5.39.0
+* Extend the Toolset shortcodes GUI API by supporting helper attributes.
+* Include an abstract class for privacy policy contents, to be extended by any Toolset plugin.
+
+## 3.0.4
+* Add the ability to query usermeta groups by the roles they are associated with.
+* Fix a problem with Divi Cuilder taking over a post that uses a Content Template dsigned with it.
+* Fix a problem with Visual Composer 5.5+ and its integration with Content Templates.
+* Fixed: Association_Query_V2::need_found_rows() does not work for cached results. (types-1676)
+* Fixed hardcoded table prefixes. (types-1674)
+* Fix some issues with checkboxes fields rendering.
+
+## 3.0.3
+* Introduce caching in associations queries.
+* Introduce a condition to query by multiple items as a given association role.
+* Improve the support for getting data from legacy parents using a shortcode attribute.
+
+## 3.0.2
+* Hotfix Types release.
+
+## 3.0.1
+* Adjust the shortcodes GUI API so it generates attributes wrapped in single quotes.
+
+## 3.0
+* (types-1537) Display the Installer's Compatibility Reporting setting wherever necessary.
+* (toolsetcommon-406) Add new actions to inform about associations being created and deleted.
+* (types-1583) Fix: Errors in PHP 5.3.6.
+* (types-1553) Fix: Do not assume that an option for post type definitions is set.
+* Migration: do not enforce a specific translation mode between posts involved in relationships to migrate.
+* API: fails gracefully when trying to get a relationship by a non existing slug.
+* API: two new public functions to create associations.
+* WPML: support defining associations between posts without enforcing a specific translation mode for them.
+* WPML: ensure that data from a post reference field can be rendered.
+* (types-1515) Introduce two new public API functions to create and delete associations.
+
+## 2.7.1
+* Tag for Forms 2.0-RC3
+* Better validation methods in shared forms.
+* Fixed styling issue in the Toolset shared admin pages.
+* Fixed the shortcodes API GUI on items that have a content and include instructions for it.
+
+## 2.7.0
+* Tag for upcoming Toolset releases.
+* Fix a PHP 5.3 compatibility issue.
+
+## 2.6.9.1
+* Restore compatibility with Toolset plugins using previous versions of the assets manager shared class.
+
+## 2.6.9
+* Restore the $current_page value for the post selector shortcode attribute.
+* Remove an admin notice about using Toolset plugins together.
+
+## 2.6.8
+* (types-1444) Fixed inconsistent API call results when WPML switcher is set to "All languages".
+
+## 2.6.7
+* Improve the shortcodes GUI post selector for better m2m compatibility.
+* Extend the m2m relationships query API so it can play with intermediary post types.
+
+## 2.6.6
+* (toolsetcommon-390) Make sure that there are no potential posts for association when the other (known) post has reached its cardinality limit.
+* (toolsetcommon-381) Make the `_wpcf_belongs_{$post_type}_id` usage in WP_Query meta queries safe to use also in m2m.
+* (types-1467) Fixes in the data structure upgrade mechanism and in the upgrade command for m2m-v1 tables.
+
+## 2.6.5
+* Released with CRED 2.0-b2 and Layouts 2.3-b1
+* Include a compatibility layer for xxx_post_meta native functions usage on legacy relationships postmeta keys.
+
+## 2.6.4
+* Added a set of checks to avoid errors with third parties also loading the Recaptcha v1.11 library.
+* (toolsetcommon-382) Fix issues with the Toolset_Post_Type_Repository too early initialization.
+* (toolsetcommon-369) Fix: Avoid repeated results in the association query.
+
+## 2.6.3
+* Compatibility for Types 2.3-b4
+* Fixed an issue using repeatable File field inside a relationship
+* (types-1374) Fail gracefully if dealing with corrupted `_wpcf_belongs_*_id` postmeta during the m2m migration.
+
 ## 2.6.2
 * Various minor bugfixes.
 * (toolsetcommon-290) First version of the public relationship API for both legacy and m2m relationships.
@@ -248,7 +361,6 @@
 - Fixed issue when there is more than one CRED form on a page with the same taxonomy.
 - Fixed a little problem with edit skype button modal window - was too narrow.
 - Fixed empty title problem for filter "wpt_field_options" on user edit/add screen.
-https://wp-types.com/forums/topic/populate-select-field-in-wpcf-um-group/
 - Added filter "toolset_editor_add_form_buttons" to disable Toolset buttons on the post editor.
 - Added placeholder attributes to fields.
 - Updated CakePHP validation URL method to allow new TLD's.

@@ -70,15 +70,21 @@
  */
 abstract class Toolset_Wp_Query_Adjustments extends Toolset_Wpdb_User {
 
+
 	// Must not be changed, third-party software depends on it.
 	const RELATIONSHIP_QUERY_ARG = 'toolset_relationships';
+
+
+	// The time when we store the toolset_relationships query argument during pre_get_posts.
+	// It needs to happen late so that other query modifications (also meta_query ones) can happen before.
+	const TIME_TO_STORE_RELATIONSHIPS_ARG = 10000;
 
 
 	/**
 	 * Initialize the query adjustments.
 	 */
 	public function initialize() {
-		add_action( 'pre_get_posts', array( $this, 'check_custom_query_args' ) );
+		add_action( 'pre_get_posts', array( $this, 'check_custom_query_args' ), self::TIME_TO_STORE_RELATIONSHIPS_ARG );
 	}
 
 
@@ -96,24 +102,6 @@ abstract class Toolset_Wp_Query_Adjustments extends Toolset_Wpdb_User {
 		if( array_key_exists( self::RELATIONSHIP_QUERY_ARG, $query->query_vars ) ) {
 			$query->{self::RELATIONSHIP_QUERY_ARG} = $query->query_vars[ self::RELATIONSHIP_QUERY_ARG ];
 		}
-	}
-
-
-	/**
-	 * Get the table join manager object attached to the WP_Query instance or create and attach a new one.
-	 *
-	 * @param WP_Query $query
-	 *
-	 * @return Toolset_Wp_Query_Adjustments_Table_Join_Manager
-	 */
-	protected function get_table_join_manager( WP_Query $query ) {
-		// This is a dirty hack but still cleanest considering we need to use this object
-		// in different callbacks from WP_Query.
-		$property_name = 'toolset_join_manager';
-		if( ! property_exists( $query, $property_name ) ) {
-			$query->{$property_name} = new Toolset_Wp_Query_Adjustments_Table_Join_Manager();
-		}
-		return $query->{$property_name};
 	}
 
 

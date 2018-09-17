@@ -1,0 +1,183 @@
+{#
+	Code snippet listing on the Customizations tab in Toolset Settings.
+
+
+#}
+
+{% extends "@toolset/listing.twig" %}
+
+{% import "@toolset/listing.twig" as listing %}
+{% import "@toolset/forms.twig" as forms %}
+
+{# We already have the section header for this purpose. #}
+{% block title %}{% endblock %}
+
+{% block columnHeaders %}
+	{{ listing.columnHeader( __( 'Name', 'wpcf' ), true, 'displayName', 'column-title column-primary') }}
+	{{ listing.columnHeader( __( 'Status', 'wpcf' ), false ) }}
+	{{ listing.columnHeader( __( 'Run', 'wpcf' ), false ) }}
+	{{ listing.columnHeader( __( 'Context', 'wpcf' ), false ) }}
+	{{ listing.columnHeader( __( 'Description', 'wpcf' ), false ) }}
+{% endblock %}
+
+{# % block colgroup %}
+	<colgroup>
+		<col />
+		<col />
+		<col />
+		<col />
+		<col />
+		<col style="max-width: 10%"/>
+	</colgroup>
+{% endblock %}
+#}
+
+{# Row actions which will be embedded in the main column. #}
+{% block rowActions %}
+	<div data-bind="visible: ! isEditing()">
+		<span class="edit">
+			<a data-bind="click: onEdit">{{ __( 'Edit', 'wpcf' ) }}</a>
+		</span>
+		|
+		<span class="edit" data-bind="visible: ! isActive()">
+			<a data-bind="click: onActivate">{{ __( 'Activate', 'wpcf' ) }}</a>
+		</span>
+		<span class="edit" data-bind="visible: isActive">
+			<a data-bind="click: onDeactivate">{{ __( 'Deactivate', 'wpcf' ) }}</a>
+		</span>
+		|
+		<span class="edit">
+			<a data-bind="click: onRunOnce">{{ __( 'Run now', 'wpcf' ) }}</a>
+		</span>
+		|
+		<span class="delete">
+			<a data-bind="click: onDelete">{{ __( 'Delete', 'wpcf' ) }}</a>
+		</span>
+	</div>
+{% endblock %}
+
+
+{% block afterDisplayName %}
+	{# The slug doesn't deserve its own column but we still want to show it, it's relevant especially for ondemand snippets. #}
+	<br />
+	<code data-bind="text: slug"></code>
+{% endblock %}
+
+
+{# Other table cells besides the main one (with displayName and row actions) #}
+{% block tdCells %}
+	<td>
+		<div data-bind="text: display.activityStatus"></div>
+		<div data-bind="visible: display.hasLastError">
+			<span class="toolset_code_snippets__error_indication">{{ __( 'Error', 'wpcf' ) }}</span>
+		</div>
+	</td>
+	<td data-bind="text: display.runMode"></td>
+	<td data-bind="text: display.runContexts"></td>
+	<td data-bind="text: description"></td>
+{% endblock %}
+
+{% block afterNormalRow %}
+	{# Another row with Edit Snippet GUI. #}
+	<tr data-bind="visible: isEditing">
+		<td></td> {# this is for the checkbox column #}
+		<td colspan="5">
+			<div class="toolset_code_snippets__snippet_edit_area">
+				<table class="widefat toolset-field-table toolset_code_snippets--no-border">
+					<tr>
+						<td><label>{{ __( 'Name', 'wpcf' ) }}</label></td>
+						<td><input class="large-text" type="text" title="{{ __( 'Name', 'wpcf' ) }}" data-bind="value: displayName"/></td>
+					</tr>
+					<tr>
+						<td><label>{{ __( 'Slug', 'wpcf' ) }}</label></td>
+						<td><input class="large-text" type="text" title="{{ __( 'Slug', 'wpcf' ) }}" data-bind="value: slug"/></td>
+					</tr>
+					<tr>
+						<td><label>{{ __( 'Path to snippet file', 'wpcf' ) }}</label></td>
+						<td><code data-bind="text: filePath"></code></td>
+					</tr>
+					<tr>
+						<td><label>{{ __( 'Run mode', 'wpcf') }}</label></td>
+						<td>
+							<p>
+								{% for	option in [
+									{ 'value': 'always', 'label': __( 'Run always', 'wpcf' ) },
+									{ 'value': 'ondemand', 'label': __( 'On demand', 'wpcf' ) },
+								] %}
+									{{ forms.radio( 'checked: runMode', option.value, option.label, '', '', 'toolset_code_snippets__option' ) }}
+								{% endfor %}
+							</p>
+							<p data-bind="visible: ! isActive()">
+								<strong>{{ __( 'Note: The snippet is inactive.', 'wpcf') }}</strong>
+								{{ __( 'The run mode will have no effect until you activate it or run the snippet manually.', 'wpcf' ) }}<br />
+								<a data-bind="click: onSetActive">{{ __( 'Activate', 'wpcf' ) }}</a>
+							</p>
+							<p data-bind="visible: 'ondemand' == runMode()">
+								{{ __( 'The script will be executed only if you add a specific request parameter:', 'wpcf' ) }}
+								<code data-bind="text: '{{ strings.site_url }}?{{ strings.ondemand_run_trigger }}=' + slug()"></code>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<td><label>{{ __( 'Run context', 'wpcf' ) }}</label></td>
+						<td>
+							{% for option in [
+								{ 'value': 'frontend', 'label': __( 'Front-end', 'wpcf' ) },
+								{ 'value': 'admin', 'label': __( 'WordPress admin', 'wpcf' ) },
+								{ 'value': 'ajax', 'label': __( 'AJAX calls', 'wpcf' ) },
+							] %}
+								{{ forms.checkbox( 'checked: runContexts', option.value, option.label, '', '', 'toolset_code_snippets__option' ) }}
+							{% endfor %}
+
+							<p data-bind="visible: runContexts().length === 0">
+								<strong>{{ __( 'Note: The script doesn\'t have a run context configured.', 'wpcf' ) }}</strong>
+								{{ __( 'It will not be executed anywhere unless you choose at least one context.', 'wpcf', 'wpcf' ) }}
+							</p>
+						</td>
+					</tr>
+					<tr data-bind="visible: display.hasLastError">
+						<td><label class="toolset_code_snippets__error_indication">{{ __( 'Last error', 'wpcf' ) }}</label></td>
+						<td>
+							<p data-bind="html: lastError"></p>
+							<p>
+								{{ __( 'Note: Depending on the nature of the error, you may need to run the script in a particular scenario to make sure the issue is gone.', 'wpcf' ) }}
+							</p>
+							<p>{{ forms.button('click: onTryAgain', __( 'Save the snippet and try again', 'wpcf' )) }}</p>
+						</td>
+					</tr>
+				</table>
+
+				<div class="notice notice-warning inline" data-bind="visible: ! isCodeEditable()">
+					<p>{{ __( 'Unfortunately, this snippet cannot be edited directly. Check file permissions and wp-config.php constants DISALLOW_FILE_EDIT and DISALLOW_FILE_MODS. Alternatively, you can edit the file manually.', 'wpcf' ) }}</p>
+				</div>
+
+				<div class="toolset_code_snippets__codemirror_wrap">
+					<textarea
+							data-bind="
+								value: code,
+								readonly: ! isCodeEditable(),
+								attr: { id: 'toolset_code_snippets__editor-' + slug() }"
+							class="toolset_code_snippets__code_area toolset_code_snippets--fullwidth"
+							title="Content of the snippet file"
+					></textarea>
+				</div>
+
+				<div class="toolset_code_snippets__buttonpane">
+					<div class="toolset_code_snippets--left">
+						{{ forms.button( 'click: onCancelEdit', __( 'Cancel', 'wpcf' ) ) }}
+					</div>
+					<div class="toolset_code_snippets--right">
+						{{ forms.button( 'click: onSave', __( 'Save', 'wpcf' ) ) }}
+						{{ forms.button( 'click: onTryAgain', __( 'Save and test', 'wpcf' ) ) }}
+						{{ forms.button( 'click: onSaveAndClose', __( 'Save and close', 'wpcf' ), 'primary' ) }}
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+{% endblock %}
+
+
+{% block topPagination %}
+	{# No need for it here, the listing is too narrow already. #}
+{% endblock %}

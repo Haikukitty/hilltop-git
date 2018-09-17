@@ -20,7 +20,7 @@ class Toolset_Relationship_Database_Operations {
 	 *
 	 * @since m2m
 	 */
-	const MAXIMUM_RELATIONSHIP_SLUG_LENGTH = 255;
+	const MAXIMUM_RELATIONSHIP_SLUG_LENGTH = 190;
 
 
 	/**
@@ -156,14 +156,16 @@ class Toolset_Relationship_Database_Operations {
 	 * Practically that means creating the wp_toolset_associations table.
 	 *
 	 * @since m2m
-	 *
-	 * TODO is it possible to reliably detect dbDelta failure?
+	 * @return Toolset_Result_Set
 	 */
 	public function do_native_dbdelta() {
-		$this->create_associations_table();
-		$this->create_relationship_table();
-		$this->create_type_set_table();
-		return true;
+		$results = new Toolset_Result_Set();
+
+		$results->add( $this->create_associations_table() );
+		$results->add( $this->create_relationship_table() );
+		$results->add( $this->create_type_set_table() );
+
+		return $results;
 	}
 
 
@@ -207,13 +209,14 @@ class Toolset_Relationship_Database_Operations {
 	 * Note: It is assumed that the table doesn't exist.
 	 *
 	 * @since m2m
+	 * @return Toolset_Result
 	 */
 	private function create_associations_table() {
 
 		$association_table_name = $this->table_name->association_table();
 
 		if ( $this->table_exists( $association_table_name ) ) {
-			return;
+			return new Toolset_Result( true );
 		}
 
 		// Note that dbDelta is very sensitive about details, almost nothing here is arbitrary.
@@ -229,7 +232,42 @@ class Toolset_Relationship_Database_Operations {
 				KEY child_id (child_id, relationship_id)
 			) " . $this->get_charset_collate() . ";";
 
+		return $this->do_dbdelta_and_return( $query, $association_table_name );
+	}
+
+
+	/**
+	 * @param string $query
+	 * @param string $table_to_check
+	 *
+	 * @return Toolset_Result
+	 * @since 3.0.2
+	 */
+	private function do_dbdelta_and_return( $query, $table_to_check ) {
 		self::dbdelta( $query );
+		$wpdb_error = $this->wpdb->last_error;
+
+		if( ! $this->table_exists( $table_to_check ) ) {
+			return new Toolset_Result(
+				false,
+				sprintf(
+					__( 'Unable to create table %s due to a MySQL Error: %s', 'wpcf' ),
+					$table_to_check,
+					$wpdb_error
+				)
+			);
+		} elseif( ! empty( $wpdb_error ) ) {
+			return new Toolset_Result(
+				false,
+				sprintf(
+					__( 'MySQL error when creating table %s: %s', 'wpcf' ),
+					$table_to_check,
+					$wpdb_error
+				)
+			);
+		}
+
+		return new Toolset_Result( true );
 	}
 
 
@@ -239,13 +277,14 @@ class Toolset_Relationship_Database_Operations {
 	 * Note: It is assumed that the table doesn't exist.
 	 *
 	 * @since m2m
+	 * @return Toolset_Result
 	 */
 	private function create_relationship_table() {
 
 		$table_name = $this->table_name->relationship_table();
 
 		if ( $this->table_exists( $table_name ) ) {
-			return;
+			return new Toolset_Result( true );
 		}
 
 		// Note that dbDelta is very sensitive about details, almost nothing here is arbitrary.
@@ -260,7 +299,7 @@ class Toolset_Relationship_Database_Operations {
 			child_domain varchar(20) NOT NULL DEFAULT '',
 			child_types bigint(20) UNSIGNED NOT NULL DEFAULT 0,
 			intermediary_type varchar(20) NOT NULL DEFAULT '',
-			ownership enum('parent', 'child', 'none') NOT NULL DEFAULT 'none',
+			ownership varchar(8) NOT NULL DEFAULT 'none',
 			cardinality_parent_max int(10) NOT NULL DEFAULT -1,
 			cardinality_parent_min int(10) NOT NULL DEFAULT 0,
 			cardinality_child_max int(10) NOT NULL DEFAULT -1,
@@ -271,6 +310,10 @@ class Toolset_Relationship_Database_Operations {
 			role_name_parent varchar(255) NOT NULL DEFAULT '',
 			role_name_child varchar(255) NOT NULL DEFAULT '',
 			role_name_intermediary varchar(255) NOT NULL DEFAULT '',
+			role_label_parent_singular VARCHAR(255) NOT NULL DEFAULT '',
+			role_label_child_singular VARCHAR(255) NOT NULL DEFAULT '',
+			role_label_parent_plural VARCHAR(255) NOT NULL DEFAULT '',
+			role_label_child_plural VARCHAR(255) NOT NULL DEFAULT '',
 			needs_legacy_support tinyint(1) NOT NULL DEFAULT 0,
 			is_active tinyint(1) NOT NULL DEFAULT 0,
 			PRIMARY KEY  id (id),
@@ -281,15 +324,17 @@ class Toolset_Relationship_Database_Operations {
 			KEY child_type (child_domain, child_types)
 		) " . $this->get_charset_collate() . ";";
 
-		self::dbdelta( $query );
-
+		return $this->do_dbdelta_and_return( $query, $table_name );
 	}
 
 
+	/**
+	 * @return Toolset_Result
+	 */
 	private function create_type_set_table() {
 		$table_name = $this->table_name->type_set_table();
 		if ( $this->table_exists( $table_name ) ) {
-			return;
+			return new Toolset_Result( true );
 		}
 
 		// Note that dbDelta is very sensitive about details, almost nothing here is arbitrary.
@@ -302,7 +347,7 @@ class Toolset_Relationship_Database_Operations {
 			KEY type (type)
 		) " . $this->get_charset_collate() . ";";
 
-		self::dbdelta( $query );
+		return $this->do_dbdelta_and_return( $query, $table_name );
 	}
 
 
@@ -344,7 +389,7 @@ class Toolset_Relationship_Database_Operations {
 			$rows_updated
 		)
 			: sprintf(
-			__( 'There has been an error when updating the assocation table with the new relationship slug: %s', 'wpcf' ),
+			__( 'There has been an error when updating the association table with the new relationship slug: %s', 'wpcf' ),
 			$this->wpdb->last_error
 		)
 		);
@@ -419,6 +464,10 @@ class Toolset_Relationship_Database_Operations {
 			$relationships_table_alias.role_name_parent AS role_name_parent,
 			$relationships_table_alias.role_name_child AS role_name_child,
 			$relationships_table_alias.role_name_intermediary AS role_name_intermediary,
+			$relationships_table_alias.role_label_parent_singular AS role_label_parent_singular,
+			$relationships_table_alias.role_label_child_singular AS role_label_child_singular,
+			$relationships_table_alias.role_label_parent_plural AS role_label_parent_plural,
+			$relationships_table_alias.role_label_child_plural AS role_label_child_plural,
 			$relationships_table_alias.needs_legacy_support AS needs_legacy_support,
 			$relationships_table_alias.is_active AS is_active,
 			$relationships_table_alias.parent_types AS parent_types_set_id,
@@ -592,15 +641,16 @@ class Toolset_Relationship_Database_Operations {
 		if ( ! in_array( $role_name, Toolset_Relationship_Role::parent_child_role_names() ) ) {
 			throw new InvalidArgumentException( 'Wrong role name' );
 		}
+		$associations_table = Toolset_Relationship_Table_Name::associations();
 		$count = $this->wpdb->get_var(
 			$this->wpdb->prepare(
 				"SELECT max(n) count
 					FROM (
 						SELECT count(*) n
-							FROM `wp_toolset_associations`
+							FROM {$associations_table}
 							WHERE relationship_id = %d
 							GROUP BY {$role_name}_id
 					) count", $relationship_id ) );
-		return $count;
+		return (int) $count;
 	}
 }

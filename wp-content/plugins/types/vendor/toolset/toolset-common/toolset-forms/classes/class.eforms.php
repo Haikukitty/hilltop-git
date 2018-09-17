@@ -459,24 +459,22 @@ class Enlimbo_Forms {
 		}
 
 		switch( $what_to_validate ){
-			case 'required';
-				$element['#attributes']['required'] = 'true';
-				$element['#attributes']['data-parsley-required-message'] = $element['#validate'][ $what_to_validate ]['message'];
-				break;
 
 			case 'number':
 				$element['#attributes']['data-parsley-type'] = 'number';
-				$element['#attributes']['data-parsley-number-message'] = $element['#validate'][ $what_to_validate ]['message'];
+				$element['#attributes']['data-parsley-error-message'] = $element['#validate'][ $what_to_validate ]['message'];
 				break;
-
 			case 'url':
 				$element['#attributes']['data-parsley-type'] = 'url';
-				$element['#attributes']['data-parsley-url-message'] = $element['#validate'][ $what_to_validate ]['message'];
+				$element['#attributes']['data-parsley-error-message'] = $element['#validate'][ $what_to_validate ]['message'];
 				break;
-
 			case 'email':
 				$element['#attributes']['data-parsley-type'] = 'email';
-				$element['#attributes']['data-parsley-email-message'] = $element['#validate'][ $what_to_validate ]['message'];
+				$element['#attributes']['data-parsley-error-message'] = $element['#validate'][ $what_to_validate ]['message'];
+				break;
+			case 'required';
+				$element['#attributes']['data-parsley-required'] = 'true';
+				$element['#attributes']['data-parsley-required-message'] = $element['#validate'][ $what_to_validate ]['message'];
 				break;
 		}
 
@@ -855,7 +853,8 @@ class Enlimbo_Forms {
 		$is_boolean = is_bool( $element['#value'] );
 		$use_default_value = ( ( $is_empty && $is_zero ) || $is_boolean );
 		$value_output = ( $use_default_value ? $value : esc_attr( $element['#value'] ) );
-		$element['_render']['element'] .= $value_output;
+		// we need to convert special characters of the input attr "value" (types-1643)
+		$element['_render']['element'] .= htmlspecialchars( $value_output );
 
 		$element['_render']['element'] .= '"' . $element['_attributes_string'];
 		if (
@@ -1225,7 +1224,7 @@ class Enlimbo_Forms {
 		$element = $this->_setRender( $element );
 		$output = '<input type="hidden" id="' . $element['#id'] . '" name="'
 			. $element['#name'] . '" value="';
-		$output .= isset( $element['#value'] ) ? $element['#value'] : 1;
+		$output .= array_key_exists( '#value', $element ) ? esc_attr( $element['#value'] ) : 1;
 		$output .= '"' . $element['_attributes_string'] . $this->_getDataWptId( $element ) . ' />';
 
 		return $output;

@@ -202,11 +202,20 @@ final class Types_Page_Dashboard extends Types_Page_Abstract {
 
 		$cpts = array();
 
+		$post_type_service = Toolset_Post_Type_Repository::get_instance();
+
 		foreach( $cpts_raw as $cpt_raw ) {
-			$post_type = new Types_Post_Type( $cpt_raw['slug'] );
-			// only use active post types
-			if( isset( $post_type->name ) )
-				$cpts[$cpt_raw['slug']] = $post_type;
+			$post_type = $post_type_service->get( $cpt_raw['slug'] );
+			if( ! $post_type ) {
+				continue;
+			}
+
+			if( $post_type->has_special_purpose() ) {
+				// don't show post types with special purpose (intermediary or repeatable field group)
+				continue;
+			}
+
+			$cpts[$cpt_raw['slug']] = new Types_Post_Type( $post_type->get_slug() );
 		}
 
 		uasort( $cpts, array( $this, 'sort_post_types_by_name' ) );
@@ -260,13 +269,24 @@ final class Types_Page_Dashboard extends Types_Page_Abstract {
 		if( $this->types_by_3rd !== null )
 			return $this->types_by_3rd;
 
+		$post_type_service = Toolset_Post_Type_Repository::get_instance();
+
 		$cpts_raw = get_post_types( array( 'public' => true ) );
 		$cpts = array();
 		foreach( $cpts_raw as $cpt_slug => $cpt_raw ) {
-			$post_type = new Types_Post_Type( $cpt_slug );
-			// only use active post types
-			if( isset( $post_type->name ) )
-				$cpts[$cpt_slug] = $post_type;
+			if( ! $post_type = $post_type_service->get( $cpt_slug ) ) {
+				continue;
+			};
+
+			if( $post_type->has_special_purpose() ) {
+				continue;
+			}
+
+			if( ! isset( $post_type->get_wp_object()->name ) ) {
+				continue;
+			}
+
+			$cpts[$cpt_slug] = new Types_Post_Type( $post_type->get_slug() );
 		}
 
 		$cpts = array_diff_key( $cpts, $this->get_types_by_wordpress(), $this->get_types_by_toolset() );
@@ -477,6 +497,11 @@ final class Types_Page_Dashboard extends Types_Page_Abstract {
 		$rows = '';
 
 		foreach( $post_types as $post_type ) {
+			if( ! isset( $post_type->name ) ) {
+				// this happens for inactive post types - we won't show them
+				continue;
+			}
+
 			$info_post_type = new Types_Information_Table( 'types-information-table' );
 			Types_Helper_Condition::set_post_type( $post_type->get_name() );
 			Types_Helper_Placeholder::set_post_type( $post_type->get_name() );
@@ -490,8 +515,8 @@ final class Types_Page_Dashboard extends Types_Page_Abstract {
 				array(
 					'labels'    => array(
 						'or'                 => __( 'Or...', 'wpcf' ),
-						'create_taxonomy'    => __( 'Create taxonomy', 'wpcf' ),
-						'create_field_group' => __( 'Create field group', 'wpcf' ),
+						'create_taxonomy'    => __( 'Add custom taxonomy', 'wpcf' ),
+						'create_field_group' => __( 'Add custom fields', 'wpcf' ),
 						'no_archive_for'     => __( 'No archive available for %s', 'wpcf' ),
 					),
 					'admin_url' => admin_url(),

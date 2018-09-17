@@ -48,7 +48,9 @@ class Toolset_Association_Query_Result_Transformation_Element_Instance
 	 * table in request_element_selection() and then obtain the domain information from there.
 	 *
 	 * @param object $database_row
+	 *
 	 * @return IToolset_Element
+	 * @throws Toolset_Element_Exception_Element_Doesnt_Exist
 	 */
 	public function transform(
 		$database_row, IToolset_Association_Query_Element_Selector $element_selector
@@ -63,6 +65,9 @@ class Toolset_Association_Query_Result_Transformation_Element_Instance
 		}
 
 		$element_id = $this->get_element_id( $database_row, $element_selector, true );
+		if ( ! $element_id ) {
+			return null;
+		}
 		return $this->element_factory->get_element( Toolset_Element_Domain::POSTS, $element_id );
 	}
 
@@ -122,8 +127,10 @@ class Toolset_Association_Query_Result_Transformation_Element_Instance
 	 * @since 2.5.10
 	 */
 	public function request_element_selection( IToolset_Association_Query_Element_Selector $element_selector ) {
-		// We need only one element here.
+		// We need only one element here. Also, we explicitly *don't* want to include association ID
+		// so that we can filter out duplicate IDs by the DISTINCT query.
 		$element_selector->request_element_in_results( $this->role );
+		$element_selector->request_distinct_query();
 	}
 
 }

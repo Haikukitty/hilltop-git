@@ -112,7 +112,7 @@ final class WPCF_Page_Listing_Termmeta extends WPCF_Page_Listing_Abstract {
 			'#type' => 'markup',
 			'#markup' => sprintf(
 				' <a class="button" href="%s">%s</a></p>',
-				Types_Page_Field_Control::get_page_url( Types_Field_Utils::DOMAIN_TERMS ),
+				Types_Page_Field_Control::get_page_url( Toolset_Field_Utils::DOMAIN_TERMS ),
 				__( 'Term Field Control', 'wpcf' )
 			),
 			'_builtin' => true,

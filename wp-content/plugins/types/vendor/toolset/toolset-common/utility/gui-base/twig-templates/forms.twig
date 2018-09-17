@@ -66,8 +66,8 @@
 {% endmacro %}
 
 
-{% macro radio( dataBinding, value, label, name, class )%}
-    <label>
+{% macro radio( dataBinding, value, label, name, class, labelClass )%}
+    <label class="{{ labelClass }}">
         <input type="radio"
                name="{{ name }}"
                class="{{ class }}"
@@ -80,8 +80,8 @@
 {% endmacro %}
 
 
-{% macro checkbox(dataBinding, value, label, name, class) %}
-    <label>
+{% macro checkbox(dataBinding, value, label, name, class, labelClass) %}
+    <label class="{{ labelClass }}">
         <input type="checkbox"
                name="{{ name }}"
                class="{{ class }}"

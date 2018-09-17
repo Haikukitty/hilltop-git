@@ -120,10 +120,25 @@ interface IToolset_Post_Type {
 	/**
 	 * Check if the post type can be used in a relationship.
 	 *
-	 * @return bool
+	 * @return Toolset_Result
 	 * @since 2.5.10
 	 */
 	public function can_be_used_in_relationship();
+
+
+	/**
+	 * Check if the post type can be used in a many-to-many relationship as an intermediary post.
+	 *
+	 * @param bool $skip_check_for_existing_intermediary
+	 *
+	 * @param bool $skip_check_for_relationship_involvment
+	 *
+	 * @return Toolset_Result
+	 */
+	public function can_be_used_as_intermediary(
+		$skip_check_for_existing_intermediary = false,
+		$skip_check_for_relationship_involvment = false
+	);
 
 
 	/**

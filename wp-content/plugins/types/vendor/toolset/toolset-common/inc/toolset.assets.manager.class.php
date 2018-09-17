@@ -158,8 +158,10 @@ class Toolset_Assets_Manager {
 	const SCRIPT_CODEMIRROR = 'toolset-codemirror-script';
 	const SCRIPT_CODEMIRROR_CSS = 'toolset-meta-html-codemirror-css-script';
 	const SCRIPT_CODEMIRROR_XML = 'toolset-meta-html-codemirror-xml-script';
+	const SCRIPT_CODEMIRROR_PHP = 'toolset-meta-html-codemirror-php-script';
 	const SCRIPT_CODEMIRROR_HTMLMIXED = 'toolset-meta-html-codemirror-htmlmixed-script';
 	const SCRIPT_CODEMIRROR_JS = 'toolset-meta-html-codemirror-js-script';
+	const SCRIPT_CODEMIRROR_C_LIKE = 'toolset-meta-html-codemirror-c-like';
 	const SCRIPT_CODEMIRROR_OVERLAY = 'toolset-meta-html-codemirror-overlay-script';
 	const SCRIPT_CODEMIRROR_UTILS_SEARCH = 'toolset-meta-html-codemirror-utils-search';
 	const SCRIPT_CODEMIRROR_UTILS_SEARCH_CURSOR = 'toolset-meta-html-codemirror-utils-search-cursor';
@@ -263,6 +265,9 @@ class Toolset_Assets_Manager {
 	 */
 	protected $assets_url = '';
 
+	private $did_initialize_scripts = false;
+	private $did_initialize_styles = false;
+
 
 	protected function __construct() {
 
@@ -289,22 +294,22 @@ class Toolset_Assets_Manager {
 		add_action( 'toolset_localize_script', array( $this, 'localize_script' ), 10, 3 );
 	}
 
+	private static $instances = array();
 
 	/**
 	 * @return Toolset_Assets_Manager
 	 * @deprecated Use get_instance instead().
 	 */
 	final public static function getInstance() {
-		static $instances = array();
 		$called_class = get_called_class();
 
-		if ( isset( $instances[ $called_class ] ) ) {
-			return $instances[ $called_class ];
+		if ( isset( self::$instances[ $called_class ] ) ) {
+			return self::$instances[ $called_class ];
 		} else {
 			if ( class_exists( $called_class ) ) {
-				$instances[ $called_class ] = new $called_class();
+				self::$instances[ $called_class ] = new $called_class();
 
-				return $instances[ $called_class ];
+				return self::$instances[ $called_class ];
 			} else {
 				// This can unfortunately happen when the get_called_class() workaround for PHP 5.2 misbehaves.
 				return false;
@@ -320,17 +325,44 @@ class Toolset_Assets_Manager {
 	 */
 	public static function get_instance() {
 		if( null === self::$instance ) {
-			self::$instance = new self();
+			$called_class = get_called_class();
+			if( $called_class === 'Toolset_Assets_Manager' && isset( self::$instances[ $called_class ] ) ) {
+				// Make sure that we don't re-instantiate the Toolset_Assets_Manager class even if it was instantiated
+				// before through the legacy getInstance() method.
+				//
+				// @refactoring Stop subclassing Toolset_Assets_Manager
+				self::$instance = self::$instances[ $called_class ];
+			} else {
+				self::$instance = new self();
+			}
 		}
 
 		return self::$instance;
 	}
 
+	/**
+	 * Backward compatibility
+	 * For PHP 7 we renamed the method __initialize_styles() and __initialize_scripts() to initialize_styles() and initialize_scripts().
+	 * As both are public methods we apply this fallback for the case someone calls the old methods.
+	 *
+	 * @param $method
+	 * @param $arguments
+	 */
+	public function __call( $method, $arguments ) {
+		switch( $method ) {
+			case '__initialize_styles':
+				$this->initialize_styles();
+				break;
+			case '__initialize_scripts':
+				$this->initialize_scripts();
+				break;
+		}
+	}
 
 
 	public function init() {
-		$this->__initialize_styles();
-		$this->__initialize_scripts();
+		$this->initialize_styles();
+		$this->initialize_scripts();
 	}
 
 
@@ -369,7 +401,27 @@ class Toolset_Assets_Manager {
 	}
 
 
-	protected function __initialize_styles() {
+	protected function initialize_styles() {
+
+		// Prevent an infinite recursion in case we have a subclass of this that has:
+		//
+		// function __initialize_styles() {
+		//     // ...
+		//     return parent::__initialize_styles();
+		// }
+		if( $this->did_initialize_styles ) {
+			return null;
+		}
+		$this->did_initialize_styles = true;
+
+		if( method_exists( $this, '__initialize_styles' ) ) {
+			// Support for subclasses overwriting the previous __initialize_styles function.
+			//
+			// This will cause the common assets never to be registered in these subclasses,
+			// but we don't mind - these assets are already registered by Toolset_Assets_Manager
+			// on every request.
+			return $this->__initialize_styles();
+		}
 
 		// Libraries
 		//
@@ -527,7 +579,27 @@ class Toolset_Assets_Manager {
 	}
 
 
-	protected function __initialize_scripts() {
+	protected function initialize_scripts() {
+
+		// Prevent an infinite recursion in case we have a subclass of this that has:
+		//
+		// function __initialize_scripts() {
+		//     // ...
+		//     return parent::__initialize_scripts();
+		// }
+		if( $this->did_initialize_scripts ) {
+			return null;
+		}
+		$this->did_initialize_scripts = true;
+
+		if( method_exists( $this, '__initialize_scripts' ) ) {
+			// Support for subclasses overwriting the previous __initialize_scripts function.
+			//
+			// This will cause the common assets never to be registered in these subclasses,
+			// but we don't mind - these assets are already registered by Toolset_Assets_Manager
+			// on every request.
+			return $this->__initialize_scripts();
+		}
 
 		// Libraries
 		//
@@ -656,6 +728,29 @@ class Toolset_Assets_Manager {
 			array( self::SCRIPT_CODEMIRROR_OVERLAY ),
 			"5.5.0"
 		);
+
+		$this->register_script(
+			self::SCRIPT_CODEMIRROR_C_LIKE,
+			$this->assets_url . '/visual-editor/res/js/codemirror/mode/clike/clike.js',
+			array( self::SCRIPT_CODEMIRROR_OVERLAY ),
+			"5.5.0"
+		);
+
+		$this->register_script(
+			self::SCRIPT_CODEMIRROR_PHP,
+			$this->assets_url . '/visual-editor/res/js/codemirror/mode/php/php.js',
+			array(
+				self::SCRIPT_CODEMIRROR_OVERLAY,
+				self::SCRIPT_CODEMIRROR_XML,
+				self::SCRIPT_CODEMIRROR_JS,
+				self::SCRIPT_CODEMIRROR_CSS,
+				self::SCRIPT_CODEMIRROR_HTMLMIXED,
+				self::SCRIPT_CODEMIRROR_C_LIKE,
+			),
+			"5.5.0"
+		);
+
+
 
 		$this->register_script(
 			self::SCRIPT_CODEMIRROR_CSS,
@@ -840,8 +935,9 @@ class Toolset_Assets_Manager {
 			self::SCRIPT_TOOLSET_SHORTCODE,
 			$this->assets_url . "/res/js/toolset-shortcode.js",
 			array( 
-				'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs', 'suggest', 'shortcode', 'underscore', 'wp-util', 
-				self::SCRIPT_SELECT2, self::SCRIPT_ICL_EDITOR, self::SCRIPT_UTILS, self::SCRIPT_TOOLSET_EVENT_MANAGER ),
+				'jquery', 'jquery-ui-dialog', 'jquery-ui-tabs', 'suggest', 'shortcode', 'underscore', 'wp-util', 'wp-pointer', 
+				self::SCRIPT_SELECT2, self::SCRIPT_ICL_EDITOR, self::SCRIPT_UTILS, self::SCRIPT_TOOLSET_EVENT_MANAGER 
+			),
 			TOOLSET_COMMON_VERSION,
 			true
 		);
