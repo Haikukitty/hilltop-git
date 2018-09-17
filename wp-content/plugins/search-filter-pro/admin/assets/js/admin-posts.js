@@ -2350,7 +2350,7 @@
 		
 		
 		//load tooltips
-		$('[data-hint]').live('mouseover', function() {
+		$('body').on( 'mouseover', '[data-hint]', function() {
 			
 			$(this).qtip({
 				overwrite: false, // Make sure another tooltip can't overwrite this one without it being explicitly destroyed

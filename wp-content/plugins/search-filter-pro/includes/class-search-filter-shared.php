@@ -23,7 +23,7 @@ class Search_Filter_Shared {
         add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
         // Activate plugin when new blog is added
-        add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
+        //add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
     }
 	public function create_custom_post_types()
@@ -144,7 +144,7 @@ class Search_Filter_Shared {
      *
      * @param    int    $blog_id    ID of the new blog.
      */
-    public function activate_new_site( $blog_id ) {
+    /*public function activate_new_site( $blog_id ) {
 
         if ( 1 !== did_action( 'wpmu_new_blog' ) ) {
             return;
@@ -154,6 +154,6 @@ class Search_Filter_Shared {
         self::single_activate();
         restore_current_blog();
 
-    }
+    }*/
 
 }

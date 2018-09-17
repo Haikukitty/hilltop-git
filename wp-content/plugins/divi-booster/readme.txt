@@ -3,8 +3,8 @@ Contributors: danmossop
 Donate link: 
 Tags: divi theme, elegant themes
 Requires at least: 3.0
-Tested up to: 4.9.5
-Stable tag: 2.7.4
+Tested up to: 4.9.8
+Stable tag: 2.7.6
 
 Enhancements to the Divi Theme by Elegant Themes, including bug fixes and extra configuration options.
 
@@ -51,6 +51,12 @@ The Divi Booster plugin is an independent product which is not associated with, 
 To follow...
 
 == Changelog ==
+
+= 2.7.6 =
+* Removed a commented link to a third-party site that was triggering an error in Wordfence
+
+= 2.7.5 =
+* Fixed second slide button not showing when additional CSS classes applied
 
 = 2.7.4 =
 * Fixed missing argument error when page layout option enabled in Divi 3.10

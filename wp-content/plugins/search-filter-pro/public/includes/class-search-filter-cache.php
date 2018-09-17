@@ -1486,6 +1486,9 @@ class Search_Filter_Cache
         //now remove excluded post IDs from the included IDs as these overwrite the excluded posts types too
         if(isset($this->query_args['post__not_in']))
         {
+        	if(!is_array($this->query_args['post__not_in'])){
+		        $this->query_args['post__not_in'] = array($this->query_args['post__not_in']);
+	        }
             $post__in = array_diff($post__in, $this->query_args['post__not_in']);
 
             /* todo check if we need to unset Post__not_in */

@@ -52,7 +52,6 @@
 							   //'publicly_queryable '   => true
 							);
 							
-							
 							$post_types = get_post_types( $args, 'objects' ); 
 							
 							$is_default = false;
@@ -325,7 +324,7 @@
 							<input type="hidden"  name="results_url" id="results_url_hidden" class="results_url_hidden"  value="<?php echo $values['results_url']; ?>" disabled="disabled" />
 							</p>
 							
-						</div>	
+						</div>
 						</td>
 					</tr>
 					<tr class="tpl_archive_rows">
@@ -896,15 +895,17 @@
 							{
 								$ids_array = array_map("intval" , explode(",", $tval));
 								
-								if(Search_Filter_Helper::has_wpml())
-								{
+								if(Search_Filter_Helper::has_wpml()) {
+
 									$res = array();
-									foreach ($ids_array as $id)
-									{
-										$xlat = Search_Filter_Helper::wpml_object_id($id, $taxonomy->name, false);
+									foreach ($ids_array as $id) {
+
+										$xlat = Search_Filter_Helper::wpml_object_id($id, $taxonomy->name, true);
 										if(!is_null($xlat)) $res[] = $xlat;
 									}
+
 									$ids_array = $res;
+
 								}
 								$ids_string = implode("," , $ids_array);
 							}

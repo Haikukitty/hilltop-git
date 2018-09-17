@@ -123,7 +123,7 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 				$current_depth = 0;
 				//and reset the array tracking the parent IDs of this tree
 				$this->depth_track = array( $taxonomy_term_id ); //reset the chain
-				//echo "\r\nHERE ";
+
 			}
 			else {
 
@@ -132,12 +132,11 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 				$depth_length = count($this->depth_track);
 
 				$found_parent_depth = array_search( $taxonomy_term->parent, $this->depth_track );
-				//echo "\r\nLOOKING FOR PARENT ID: ".$taxonomy_term->parent." in depth_track | RES: ".$found_parent_depth."\r\n";
-				//var_dump($this->depth_track);
 
 				if($found_parent_depth !== false ) {
-					//echo "xxxx";
+
 					$current_depth = $found_parent_depth + 1;
+
 					//then we found a parent, but it was at the end of the chain, so we need to extend it by
 					$this->depth_track[$current_depth] =  $taxonomy_term_id;
 
@@ -146,10 +145,6 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 					//depth does not yet exist, so add it
 					//array_push($this->depth_track, $current_depth);
 				}
-
-
-
-
 
 				//if the last item had the same parent ID as the previous item, then the depth stays the same
 				/*if($this->depth_track[$depth_length-1] == $taxonomy_term->parent) {

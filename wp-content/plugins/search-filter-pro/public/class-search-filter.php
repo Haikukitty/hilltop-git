@@ -82,6 +82,8 @@ class Search_Filter {
 		global $search_filter_third_party;
 		$this->third_party = $search_filter_third_party;
 
+		add_action( 'woocommerce_product_query', array($this, 'setup_wc_query'), 100000 );
+
 		//add_filter('rewrite_rules_array', array($this, 'sf_rewrite_rules'));
 	}
 
@@ -138,7 +140,7 @@ class Search_Filter {
 			return;
 		}
 		
-		if(function_exists("is_shop"))
+		/*if(function_exists("is_shop"))
 		{
 			if($this->is_woo_shop($query))
 			{
@@ -162,9 +164,7 @@ class Search_Filter {
 					
 				}
 			}
-		}
-
-
+		}*/
 
 		if(is_post_type_archive()||is_home()||is_tag()||is_tax()||is_category())
 		{//then we know its a post type archive, see if any of our search forms
@@ -182,7 +182,6 @@ class Search_Filter {
                     {//this means its an archive and its already been init
                         return;
                     }
-
 
 					if($search_form_settings['display_results_as']=="post_type_archive")
 					{
@@ -217,7 +216,7 @@ class Search_Filter {
 						}
 						
 					}
-                    else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
+                    /*else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
                     {
                         $post_type = "product";
                         $enable_taxonomy_archives = $search_form_settings["enable_taxonomy_archives"];
@@ -232,12 +231,68 @@ class Search_Filter {
                         }
 
 
-                    }
+                    }*/
 				}
 			}
 		}
 	}
-	
+	public function setup_wc_query($query){
+
+		global $searchandfilter;
+
+		//filter the shop page
+		if(function_exists("is_shop")) {
+			if ( $this->is_woo_shop( $query ) ) {
+				foreach ( $this->all_search_form_ids as $search_form_id ) {
+					//as we only want to update "enabled", then load all settings and update only this key
+					$search_form_settings = Search_Filter_Helper::get_settings_meta( $search_form_id );
+
+					if ( isset( $search_form_settings['display_results_as'] ) ) {
+						if ( $search_form_settings['display_results_as'] == "custom_woocommerce_store" ) {
+							$searchandfilter->set_active_sfid( $search_form_id );
+							$searchandfilter->get( $search_form_id )->query->setup_wc_query( $query );
+							return;
+						}
+					}
+				}
+			}
+		}
+
+		//filter WC tax archives
+		if(is_post_type_archive()||is_home()||is_tag()||is_tax()||is_category())
+		{//then we know its a post type archive, see if any of our search forms
+
+			foreach($this->all_search_form_ids as $search_form_id)
+			{
+				//as we only want to update "enabled", then load all settings and update only this key
+				$search_form_settings = Search_Filter_Helper::get_settings_meta($search_form_id);
+
+				if(isset($search_form_settings['display_results_as']))
+				{
+					global $wp_query;
+					if(isset($wp_query->query_vars['sfid']))
+					{//this means its an archive and its already been init
+						return;
+					}
+					else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
+					{
+						$post_type = "product";
+						$enable_taxonomy_archives = $search_form_settings["enable_taxonomy_archives"];
+
+						$searchandfilter->set_active_sfid($search_form_id);
+
+						if(($enable_taxonomy_archives==1) && (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, false)))
+						{
+							$searchandfilter->set_active_sfid($search_form_id);
+							$searchandfilter->get( $search_form_id )->query->setup_wc_query( $query );
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	function archive_query_init($wp)
 	{//here we test to see if we have an ID set - which if it is, then this means a user is on a results page, using archive method
 		
@@ -612,7 +667,7 @@ class Search_Filter {
 	public function register_scripts() {
 		
 		global $searchandfilter;
-		
+
 		$file_ext = '.min.js';
 		if(SEARCH_FILTER_DEBUG==true)
 		{

@@ -83,7 +83,7 @@ class Search_Filter_Author_Object_Walker {
 		foreach ( $authors as $author_id ) {
 			
 			$author = get_userdata( $author_id );
-			//var_dump($author);
+
 			if ( $exclude_admin && 'admin' == $author->display_name )
 				continue;
 

@@ -159,7 +159,7 @@ class Search_Filter_Config
 	{
 		$filters = array();
 		
-		//var_dump($this->get_fields());
+
 		if(!empty($this->form_data['fields']))
 		{
 			foreach($this->form_data['fields'] as $key => $field)

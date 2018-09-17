@@ -66,8 +66,8 @@ function db_pb_slide_filter_content($content, $args) {
 			$url = ($parts=parse_url($url) and empty($parts['scheme']))?"http://$url":$url; // Add http if missing
 		} 
 		
-		$content = preg_replace('#(<a href=".*?" class="et_pb_more_button et_pb_button">.*?</a>)#', '\\1<a '.((isset($url))?'href="'.esc_attr($url).'"':'').' class="et_pb_more_button et_pb_button db_pb_button_2">'.esc_html($args['button_text_2']).'</a>', $content); // Old format
-		$content = preg_replace('#(<a class="et_pb_button et_pb_more_button" href=".*?">.*?</a>)#', '\\1<a class="et_pb_button et_pb_more_button db_pb_button_2" '.((isset($url))?'href="'.esc_attr($url).'"':'').'>'.esc_html($args['button_text_2']).'</a>', $content); // New format
+		$content = preg_replace('#(<a href=".*?" class="et_pb_more_button[^"]+et_pb_button[^"]*">.*?</a>)#', '\\1<a '.((isset($url))?'href="'.esc_attr($url).'"':'').' class="et_pb_more_button et_pb_button db_pb_button_2">'.esc_html($args['button_text_2']).'</a>', $content); // Old format
+		$content = preg_replace('#(<a class="et_pb_button[^"]+et_pb_more_button[^"]*" href=".*?">.*?</a>)#', '\\1<a class="et_pb_button et_pb_more_button db_pb_button_2" '.((isset($url))?'href="'.esc_attr($url).'"':'').'>'.esc_html($args['button_text_2']).'</a>', $content); // New format
 	}
 	
 	// Make slide background clickable link

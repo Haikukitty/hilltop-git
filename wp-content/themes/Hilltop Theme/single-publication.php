@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * The Template for displaying all single publication posts
+ *
+ **/
+
 get_header();
 
 $show_default_title = get_post_meta( get_the_ID(), '_et_pb_show_title', true );
@@ -7,6 +12,39 @@ $show_default_title = get_post_meta( get_the_ID(), '_et_pb_show_title', true );
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
+
+<style>
+	.et_pb_button::after, .et_pb_button::before {
+    position: absolute;
+    margin-left: -1em;
+    opacity: 0;
+    text-shadow: none;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: none;
+    line-height: 1em;
+    text-transform: none;
+    content: "";
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+	
+	.pdfbutton:hover {
+    background: #d88736 !important;
+    padding: 13px 13px !important;
+}
+	
+	.pdfbutton {
+		color: #ffffff !important;
+    border-width: 0px !important;
+    border-radius: 0px;
+    background-color: #d97310 !important;
+    padding: 13px 13px !important;
+	}
+	}
+</style>
 
 <div id="main-content">
 	<?php
@@ -27,12 +65,20 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 		<?php endwhile;
 		else:
+	
+	
 	?>
 	
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); ?>
-				<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
+				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); 
+	
+	
 
+
+$pubheader = get_field('pubs_header_image','cpt_publication');
+	
+	?>
+				<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
 					<div class="et_pb_section et_pb_section_0 et_pb_fullwidth_section et_section_regular et_pb_section_first">
 			
 				
@@ -65,7 +111,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 } ?>
-
 					<div class="et_pb_row et_pb_row_0">
 					<div class="entry-content">
 						

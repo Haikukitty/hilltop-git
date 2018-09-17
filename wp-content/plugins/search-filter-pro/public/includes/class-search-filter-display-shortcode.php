@@ -8,8 +8,6 @@
  * @copyright 2018 Search & Filter
  */
 
-//$_GET['tag'] = 'vc_basic_grid';
-
 class Search_Filter_Display_Shortcode {
 
     public function __construct($plugin_slug)
@@ -303,7 +301,8 @@ class Search_Filter_Display_Shortcode {
             'id' => '',
             'slug' => '',
             'show' => 'form',
-            'action' => ''
+            'action' => '',
+            'skip' => 0
 
         ), $atts));
 
@@ -336,14 +335,6 @@ class Search_Filter_Display_Shortcode {
                 return;
             }
 
-            if(isset($_GET['sf_data']))
-            {//this means the searchform is loaded within a S&F ajax request, and we only want results - so don't want
-
-                if($_GET['sf_data']=="results")
-                {
-                    return;
-                }
-            }
 
             $fields = Search_Filter_Helper::get_fields_meta($base_form_id);
             $settings = Search_Filter_Helper::get_settings_meta($base_form_id);
@@ -373,12 +364,27 @@ class Search_Filter_Display_Shortcode {
             }
             else if($action=="filter_next_query")
             {
+
+            	if(!isset($skip)){
+            		$skip = 0;
+	            }
+	            $skip = intval($skip);
+	            
                 //$searchform->query()->prep_query();
-                $searchform->query()->filter_next_query();
+                $searchform->query()->filter_next_query($skip);
                 return $returnvar;
             }
             else if($show=="form")
             {
+	            if(isset($_GET['sf_data']))
+	            {//this means the searchform is loaded within a S&F ajax request, and we only want results - so don't want
+
+		            if($_GET['sf_data']=="results")
+		            {
+			            return;
+		            }
+	            }
+
                 $searchandfilter->increment_form_count($base_form_id);
                 /* TODO  set auto count somewhere else */
 

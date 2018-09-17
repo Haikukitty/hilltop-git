@@ -46,7 +46,9 @@ class Search_Filter_Query {
 	public $pagination_filter_type		= "";
 	public $sort_type 					= "";
 	public $add_meta_sort				= array();
-	
+
+	public $filter_next_skip            = 0;
+
 	
 	public function __construct($sfid, $settings, $fields, $filters)
 	{
@@ -99,8 +101,9 @@ class Search_Filter_Query {
 		
 		query_posts($args);
 	}
-	public function filter_next_query()
+	public function filter_next_query($skip = 0)
 	{
+		$this->filter_next_skip = $skip;
         add_action( 'pre_get_posts', array( $this, 'setup_next_query' ), 200 );
 	}
 
@@ -116,7 +119,7 @@ class Search_Filter_Query {
 		
 		remove_filter( 'template_redirect', 'redirect_canonical' );
 		$this->prep_query();
-		
+
 		if(!$searchandfilter->has_pagination_init())
 		{
 			add_filter('get_pagenum_link', array($this, 'pagination_fix_pagenum'), 100);
@@ -148,10 +151,22 @@ class Search_Filter_Query {
 	
 	public function setup_next_query($query)
     {
-        $this->setup_custom_query($query);
+    	if($this->filter_next_skip==0) {
+		    $this->setup_custom_query( $query );
+		    remove_action( 'pre_get_posts', array( $this, 'setup_next_query' ), 200 );
+	    }
+	    else{
+		    $this->filter_next_skip--;
+	    }
 
-        remove_action( 'pre_get_posts', array( $this, 'setup_next_query' ), 200 );
+
     }
+	public function setup_wc_query($query){
+
+		//$this->prep_query();
+		$this->filter_pre_get_posts($query);
+	}
+
 	public function setup_archive_query($query, $is_custom_query = false)
 	{
 		if(!$is_custom_query)
@@ -186,11 +201,12 @@ class Search_Filter_Query {
 				if(is_shop() && $query->is_main_query())
 				{
 					add_filter( 'woocommerce_redirect_single_search_result', '__return_false' );
-					$filter_query = true;
+					//$filter_query = true;
+					//add_action( 'woocommerce_product_query', array($this, 'setup_wc_query') );
 				}
 			}
 
-            $post_type = "product";
+            /*$post_type = "product";
             if(( $query->is_main_query() ) && ($enable_taxonomy_archives==1) && ( Search_Filter_Wp_Data::is_taxonomy_archive($query) ) )
             {
                 //now check to make sure this taxonomy belongs to the post type
@@ -207,11 +223,13 @@ class Search_Filter_Query {
 
                             if ($is_taxonomy_archive) {
                                 $filter_query = true;
+	                            //add_action( 'woocommerce_product_query', array($this, 'setup_wc_query') );
                             }
                         }
                     }
                 }
-            }
+            }*/
+
 
 		}
 		else if($display_results_as=="post_type_archive")
@@ -264,7 +282,6 @@ class Search_Filter_Query {
 		{
             $this->filter_pre_get_posts($query);
 		}
-		//return $query;
 	}
 
 	public function filter_pre_get_posts($query)
@@ -357,7 +374,7 @@ class Search_Filter_Query {
 
 		if($this->has_prep_query==false)
 		{//only run once
-			
+
 			$this->has_prep_query = true;
 
 			//apply filter logic from cache, and `sf_edit_query_args` filter
@@ -477,8 +494,9 @@ class Search_Filter_Query {
 			$sfpaged = (int)$_GET['sf_paged'];
 			global $paged;
 			$paged = $sfpaged;
+			//set_query_var("paged", $paged); //some plugins / themes use `get_query_var`, they really shouldn't
 		}
-		
+
 		//regular paged value - normally found when loading the page (non ajax)
 		$args['paged'] = $sfpaged;
 		$args['search_filter_id'] = $this->sfid;
@@ -1686,7 +1704,7 @@ class Search_Filter_Query {
 			$res = array();
 			foreach ($ids_array as $id)
 			{
-				$xlat = Search_Filter_Helper::wpml_object_id($id,$type,false);
+				$xlat = Search_Filter_Helper::wpml_object_id($id, $type, true);
 				if(!is_null($xlat)) $res[] = $xlat;
 			}
 			return $res;

@@ -24,10 +24,6 @@ class Search_Filter_Wp_Cache
             return;
         }
 
-        /*echo "<pre>set_transient: $transient_key\n";
-        echo self::create_transient_key($transient_key);
-        echo "</pre>";*/
-
         //only set transients if the cache has completed..
         $update_transient = false;
 
@@ -52,18 +48,6 @@ class Search_Filter_Wp_Cache
         }
 
         return false;
-
-
-        /*$result = wp_cache_get( 'my_result', 'test' );
-        if ( false === $result ) {
-            wp_cache_set( 'my_result', "aaa", "test", -1);
-        }
-        else
-        {
-            echo $result."<br />";
-        }*/
-
-
     }
 
     public static function get_transient($transient_key)
@@ -75,18 +59,8 @@ class Search_Filter_Wp_Cache
             return;
         }
 
-        /*echo "<pre>get_transient: $transient_key\n";
-        echo self::create_transient_key($transient_key);
-        var_dump(get_transient(self::create_transient_key($transient_key)));
-        echo "</pre>";*/
-
         return get_transient(self::create_transient_key($transient_key));
 
-        /*
-        $data = wp_cache_get( $transient_key, 'search-filter' );
-        //var_dump($data);
-        //echo "</pre>";
-        return $data;*/
     }
 
 

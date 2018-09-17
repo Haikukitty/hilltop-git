@@ -76,7 +76,7 @@ class Search_Filter_Field_Taxonomy extends Search_Filter_Field_Base {
 				'show_count_format_sf' => "inline",
 				'elem_attr' => ""
 			);
-			
+
 			if(($values['order_by']!="default")&&($values['order_by']!=""))
 			{
 				$args['orderby'] = $values['order_by'];

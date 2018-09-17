@@ -8,7 +8,6 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
 
-
 <style>
  form_open:before {
  content: "";
@@ -175,7 +174,6 @@ var body = document.body,
 
 
 <div id="main-content">
-
 	
 	<?php if ( ! $is_page_builder_used ) : ?>
 
@@ -224,19 +222,7 @@ function my_custom_population_function( $value ) {
 	?>
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<?php
-add_filter("gform_field_value_staffname", "populate_staffname");
-function populate_staffname($value){
-return get_post_meta($post->ID, 'staff-name', true);
-}
-
-add_filter("gform_field_value_staffemail", "populate_staffemail");
-function populate_staffemail($value){
-return get_post_meta($post->ID, 'staff-email', true);
-
-}
-
-?>
+					
 
 					<div class="entry-content">
 					<?php
@@ -252,7 +238,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 	
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php if (et_get_option('divi_integration_single_top') <> '' && et_get_option('divi_integrate_singletop_enable') == 'on') echo(et_get_option('divi_integration_single_top')); ?>
-
 	
 
 	
@@ -270,7 +255,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 } ?>
 					
-
 					<div class="row">
 						<div class="col-md-4 col-sm-4 staff-pic">
 						<?php	if ( has_post_thumbnail() ) { 
@@ -316,7 +300,6 @@ return get_post_meta($post->ID, 'staff-email', true);
 						</div>
 					
 				</article> <!-- .et_pb_post -->
-
 					<section class="overlay" aria-hidden="true">
 					
 

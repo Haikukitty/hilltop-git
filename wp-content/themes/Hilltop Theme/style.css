@@ -111,7 +111,6 @@ h5 {
 
 
 
-
  #top-menu {
    padding-top:1px;
 }
@@ -132,7 +131,6 @@ h5 {
     position: absolute;
     padding: 0px 0;
 }
-
 
 .nav li li.last-in-section {
 	    border-bottom: 0px solid #5cc0c5;
@@ -162,7 +160,7 @@ h5 {
 #top-menu li a, .et_search_form_container input {
     font-weight: normal;
     font-style: normal;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     text-decoration: none;
 }
 
@@ -175,7 +173,6 @@ h5 {
 
 .et_mobile_menu li a:hover, .nav ul li a:hover {
      opacity: 1; 
-
     background-color: rgba(139,115,15,0.13);
     color: #d97310 !important;
 }
@@ -298,7 +295,6 @@ h1.et_pb_module_header a:hover {
 	font-family:'Candara','Orienta',sans-serif;
 }
 
-
 .et-fixed-header .logolink {
 display:none;
 }
@@ -319,7 +315,6 @@ display:none;
     background-color: transparent;
     content: "";
 }
-
 
 .headerhilltop .et_pb_fullwidth_header_container {
 	width:90% !important;
@@ -406,7 +401,6 @@ h3 a:hover {
     padding: 6px 19px;
     border-top: 0px solid #eee;
 }
-
 
 .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.bottom, .staffheaderphoto .et_pb_fullwidth_header_container .header-content-container.center {
     margin-bottom: 0 !important;
@@ -1029,14 +1023,14 @@ height: auto;
     text-align: center;
     line-height: 200%;
     padding-top: 17px;
-    border-top: 1px solid rgba(140,115,42,0.17);
+    border-top:0px solid rgba(140,115,42,0.17);
     margin-top: 17px;
 }
 
 .bottom-nav, .bottom-nav a, .bottom-nav li.current-menu-item a {
     color: #007181 !important;
 	font-weight:700 !important;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	padding:5px 17px;
 }
 
@@ -1060,7 +1054,6 @@ height: auto;
 .headerhilltop .header-content  h1.et_pb_module_header {
 font-size: 2.1rem !important;
 }
-
 
 .widget_search input#searchsubmit {
     color: #ffffff;
@@ -1576,7 +1569,7 @@ font-weight:300;
 @media screen and (min-width:981px) and (max-width:1100px) {
 
 	#top-menu li {
-    padding-right: 15px;
+    padding-right: 0px;
 	}
 
 	
@@ -1891,7 +1884,6 @@ font-weight:300;
     font-size: 1.4rem;
 	}
 	
-
 	#menu-footer li {
 		margin-bottom:3px;
 	}	

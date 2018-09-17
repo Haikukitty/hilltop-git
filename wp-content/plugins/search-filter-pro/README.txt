@@ -4,7 +4,7 @@ Donate link:
 Tags: posts, custom posts, products, category, filter, taxonomy, post meta, custom fields, search, wordpress, post type, post date, author
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 2.4.3
+Stable tag: 2.4.5
 
 Search and Filtering for posts, products and custom posts. Allow your users to Search & Filter by taxonomies, custom fields and more.
 
@@ -57,6 +57,22 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 
 == Changelog ==
 
+= 2.4.5 =
+* Fix - an issue with noUiSlider when "Display values as" is set to "text" in range fields
+* Fix - an issue with Beaver Builder Themer auto scrolling to results on page load (when using our display method "archive")
+* Fix - an issue with Ajax requests and Polylang
+* Fix - some issues with filtering WC shop in some themes
+
+= 2.4.4 =
+* Fix - an error being thrown when creating new sites in wpmu
+* Fix - return the original IDs of taxonomy terms, when no translated term is found (when using translation plugins) - this allows for taxonomies that are not translated to retain their settings
+* Fix - an issue where some of our 3rd party integrations were not working in ajax requests (very rare)
+* Fix - an issue where the `filter_next_query` shortcode was being ignored in ajax requests
+* Fix - an issue with Ajax URLs not always being set correctly when using PolyLang
+* Updated - noUiSlider to v11.1.0
+* Updated - chosen to v1.8.7
+* New - added a `skip` argument for our `filter_next_query` shortcode, to access those tricky queries
+
 = 2.4.3 =
 * Fix - refix enable_taxonomy_archives variable warnings
 * Fix - an issue with Beaver Builder Themer scrolling to the results on page load (this occured when pagination was set)
@@ -89,7 +105,7 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 * Fix - various WooCommerce issues relating to Variations - Woocommerce users' who use variations may need to rebuild S&F cache
 * Fix - correctly set the `sf-option-active` class on multi select items (this includes checkboxes)
 * Fix - properly escape some strings
-* Fix - destroy nuUiSlider (if it exists) before init, in case it has been init by another plugin (improved compatibility)
+* Fix - destroy noUiSlider (if it exists) before init, in case it has been init by another plugin (improved compatibility)
 * Fix - some issues with levels / nesting of hierarchical taxonomies
 * Fix - some issues with polylang and ajax requests
 * Fix - an issue with a number range field not resetting properly

@@ -35,7 +35,9 @@ class Search_Filter_Third_Party
 		global $wpdb;
 		$this->cache_table_name = $wpdb->prefix . 'search_filter_cache';
 
-		if(!is_admin()) {
+		// if(!is_admin()) {
+		if( (!is_admin()) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+			//frontend only, or ajax
 
 			//beaverbuilder themer plugin
 			// removes paged = 1 from pagination when its the first page, otherwise themer kicks in a scroll on page load
@@ -92,6 +94,7 @@ class Search_Filter_Third_Party
 		add_filter('sf_archive_slug_rewrite', array($this, 'pll_sf_archive_slug_rewrite'), 10, 3); //
 		add_filter('sf_rewrite_query_args', array($this, 'pll_sf_rewrite_args'), 10, 3); //
 		//add_filter('sf_pre_get_posts_admin_cache', array($this, 'sf_pre_get_posts_admin_cache'), 10, 3); //
+		
 		$this->init();
 	}
 
@@ -1213,13 +1216,14 @@ class Search_Filter_Third_Party
 		if(!class_exists('FLThemeBuilderLoader')){
 			return $query;
 		}
+
 		if(!$query->is_main_query()) {
 			return $query;
 		}
 
 		if(isset($query->query_vars['search_filter_id'])){
 			if($query->get("paged")==1){
-				$query->set("paged", null);
+				$query->set("paged", 0);
 			}
 		}
 
@@ -1476,17 +1480,44 @@ class Search_Filter_Third_Party
 
 		if((function_exists('pll_home_url'))&&(function_exists('pll_current_language')))
 		{
-			if(get_option('permalink_structure'))
-			{
-				$home_url = trailingslashit(pll_home_url());
 
-				$ajax_url = $this->add_url_args($home_url, "sfid=$sfid&sf_action=get_data&sf_data=all");
 
+			global $searchandfilter;
+			$sf_inst = $searchandfilter->get($sfid);
+
+			//these are the display results methods that use the current url for ajax
+			// we want to do it this way, to allow other display methods (like VC / ajax integration) to carry on working
+			$retain_results_methods = array("archive", "post_type_archive", "custom", "custom_woocommerce_store", "custom_edd_store");
+
+			if(in_array($sf_inst->settings("display_results_as"), $retain_results_methods)){
+				//so don't modify the ajax url, it will have the lang in there
+				return $ajax_url;
 			}
-			else
-			{
-				$ajax_url = $this->add_url_args( pll_home_url(), "sfid=$sfid&sf_action=get_data&sf_data=all");
+			else {
+				//if we are doing an ajax request, make sure we are including the proper home url, with lang `/en`
+				//allow sf_data to remain the same value
+				$sf_data = "all";
+				$url_parts = parse_url($ajax_url);
+				if(isset($url_parts['query'])){
+					parse_str($url_parts['query'], $url_vars);
+					if(isset($url_vars['sf_data'])){
+						$sf_data = $url_vars['sf_data'];
+					}
+				}
+
+				//if ( $sf_inst->settings( "display_results_as" ) == "shortcode" ) {
+					if ( get_option( 'permalink_structure' ) ) {
+						$home_url = trailingslashit( pll_home_url() );
+						$ajax_url = $this->add_url_args( $home_url, "sfid=$sfid&sf_action=get_data&sf_data=$sf_data" );
+
+					} else {
+						$ajax_url = $this->add_url_args( pll_home_url(), "sfid=$sfid&sf_action=get_data&sf_data=$sf_data" );
+					}
+				/*} else {
+
+				}*/
 			}
+
 		}
 
 		return $ajax_url;
