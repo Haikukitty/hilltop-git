@@ -5,11 +5,7 @@
  * Description: Enables ACF options pages for a post type archive.
  * Author: Tusko Trush
  * Author URI: https://frontend.im/
-<<<<<<< HEAD
  * Version: 2.0.3
-=======
- * Version: 2.0.2
->>>>>>> comment
  * License: GPL v3
  * Text Domain: acf-cpt-options-pages
  * Domain Path: /languages
