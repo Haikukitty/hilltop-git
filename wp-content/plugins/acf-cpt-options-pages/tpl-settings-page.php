@@ -61,7 +61,10 @@ global $title; ?>
                     </div>
                 <?php }
             }
+<<<<<<< HEAD
 	        echo __( 'Buy me a beer', CPT_ACF_DOMAIN );
+=======
+>>>>>>> comment
         } else {
             echo __( 'No Custom Post Types found.', CPT_ACF_DOMAIN );
         } ?>

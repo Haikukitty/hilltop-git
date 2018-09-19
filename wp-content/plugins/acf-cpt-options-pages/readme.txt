@@ -5,7 +5,11 @@ Donate link: https://send.monobank.com.ua/QMnpw2tn
 Tags: Advanced Custom Fields, ACF Options, Custom Post Type, Archive
 Requires at least: 3.0
 Tested up to: 4.9.6
+<<<<<<< HEAD
 Stable tag: 2.0.3
+=======
+Stable tag: 2.0.2
+>>>>>>> comment
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,9 +139,12 @@ If you have any questions on this please post an issue/question at [Github Issue
 
 == Changelog ==
 
+<<<<<<< HEAD
 = 2.0.3 =
 * Fixed underscores in options pages title
 
+=======
+>>>>>>> comment
 = 2.0.2 =
 * Fixed WPML slugs
 

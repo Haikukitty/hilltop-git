@@ -57,11 +57,18 @@ class ACFCPT_OptionsPages {
     }
 
     public function register_post_type_options_page($name, $cpt) {
+<<<<<<< HEAD
 	    $cpt_obj  = get_post_type_object( $cpt );
 	    $slug     = ($name !== $cpt ? '_' . strtolower(preg_replace('/[^a-zA-Z0-9_]/', '_', $name)) : '');
 	    $cpt_id = 'cpt_' . $cpt . $slug;
 
 	    $human_page_name = sprintf( __( '%s Options', CPT_ACF_DOMAIN ), ucfirst( ($name ? str_replace('_', ' ', $name) : $cpt_obj->labels->singular_name) ) );
+=======
+        $cpt_id   = 'cpt_' . $cpt;
+        $slug     = ($name !== $cpt ? '_' . strtolower(preg_replace('/[^a-zA-Z0-9_]/', '_', $name)) : '');
+
+	    $cpt_id = $cpt_id . $slug;
+>>>>>>> comment
 
 	    if( defined('ICL_LANGUAGE_CODE') ) {
 		    $cpt_id = $cpt_id . '_' . ICL_LANGUAGE_CODE;
@@ -77,8 +84,13 @@ class ACFCPT_OptionsPages {
         );
 
         $cpt_acf_custom = array(
+<<<<<<< HEAD
 	        'page_title'  => $human_page_name,
 	        'menu_title'  => $human_page_name,
+=======
+	        'page_title'  => sprintf( __( '%s Options', CPT_ACF_DOMAIN ), ucfirst( $name ) ),
+	        'menu_title'  => sprintf( __( '%s Options', CPT_ACF_DOMAIN ), ucfirst( $name ) ),
+>>>>>>> comment
 	        'menu_slug'   => $slug .'-'. $cpt . '-options',
 	        'capability'  => 'edit_posts',
         );
