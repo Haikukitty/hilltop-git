@@ -74,7 +74,9 @@ if($teamintrotext) { ?>
 			$_terms = get_terms( array(
     'taxonomy' => 'teams',
     'hide_empty' => true,
-				'orderby' => 'ID'
+		'orderby' => 'description',
+		'order'				=> 'ASC'
+
 ) );
  $c = 0;
 foreach ($_terms as $term) :
